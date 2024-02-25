@@ -110,7 +110,6 @@ app.post("/send-email", (req, res) => {
 const csvBuffer = [];
 const csvWriter = createCsvWriter({
   path: 'buffer',
-  sendHeaders: false,
   header: [
     { id: 'id', title: 'ID' },
     { id: 'title', title: 'Title' },
@@ -135,19 +134,6 @@ const csvWriter = createCsvWriter({
     { id: 'vote_sum', title: 'Vote Sum' },
   ],
 });
-// Function to write records to the buffer
-function writeToBuffer(records) {
-  csvBuffer.push(...records);
-}
-
-// Use the csvWriter to write records and then push to the buffer
-async function writeRecordsToBuffer(records) {
-  await csvWriter.writeRecords(records);
-  writeToBuffer(records);
-}
-
-// Example usage
-const records = csvWriter;
 
 
 // Nodemailer setup
