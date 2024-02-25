@@ -109,7 +109,8 @@ app.post("/send-email", (req, res) => {
 
 const csvBuffer = [];
 const csvWriter = createCsvWriter({
-  path: '/tmp/help_center_articles.csv',
+  path: 'buffer',
+  sendHeaders: false,
   header: [
     { id: 'id', title: 'ID' },
     { id: 'title', title: 'Title' },
@@ -134,6 +135,19 @@ const csvWriter = createCsvWriter({
     { id: 'vote_sum', title: 'Vote Sum' },
   ],
 });
+// Function to write records to the buffer
+function writeToBuffer(records) {
+  csvBuffer.push(...records);
+}
+
+// Use the csvWriter to write records and then push to the buffer
+async function writeRecordsToBuffer(records) {
+  await csvWriter.writeRecords(records);
+  writeToBuffer(records);
+}
+
+// Example usage
+const records = csvWriter;
 
 
 // Nodemailer setup
@@ -182,6 +196,8 @@ async function getHelpCenterArticles() {
 async function sendEmail(userEmail) {
   try {
     // Email options
+    const csvStream = Readable.from(csvBuffer.map(record => JSON.stringify(record)).join('\n'));
+
     const mailOptions = {
       from: 'djinn@torango.io',
       to: userEmail,
@@ -190,7 +206,7 @@ async function sendEmail(userEmail) {
       attachments: [
         {
           filename: 'help_center_articles.csv',
-          path: '/tmp/help_center_articles.csv',
+          content: csvStream,
         },
       ],
     };
