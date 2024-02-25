@@ -4,6 +4,7 @@ const querystring = require("querystring");
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const nodemailer = require('nodemailer');
 require('dotenv').config();
+const { Readable } = require('stream');
 
 const app = express();
 const port = 3000;
@@ -70,9 +71,13 @@ app.get("/zendesk/oauth/callback", async (req, res) => {
     );
 
     res.send(`
-      <p>👋 Hi, ${profileResponse.data.user.name}!</p>
-      
-      <p>Your Zendesk Support user role is <code>${profileResponse.data.user.role}</code>.</p>
+    <p>Hi, ${profileResponse.data.user.name}!</p>
+    
+    <form action="/send-email" method="post">
+    <label for="email">Enter your email:</label>
+    <input type="email" id="email" name="email" required>
+    <button type="submit">Send Email</button>
+  </form>
     `);
   } catch (error) {
     console.error("Error in OAuth callback:", error);
@@ -81,8 +86,30 @@ app.get("/zendesk/oauth/callback", async (req, res) => {
 });
 
 
+// Add a new route for handling the email form
+app.get("/send-email", (req, res) => {
+  res.send(`
+    <form action="/send-email" method="post">
+      <label for="email">Enter your email:</label>
+      <input type="email" id="email" name="email" required>
+      <button type="submit">Send Email</button>
+    </form>
+  `);
+});
+
+// Handle the form submission and trigger the email sending function
+app.post("/send-email", (req, res) => {
+  const userEmail = req.body.email;
+
+  // Call the function to send an email
+  sendEmail(userEmail)
+    .then(() => res.send('Email sent successfully.'))
+    .catch(error => res.status(500).send(`Error sending email: ${error.message}`));
+});
+
+const csvBuffer = [];
 const csvWriter = createCsvWriter({
-  path: 'help_center_articles.csv',
+  path: '/tmp/help_center_articles.csv',
   header: [
     { id: 'id', title: 'ID' },
     { id: 'title', title: 'Title' },
@@ -152,10 +179,35 @@ async function getHelpCenterArticles() {
   }
 }
 
+async function sendEmail(userEmail) {
+  try {
+    // Email options
+    const mailOptions = {
+      from: 'djinn@torango.io',
+      to: userEmail,
+      subject: 'Help Center Articles',
+      text: 'Please find attached the list of help center articles.',
+      attachments: [
+        {
+          filename: 'help_center_articles.csv',
+          path: '/tmp/help_center_articles.csv',
+        },
+      ],
+    };
+
+    // Send email
+    await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully.');
+  } catch (error) {
+    console.error('Error sending email:', error.message);
+    throw error;
+  }
+}
 
 
 app.listen(port, () => {
   console.log(
     `Server running on port ${port}. Visit http://localhost:${port}`
   );
+   getHelpCenterArticles();
 });
