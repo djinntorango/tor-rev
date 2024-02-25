@@ -85,7 +85,6 @@ app.get("/zendesk/oauth/callback", async (req, res) => {
   }
 });
 
-
 // Add a new route for handling the email form
 app.get("/send-email", (req, res) => {
   res.send(`
@@ -109,7 +108,7 @@ app.post("/send-email", (req, res) => {
 
 const csvBuffer = [];
 const csvWriter = createCsvWriter({
-  path: 'buffer',
+  path: 'buffer.csv', // corrected path
   header: [
     { id: 'id', title: 'ID' },
     { id: 'title', title: 'Title' },
@@ -135,6 +134,17 @@ const csvWriter = createCsvWriter({
   ],
 });
 
+// Function to write records to the buffer
+function writeToBuffer(records) {
+  csvBuffer.push(...records);
+}
+
+// Use the csvWriter to write records and then push to the buffer
+async function writeRecordsToBuffer(records) {
+  await csvWriter.writeRecords(records);
+  writeToBuffer(records);
+}
+
 // Nodemailer setup
 const transporter = nodemailer.createTransport({
   service: 'outlook',
@@ -147,7 +157,6 @@ const transporter = nodemailer.createTransport({
 // Function to retrieve a list of help center articles
 async function getHelpCenterArticles() {
   let nextPage = zendeskEndpoint;
-  
 
   try {
     // Loop until there are no more pages
@@ -165,7 +174,7 @@ async function getHelpCenterArticles() {
       const articles = response.data.articles;
 
       // Write articles to CSV file
-      await csvWriter.writeRecords(articles);
+      await writeRecordsToBuffer(articles);
 
       // Get the next page URL
       nextPage = response.data.next_page;
@@ -181,7 +190,7 @@ async function getHelpCenterArticles() {
 async function sendEmail(userEmail) {
   try {
     // Email options
-    const csvStream = Readable.from(csvWriter.map(record => JSON.stringify(record)).join('\n'));
+    const csvStream = Readable.from(csvBuffer.map(record => JSON.stringify(record)).join('\n'));
 
     const mailOptions = {
       from: 'djinn@torango.io',
@@ -204,7 +213,6 @@ async function sendEmail(userEmail) {
     throw error;
   }
 }
-
 
 app.listen(port, () => {
   console.log(
