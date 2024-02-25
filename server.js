@@ -133,11 +133,7 @@ const csvWriter = createCsvWriter({
     { id: 'vote_count', title: 'Vote Count' },
     { id: 'vote_sum', title: 'Vote Sum' },
   ],
-})
-  .on('write', (records) => {
-    // Push the written records to the buffer
-    csvBuffer.push(...records);
-  });
+});
 
 // Nodemailer setup
 const transporter = nodemailer.createTransport({
@@ -185,7 +181,7 @@ async function getHelpCenterArticles() {
 async function sendEmail(userEmail) {
   try {
     // Email options
-    const csvStream = Readable.from(csvBuffer.map(record => JSON.stringify(record)).join('\n'));
+    const csvStream = Readable.from(csvWriter.map(record => JSON.stringify(record)).join('\n'));
 
     const mailOptions = {
       from: 'djinn@torango.io',
