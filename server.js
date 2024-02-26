@@ -5,6 +5,7 @@ const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 const { Readable } = require('stream');
+const createCsvStringifier = require('csv-writer').createObjectCsvStringifier;
 
 const app = express();
 const port = 3000;
@@ -107,8 +108,19 @@ app.post("/send-email", (req, res) => {
 });
 
 
+const csvStringifier = createCsvStringifier({
+  header: [
+    { id: 'id', title: 'ID' },
+    { id: 'title', title: 'Title' },
+    // ... (rest of the header configuration)
+  ],
+});
+
+// In-memory CSV string
+let csvData = '';
+
 const csvWriter = createCsvWriter({
-  path: 'help_center_articles.csv', 
+  path: '/app/src/help_center_articles.csv', 
   header: [
     { id: 'id', title: 'ID' },
     { id: 'title', title: 'Title' },
@@ -165,6 +177,7 @@ const articles = response.data.articles;
             console.log('Number of articles:', articles.length);
 
             // Write articles to CSV file
+      csvData += csvStringifier.stringifyRecords(articles);
             await csvWriter.writeRecords(articles);
 
       // Get the next page URL
@@ -190,7 +203,7 @@ async function sendEmail(userEmail) {
       attachments: [
         {
           filename: 'help_center_articles.csv',
-          path: "help_center_articles.csv",
+          content:csvData,
         },
       ],
     };
