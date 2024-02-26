@@ -159,7 +159,8 @@ const transporter = nodemailer.createTransport({
 });
 
 // Function to retrieve a list of help center articles
-async function getHelpCenterArticles(subdomain) {
+async function getHelpCenterArticles() {
+  const subdomain = storedSubdomain;
   let nextPage = `https://${subdomain}.zendesk.com/api/v2/help_center/en-us/articles.json`;
 
   try {
