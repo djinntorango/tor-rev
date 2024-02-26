@@ -108,7 +108,7 @@ app.post("/send-email", (req, res) => {
 
 const csvBuffer = [];
 const csvWriter = createCsvWriter({
-  path: 'buffer.csv', 
+  path: 'help_center_articles.csv', 
   header: [
     { id: 'id', title: 'ID' },
     { id: 'title', title: 'Title' },
@@ -200,7 +200,7 @@ async function sendEmail(userEmail) {
       attachments: [
         {
           filename: 'help_center_articles.csv',
-          content: csvStream,
+          path: "help_center_articles.csv",
         },
       ],
     };
