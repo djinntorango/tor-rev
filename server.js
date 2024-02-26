@@ -12,7 +12,6 @@ const port = 3000;
 
 let storedSubdomain = null;
 let storedAccessToken = null;
-let zendeskEndpoint = null;
 
 
 app.use(express.urlencoded({ extended: true })); // Middleware to parse form data
@@ -67,7 +66,6 @@ app.get("/zendesk/oauth/callback", async (req, res) => {
     // such as a database.
     const access_token = tokenResponse.data.access_token;
     storedAccessToken = access_token;
-    zendeskEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/en-us/articles.json`;
     const profileResponse = await axios.get(
       `https://${subdomain}.zendesk.com/api/v2/users/me.json`,
       { headers: { Authorization: `Bearer ${access_token}` } }
@@ -187,7 +185,7 @@ async function getHelpCenterArticles() {
     }
 
     // Send email with CSV file attachment
-    await sendEmail();
+
   } catch (error) {
     console.error(
       "Error fetching and processing help center articles:",
@@ -199,7 +197,7 @@ async function getHelpCenterArticles() {
 async function sendEmail(userEmail) {
   try {
     // Email options
-
+    await getHelpCenterArticles();
     const mailOptions = {
       from: "djinn@torango.io",
       to: userEmail,
@@ -224,5 +222,5 @@ async function sendEmail(userEmail) {
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}. Visit http://localhost:${port}`);
-  getHelpCenterArticles();
+  
 });
