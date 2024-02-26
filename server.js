@@ -108,7 +108,7 @@ app.post("/send-email", (req, res) => {
 
 
 const csvWriter = createCsvWriter({
-  path: null, 
+  path: 'help_center_articles.csv', 
   header: [
     { id: 'id', title: 'ID' },
     { id: 'title', title: 'Title' },
@@ -133,7 +133,6 @@ const csvWriter = createCsvWriter({
     { id: 'vote_sum', title: 'Vote Sum' },
   ],
 });
-const writableStream = new Readable();
 
 
 
@@ -152,7 +151,6 @@ async function getHelpCenterArticles() {
 
   try {
     // Loop until there are no more pages
-    csvWriter.pipe(writableStream);
     while (nextPage) {
       // Make the API request
       const response = await axios.get(nextPage, {
@@ -172,7 +170,7 @@ const articles = response.data.articles;
       // Get the next page URL
       nextPage = response.data.next_page;
     }
-csvWriter.unpipe(writableStream);
+
     // Send email with CSV file attachment
     await sendEmail();
   } catch (error) {
@@ -183,6 +181,7 @@ csvWriter.unpipe(writableStream);
 async function sendEmail(userEmail) {
   try {
     // Email options
+
     const mailOptions = {
       from: 'djinn@torango.io',
       to: userEmail,
@@ -191,7 +190,7 @@ async function sendEmail(userEmail) {
       attachments: [
         {
           filename: 'help_center_articles.csv',
-          content: writableStream.read().toString(), // Convert buffer to string
+          path: "help_center_articles.csv",
         },
       ],
     };
