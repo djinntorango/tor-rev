@@ -106,7 +106,7 @@ app.post("/send-email", (req, res) => {
     .catch(error => res.status(500).send(`Error sending email: ${error.message}`));
 });
 
-const csvBuffer = [];
+
 const csvWriter = createCsvWriter({
   path: 'help_center_articles.csv', 
   header: [
@@ -134,16 +134,7 @@ const csvWriter = createCsvWriter({
   ],
 });
 
-// Function to write records to the buffer
-function writeToBuffer(records) {
-  csvBuffer.push(...records);
-}
 
-// Use the csvWriter to write records and then push to the buffer
-async function writeRecordsToBuffer(records) {
-  await csvWriter.writeRecords(records);
-  writeToBuffer(records);
-}
 
 // Nodemailer setup
 const transporter = nodemailer.createTransport({
@@ -169,12 +160,12 @@ async function getHelpCenterArticles() {
           sort_order: 'asc',
         },
       });
-
+const articles = response.data.articles;
       // Extract relevant information from the response
-      const articles = response.data.articles;
+            console.log('Number of articles:', articles.length);
 
-      // Write articles to CSV file
-      await writeRecordsToBuffer(articles);
+            // Write articles to CSV file
+            await csvWriter.writeRecords(articles);
 
       // Get the next page URL
       nextPage = response.data.next_page;
@@ -190,7 +181,6 @@ async function getHelpCenterArticles() {
 async function sendEmail(userEmail) {
   try {
     // Email options
-    const csvStream = Readable.from(csvBuffer.map(record => JSON.stringify(record)).join('\n'));
 
     const mailOptions = {
       from: 'djinn@torango.io',
