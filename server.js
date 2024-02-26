@@ -108,7 +108,7 @@ app.post("/send-email", (req, res) => {
 
 const csvBuffer = [];
 const csvWriter = createCsvWriter({
-  path: 'buffer.csv', // corrected path
+  path: 'buffer.csv', 
   header: [
     { id: 'id', title: 'ID' },
     { id: 'title', title: 'Title' },
