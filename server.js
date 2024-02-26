@@ -12,7 +12,7 @@ const port = 3000;
 
 let storedSubdomain = null;
 let storedAccessToken = null;
-const zendeskEndpoint = `https://${storedSubdomain}.zendesk.com/api/v2/help_center/en-us/articles.json`;
+let zendeskEndpoint = null;
 
 
 app.use(express.urlencoded({ extended: true })); // Middleware to parse form data
@@ -67,6 +67,7 @@ app.get("/zendesk/oauth/callback", async (req, res) => {
     // such as a database.
     const access_token = tokenResponse.data.access_token;
     storedAccessToken = access_token;
+    zendeskEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/en-us/articles.json`;
     const profileResponse = await axios.get(
       `https://${subdomain}.zendesk.com/api/v2/users/me.json`,
       { headers: { Authorization: `Bearer ${access_token}` } }
@@ -158,8 +159,8 @@ const transporter = nodemailer.createTransport({
 });
 
 // Function to retrieve a list of help center articles
-async function getHelpCenterArticles() {
-  let nextPage = zendeskEndpoint;
+async function getHelpCenterArticles(subdomain) {
+  let nextPage = `https://${subdomain}.zendesk.com/api/v2/help_center/en-us/articles.json`;
 
   try {
     // Loop until there are no more pages
