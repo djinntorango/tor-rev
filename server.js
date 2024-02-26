@@ -12,8 +12,8 @@ const port = 3000;
 
 let storedSubdomain = null;
 let storedAccessToken = null;
-const zendeskEndpoint =
-  "https://${subdomain}.zendesk.com/api/v2/help_center/en-us/articles.json";
+const zendeskEndpoint = `https://${storedSubdomain}.zendesk.com/api/v2/help_center/en-us/articles.json`;
+
 
 app.use(express.urlencoded({ extended: true })); // Middleware to parse form data
 
