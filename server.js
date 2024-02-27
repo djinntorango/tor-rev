@@ -200,7 +200,7 @@ async function getHelpCenterArticles() {
 
       // Write articles to CSV file
       csvData += csvStringifier.stringifyRecords(articles);
-      await csvWriter.writeRecords(articles);
+
 
       // Get the next page URL
       nextPage = response.data.next_page;
