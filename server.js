@@ -177,12 +177,15 @@ const transporter = nodemailer.createTransport({
 // Function to retrieve a list of help center articles
 async function getHelpCenterArticles() {
   const subdomain = storedSubdomain;
-  let nextPage = `https://${subdomain}.zendesk.com/api/v2/help_center/en-us/articles.json?limit=100`;
-
+  const zendeskEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/en-us/articles.json`;
+  
+ let nextPage = zendeskEndpoint;
   try {
     // Loop until there are no more pages
     csvData = csvStringifier.getHeaderString();
     while (nextPage) {
+      
+      console.log('Next Page:', nextPage);
       // Make the API request
       const response = await axios.get(nextPage, {
         auth: storedAccessToken,
