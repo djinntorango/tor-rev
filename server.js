@@ -136,7 +136,7 @@ const csvStringifier = createCsvStringifier({
 });
 
 // In-memory CSV string
-let csvData = csvStringifier.getHeaderString();
+let csvData = "";
 
 const csvWriter = createCsvWriter({
   path: "/app/src/help_center_articles.csv",
@@ -181,6 +181,7 @@ async function getHelpCenterArticles() {
 
   try {
     // Loop until there are no more pages
+    csvData = csvStringifier.getHeaderString();
     while (nextPage) {
       // Make the API request
       const response = await axios.get(nextPage, {
