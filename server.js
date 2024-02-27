@@ -16,6 +16,11 @@ let storedAccessToken = null;
 
 app.use(express.urlencoded({ extended: true })); // Middleware to parse form data
 
+app.use((req, res, next) => {
+  res.setHeader('Content-Security-Policy', "frame-ancestors 'self' torango.io");
+  next();
+});
+
 app.get("/", (req, res) => {
   res.send(`
     <form action="/zendesk/auth" method="get">
