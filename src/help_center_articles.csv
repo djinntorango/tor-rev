@@ -1,4 +1,203 @@
 ID,Title,Body,Comments Disabled,Created At,Edited At,HTML URL,Label Names,Locale,Outdated,Outdated Locales,Permission Group ID,Position,Promoted,Section ID,Source Locale,Updated At,URL,User Segment ID,Vote Count,Vote Sum
+24784931072787,What are these sections and articles doing here?,"<p>This FAQ is a section in the General category of your help center knowledge base. We created this category and a few common sections to help you get started with your Help Center.</p>
+
+<p>The knowledge base in the Help Center consists of three main page types: category pages, section pages, and articles. Here's the structure:</p>
+
+<p><img src=""//static.zdassets.com/hc/assets/sample-articles/article0_image.png"" alt=""Comments are part of the articles. The articles pages are part of Sections page. The Sections pages are part of the Category pages.""></p>
+
+<p>You can create your own categories, sections, and articles and modify or completely delete ours. See the <a href=""https://support.zendesk.com/hc/en-us/articles/218222877"" target=""_blank"">Organizing knowledge base content</a> and <a href=""https://support.zendesk.com/hc/en-us/articles/203664366"" target=""_blank"">Creating articles in the Help Center</a> to learn how.</p>",false,2024-01-04T00:25:50Z,2024-01-04T00:25:50Z,https://eidolic.torango.io/hc/en-us/articles/24784931072787-What-are-these-sections-and-articles-doing-here,,en-us,false,,20825188493203,0,false,24784892907283,en-us,2024-01-04T00:25:50Z,https://d3v-eidolic.zendesk.com/api/v2/help_center/en-us/articles/24784931072787.json,,0,0
+24784892911507,How do I customize my Help Center?,"<p>You can modify the look and feel of your Help Center by changing colors and fonts. See <a href=""https://support.zendesk.com/hc/en-us/articles/206177737"" target=""_blank"">Branding your Help Center</a> to learn how.</p>
+
+<p>You can also change the design of your Help Center. If you're comfortable working with page code, you can dig in to the site's HTML, CSS, and Javascript to customize your theme. To get started, see <a href=""https://support.zendesk.com/hc/en-us/articles/203664326"" target=""_blank"">Customizing the Help Center</a>.</p>",false,2024-01-04T00:25:50Z,2024-01-04T00:25:50Z,https://eidolic.torango.io/hc/en-us/articles/24784892911507-How-do-I-customize-my-Help-Center,,en-us,false,,20825188493203,0,false,24784892907283,en-us,2024-01-04T00:25:50Z,https://d3v-eidolic.zendesk.com/api/v2/help_center/en-us/articles/24784892911507.json,,0,0
+24784892894355,Welcome to your Help Center!,"<p>You're looking at your new <a href=""https://www.zendesk.com/self-service"" target=""_blank"">Help Center</a>. We populated it with placeholder content to help you get started. Feel free to edit or delete this content.</p>
+
+<p>The Help Center is designed to provide a complete self-service support option for your customers. The Help Center contains: a knowledge base and, on Guide Professional and Enterprise, a Customer Portal for support requests. You can also add a community to your Help Center if you have Zendesk Gather.</p>
+
+<p>Your customers can search for knowledge base articles to learn a task or search the community, if available, to ask fellow users questions. If your customers can't find an answer, they can submit a support request.</p>
+
+<p>For more information, see <a href=""https://support.zendesk.com/hc/en-us/articles/203664386"" target=""_blank"">Help Center guide for end users</a>.</p><p>Each user has a Help Center profile (Guide Professional and Enterprise), so your Help Center users can get to know one another better. Profiles contain relevant information about the user, along with their activities and contributions.</p>",false,2024-01-04T00:25:50Z,2024-01-04T00:25:50Z,https://eidolic.torango.io/hc/en-us/articles/24784892894355-Welcome-to-your-Help-Center,,en-us,false,,20825188493203,0,false,24784892892563,en-us,2024-01-04T00:25:50Z,https://d3v-eidolic.zendesk.com/api/v2/help_center/en-us/articles/24784892894355.json,,0,0
+24784892948755,How can agents leverage knowledge to help customers?,"<p>You can use our <a href=""https://support.zendesk.com/hc/en-us/articles/115012706488"" target=""_blank"">Knowledge Capture app</a> to leverage your team’s collective knowledge.</p>
+<p>Using the app, agents can:
+</p><ul>
+  <li>Search the Help Center without leaving the ticket</li>
+  <li>Insert links to relevant Help Center articles in ticket comments</li>
+  <li>Add inline feedback to existing articles that need updates</li>
+  <li>Create new articles while answering tickets using a pre-defined template</li>
+</ul>
+
+
+<p>Agents never have to leave the ticket interface to share, flag, or create knowledge, so they can help the customer, while also improving your self-service offerings for other customers.</p>
+
+<p>To get started, see our <a href=""https://support.zendesk.com/hc/en-us/articles/360001975088"" target=""_blank"">Knowledge Capture documentation</a>.</p>
+
+<p>And before your agents can start creating new knowledge directly from tickets, you’ll need to <a href=""https://support.zendesk.com/hc/en-us/articles/115002374987"" target=""_blank"">create a template</a> for them to use. To help you along, we’ve provided some template ideas below. You can copy and paste any sample template below into a new article, add the <strong>KCTemplate</strong> label to the article, and you’ll be all set.</p>
+
+<h4>Q&amp;A template:</h4>
+
+<blockquote>
+
+<p>
+</p>
+<h3>[Title]</h3>
+
+
+<p>
+</p>
+<h3>Question</h3>
+write the question here.
+
+
+<p>
+</p>
+<h3>Answer</h3>
+write the answer here.
+
+
+</blockquote>
+
+<h4>Solution template:</h4>
+
+<blockquote>
+
+<p>
+</p>
+<h3>[Title]</h3>
+
+
+<p>
+</p>
+<h3>Symptoms</h3>
+write the symptoms here.
+
+
+<p>
+</p>
+<h3>Resolution</h3>
+write the resolution here.
+
+
+<p>
+</p>
+<h3>Cause</h3>
+write the cause here.
+
+
+</blockquote>
+
+<h4>How-to template:</h4>
+
+<blockquote>
+
+<p>
+</p>
+<h3>[Title]</h3>
+
+
+<p>
+</p>
+<h3>Objective</h3>
+write the purpose or task here.
+
+
+<p>
+</p>
+<h3>Procedure</h3>
+write the steps here.
+
+
+</blockquote>
+",false,2024-01-04T00:25:50Z,2024-01-04T00:25:51Z,https://eidolic.torango.io/hc/en-us/articles/24784892948755-How-can-agents-leverage-knowledge-to-help-customers,,en-us,false,,20825188493203,0,false,24784892907283,en-us,2024-01-04T00:25:51Z,https://d3v-eidolic.zendesk.com/api/v2/help_center/en-us/articles/24784892948755.json,,0,0
+24784931080979,How do I publish my content in other languages?,"<p>If you have <a href=""https://support.zendesk.com/hc/en-us/articles/224857687"" target=""_blank"" rel=""noopener noreferrer"">configured your Help Center to support multiple languages</a>, you can publish content in your supported languages.</p>
+<p>Here's the workflow for localizing your Help Center content into other languages:</p>
+<ol>
+<li>Get your content translated in the other languages.</li>
+<li>Configure the Help Center to support all your languages.</li>
+<li>Add the translated content to the Help Center.</li>
+</ol>
+<p>For complete instructions, see <a href=""https://support.zendesk.com/hc/en-us/articles/203664336#topic_inn_3qy_43"" target=""_blank"" rel=""noopener noreferrer"">Localizing the Help Center</a>.</p>",false,2024-01-04T00:25:50Z,2024-02-05T21:42:53Z,https://eidolic.torango.io/hc/en-us/articles/24784931080979-How-do-I-publish-my-content-in-other-languages,,en-us,false,,20825188493203,0,false,24784892907283,en-us,2024-02-05T21:42:54Z,https://d3v-eidolic.zendesk.com/api/v2/help_center/en-us/articles/24784931080979.json,,0,0
+26129160531731,Dashboards,"<p>Dashboards provide real-time insights into various aspects of your support operations, including ticket resolution times, agent performance, customer satisfaction scores, and more. Users can create personalized dashboards tailored to their specific needs, selecting from a range of pre-built widgets that showcase different data points. This enables support managers and teams to quickly assess trends, identify areas for improvement, and make data-driven decisions to enhance overall efficiency and customer satisfaction.</p>",false,2024-02-09T03:30:27Z,2024-02-09T03:30:27Z,https://eidolic.torango.io/hc/en-us/articles/26129160531731-Dashboards,,en-us,false,,20825188493203,0,false,26129008577811,en-us,2024-02-09T03:30:27Z,https://d3v-eidolic.zendesk.com/api/v2/help_center/en-us/articles/26129160531731.json,,0,0
+26129190683411,Knowledge Best Practices,"<p>""</p>
+<p>A fundamental best practice in knowledge management is the creation of a centralized repository. This central hub, whether it's a database, intranet, or a dedicated knowledge management system, serves as a singular, reliable source for all organizational information.</p>
+<h2 id=""h_01HP5YQFE5GSE0C8R4P6H7VXRG"">Clear Taxonomy and Structure</h2>
+<p>Organize information systematically with a clear and intuitive taxonomy. Define categories, subcategories, and tags to facilitate easy navigation and quick retrieval of relevant content.</p>
+<h2 id=""h_01HP5YQFE5TC8RYNK31C8N4DS0"">User-Friendly Interface</h2>
+<p>Design an interface that is intuitive and user-friendly. The goal is to enable employees to locate the information they need efficiently without unnecessary complexity or confusion.</p>
+<h2 id=""h_01HP5YQFE5CW2KWKJGWQF4PTDJ"">Knowledge Sharing Culture</h2>
+<p>Cultivate a culture of knowledge sharing within the organization. Encourage team members to actively contribute insights, document processes, and share valuable lessons learned.</p>
+<h2 id=""h_01HP5YQFE598E03BBQJXEHS8Y0"">Continuous Improvement</h2>
+<p>Regularly review and enhance knowledge management processes based on organizational needs and user feedback. Continuous improvement ensures that the knowledge base remains relevant, accurate, and aligned with evolving requirements.</p>
+<p>""</p>",false,2024-02-09T03:32:01Z,2024-02-09T03:32:01Z,https://eidolic.torango.io/hc/en-us/articles/26129190683411-Knowledge-Best-Practices,,en-us,false,,20825188493203,0,false,25919947625619,en-us,2024-02-09T03:32:01Z,https://d3v-eidolic.zendesk.com/api/v2/help_center/en-us/articles/26129190683411.json,,0,0
+26129183003539,Dynamic Content,"<p>""</p>
+<h2 id=""h_01HP5YHA4543XV77AWTC07WR2H"">Introduction</h2>
+<p>The dynamic content error occurs when the theme html is searching for a piece of dynamic content that has not been defined in your admin center.</p>
+<p> </p>
+<h2 id=""h_01HP5YHA453J5PM2VYNNQXM5X5"">Troubleshooting steps</h2>
+<p> </p>
+<p><strong>Step 1: Download the csv Template</strong></p>
+<ol>
+<li>
+<a>Access the csv template provided here</a>.</li>
+</ol>
+<hr>
+<p><strong>Step 2: Navigate to the Admin Center</strong></p>
+<ol>
+<li>Log in to your Zendesk account.</li>
+<li>Navigate to the Admin Center.</li>
+<li>In the Admin Center, find """"Dynamic Content"""" under the """"Workspaces"""" section,</li>
+</ol>
+<hr>
+<p><strong>Step 3: Compare your Dynamic Content to the csv Title values</strong></p>
+<p>Each title in the csv should match a title in your dynamic content. For example, the title of the first row is """"dark"""". There should be a dynamic content titled """"dark"""" as well. If any values are missing from your admin center, add them and set their values, as well as any translations you wish to support.</p>
+<p>""</p>",true,2024-02-09T03:29:47Z,2024-02-09T03:50:52Z,https://eidolic.torango.io/hc/en-us/articles/26129183003539-Dynamic-Content,,en-us,false,,20825188493203,0,true,26129008577811,en-us,2024-02-09T03:50:53Z,https://d3v-eidolic.zendesk.com/api/v2/help_center/en-us/articles/26129183003539.json,,0,0
+26129146421267,Customizing Your Brand with the Eidolic Theme,"<p>The Eidolic theme makes it easy to brand your help center.</p>
+<h2 id=""h_01HP5YNNEGB1JJWKKCQ8B5JGN9"">Installation and Activation</h2>
+<p>Initiate the brand customization process by installing and activating the Eidolic theme. Within the website's admin dashboard, navigate to the """"Themes"""" section and select Eidolic. Activate the theme to initialize the customization capabilities.</p>
+<h2 id=""h_01HP5YNNEG0XWDPNV7MSHCTT3X"">Logo and Color Palette</h2>
+<p>Replace the default logo with your brand's emblem through the theme customization options. Seamlessly upload your logo and tailor the color palette to align with your brand's visual identity. Ensure a visually cohesive and branded experience for visitors.</p>
+<h2 id=""h_01HP5YNNEGY9TCAEHT3EK8PC03"">Header and Footer Customization</h2>
+<p>Tailor the header and footer sections to mirror your brand's style and messaging. Adjust layouts, add or remove elements, and incorporate brand-specific navigation links to enhance user experience while maintaining a cohesive brand presence.</p>",false,2024-02-09T03:31:18Z,2024-02-09T04:51:41Z,https://eidolic.torango.io/hc/en-us/articles/26129146421267-Customizing-Your-Brand-with-the-Eidolic-Theme,,en-us,false,,20825188493203,0,false,26129034646803,en-us,2024-02-09T04:51:43Z,https://d3v-eidolic.zendesk.com/api/v2/help_center/en-us/articles/26129146421267.json,,0,0
+26130315197587,Customizing Your Brand,"<p>The Eidolic theme makes it easy to brand your help center.</p>
+<h2 id=""h_01HP5YNNEGB1JJWKKCQ8B5JGN9"">Installation and Activation</h2>
+<p>Initiate the brand customization process by installing and activating the Eidolic theme. Within the website's admin dashboard, navigate to the """"Themes"""" section and select Eidolic. Activate the theme to initialize the customization capabilities.</p>
+<h2 id=""h_01HP5YNNEG0XWDPNV7MSHCTT3X"">Logo and Color Palette</h2>
+<p>Replace the default logo with your brand's emblem through the theme customization options. Seamlessly upload your logo and tailor the color palette to align with your brand's visual identity. Ensure a visually cohesive and branded experience for visitors.</p>
+<h2 id=""h_01HP5YNNEGY9TCAEHT3EK8PC03"">Header and Footer Customization</h2>
+<p>Tailor the header and footer sections to mirror your brand's style and messaging. Adjust layouts, add or remove elements, and incorporate brand-specific navigation links to enhance user experience while maintaining a cohesive brand presence.</p>",false,2024-02-09T04:52:21Z,2024-02-09T04:52:21Z,https://eidolic.torango.io/hc/en-us/articles/26130315197587-Customizing-Your-Brand,,en-us,false,,20825188493203,0,false,26129080199187,en-us,2024-02-09T04:52:21Z,https://d3v-eidolic.zendesk.com/api/v2/help_center/en-us/articles/26130315197587.json,,0,0
+26130311663891,Customizing Your Brand,"<p>The Eidolic theme makes it easy to brand your help center.</p>
+<h2 id=""h_01HP5YNNEGB1JJWKKCQ8B5JGN9"">Installation and Activation</h2>
+<p>Initiate the brand customization process by installing and activating the Eidolic theme. Within the website's admin dashboard, navigate to the """"Themes"""" section and select Eidolic. Activate the theme to initialize the customization capabilities.</p>
+<h2 id=""h_01HP5YNNEG0XWDPNV7MSHCTT3X"">Logo and Color Palette</h2>
+<p>Replace the default logo with your brand's emblem through the theme customization options. Seamlessly upload your logo and tailor the color palette to align with your brand's visual identity. Ensure a visually cohesive and branded experience for visitors.</p>
+<h2 id=""h_01HP5YNNEGY9TCAEHT3EK8PC03"">Header and Footer Customization</h2>
+<p>Tailor the header and footer sections to mirror your brand's style and messaging. Adjust layouts, add or remove elements, and incorporate brand-specific navigation links to enhance user experience while maintaining a cohesive brand presence.</p>",false,2024-02-09T04:52:43Z,2024-02-09T04:52:43Z,https://eidolic.torango.io/hc/en-us/articles/26130311663891-Customizing-Your-Brand,,en-us,false,,20825188493203,0,false,26129074554003,en-us,2024-02-09T04:52:43Z,https://d3v-eidolic.zendesk.com/api/v2/help_center/en-us/articles/26130311663891.json,,0,0
+26130321561107,Customizing Your Brand,"<p>The Eidolic theme makes it easy to brand your help center.</p>
+<h2 id=""h_01HP5YNNEGB1JJWKKCQ8B5JGN9"">Installation and Activation</h2>
+<p>Initiate the brand customization process by installing and activating the Eidolic theme. Within the website's admin dashboard, navigate to the """"Themes"""" section and select Eidolic. Activate the theme to initialize the customization capabilities.</p>
+<h2 id=""h_01HP5YNNEG0XWDPNV7MSHCTT3X"">Logo and Color Palette</h2>
+<p>Replace the default logo with your brand's emblem through the theme customization options. Seamlessly upload your logo and tailor the color palette to align with your brand's visual identity. Ensure a visually cohesive and branded experience for visitors.</p>
+<h2 id=""h_01HP5YNNEGY9TCAEHT3EK8PC03"">Header and Footer Customization</h2>
+<p>Tailor the header and footer sections to mirror your brand's style and messaging. Adjust layouts, add or remove elements, and incorporate brand-specific navigation links to enhance user experience while maintaining a cohesive brand presence.</p>",false,2024-02-09T04:53:13Z,2024-02-09T04:53:13Z,https://eidolic.torango.io/hc/en-us/articles/26130321561107-Customizing-Your-Brand,,en-us,false,,20825188493203,0,false,26129076020499,en-us,2024-02-09T04:53:13Z,https://d3v-eidolic.zendesk.com/api/v2/help_center/en-us/articles/26130321561107.json,,0,0
+26130347566355,Customizing Your Brand,"<p>The Eidolic theme makes it easy to brand your help center.</p>
+<h2 id=""h_01HP5YNNEGB1JJWKKCQ8B5JGN9"">Installation and Activation</h2>
+<p>Initiate the brand customization process by installing and activating the Eidolic theme. Within the website's admin dashboard, navigate to the """"Themes"""" section and select Eidolic. Activate the theme to initialize the customization capabilities.</p>
+<h2 id=""h_01HP5YNNEG0XWDPNV7MSHCTT3X"">Logo and Color Palette</h2>
+<p>Replace the default logo with your brand's emblem through the theme customization options. Seamlessly upload your logo and tailor the color palette to align with your brand's visual identity. Ensure a visually cohesive and branded experience for visitors.</p>
+<h2 id=""h_01HP5YNNEGY9TCAEHT3EK8PC03"">Header and Footer Customization</h2>
+<p>Tailor the header and footer sections to mirror your brand's style and messaging. Adjust layouts, add or remove elements, and incorporate brand-specific navigation links to enhance user experience while maintaining a cohesive brand presence.</p>",false,2024-02-09T04:54:02Z,2024-02-09T04:54:02Z,https://eidolic.torango.io/hc/en-us/articles/26130347566355-Customizing-Your-Brand,,en-us,false,,20825188493203,0,false,26129085268627,en-us,2024-02-09T04:54:02Z,https://d3v-eidolic.zendesk.com/api/v2/help_center/en-us/articles/26130347566355.json,,0,0
+26130348364691,Customizing Your Brand,"<p>The Eidolic theme makes it easy to brand your help center.</p>
+<h2 id=""h_01HP5YNNEGB1JJWKKCQ8B5JGN9"">Installation and Activation</h2>
+<p>Initiate the brand customization process by installing and activating the Eidolic theme. Within the website's admin dashboard, navigate to the """"Themes"""" section and select Eidolic. Activate the theme to initialize the customization capabilities.</p>
+<h2 id=""h_01HP5YNNEG0XWDPNV7MSHCTT3X"">Logo and Color Palette</h2>
+<p>Replace the default logo with your brand's emblem through the theme customization options. Seamlessly upload your logo and tailor the color palette to align with your brand's visual identity. Ensure a visually cohesive and branded experience for visitors.</p>
+<h2 id=""h_01HP5YNNEGY9TCAEHT3EK8PC03"">Header and Footer Customization</h2>
+<p>Tailor the header and footer sections to mirror your brand's style and messaging. Adjust layouts, add or remove elements, and incorporate brand-specific navigation links to enhance user experience while maintaining a cohesive brand presence.</p>",false,2024-02-09T04:54:25Z,2024-02-09T04:54:25Z,https://eidolic.torango.io/hc/en-us/articles/26130348364691-Customizing-Your-Brand,,en-us,false,,20825188493203,0,false,26129089111315,en-us,2024-02-09T04:54:25Z,https://d3v-eidolic.zendesk.com/api/v2/help_center/en-us/articles/26130348364691.json,,0,0
+26130356062483,Customizing Your Brand,"<p>The Eidolic theme makes it easy to brand your help center.</p>
+<h2 id=""h_01HP5YNNEGB1JJWKKCQ8B5JGN9"">Installation and Activation</h2>
+<p>Initiate the brand customization process by installing and activating the Eidolic theme. Within the website's admin dashboard, navigate to the """"Themes"""" section and select Eidolic. Activate the theme to initialize the customization capabilities.</p>
+<h2 id=""h_01HP5YNNEG0XWDPNV7MSHCTT3X"">Logo and Color Palette</h2>
+<p>Replace the default logo with your brand's emblem through the theme customization options. Seamlessly upload your logo and tailor the color palette to align with your brand's visual identity. Ensure a visually cohesive and branded experience for visitors.</p>
+<h2 id=""h_01HP5YNNEGY9TCAEHT3EK8PC03"">Header and Footer Customization</h2>
+<p>Tailor the header and footer sections to mirror your brand's style and messaging. Adjust layouts, add or remove elements, and incorporate brand-specific navigation links to enhance user experience while maintaining a cohesive brand presence.</p>",false,2024-02-09T04:55:41Z,2024-02-09T04:55:41Z,https://eidolic.torango.io/hc/en-us/articles/26130356062483-Customizing-Your-Brand,,en-us,false,,20825188493203,0,false,26129078640147,en-us,2024-02-09T04:55:41Z,https://d3v-eidolic.zendesk.com/api/v2/help_center/en-us/articles/26130356062483.json,,0,0
 20825175147283,How do I customize my Help Center?,"<p>You can modify the look and feel of your Help Center by changing colors and fonts. See <a href=""https://support.zendesk.com/hc/en-us/articles/206177737"" target=""_blank"">Branding your Help Center</a> to learn how.</p>
 
 <p>You can also change the design of your Help Center. If you're comfortable working with page code, you can dig in to the site's HTML, CSS, and Javascript to customize your theme. To get started, see <a href=""https://support.zendesk.com/hc/en-us/articles/203664326"" target=""_blank"">Customizing the Help Center</a>.</p>",false,2023-09-18T21:38:13Z,2023-09-18T21:38:13Z,https://mandrake.torango.io/hc/en-us/articles/20825175147283-How-do-I-customize-my-Help-Center,,en-us,false,,20825188493203,0,false,20825175129235,en-us,2023-09-18T21:38:13Z,https://d3v-genie.zendesk.com/api/v2/help_center/en-us/articles/20825175147283.json,,0,0
@@ -153,3 +352,106 @@ write the steps here.
 
 </blockquote>
 ",false,2023-09-18T21:38:13Z,2023-10-09T02:10:19Z,https://mandrake.torango.io/hc/en-us/articles/20825175176851-How-can-agents-leverage-knowledge-to-help-customers,,en-us,false,,20825188493203,0,true,20825175129235,en-us,2023-12-23T22:45:52Z,https://d3v-genie.zendesk.com/api/v2/help_center/en-us/articles/20825175176851.json,,0,0
+24628854527123,Dynamic Content,"<h2 id=""h_01HFJ41999VFK22YXPJXMW5159"">Introduction</h2>
+<p>The dynamic content error occurs when the theme html is searching for a piece of dynamic content that has not been defined in your admin center.</p>
+<p><img style=""height: auto;"" src=""https://aitvaric.torango.io/hc/article_attachments/24628839355283""></p>
+<h2 id=""h_01HFJ43C5DC55DTQF94NB0BXQW"">Troubleshooting steps</h2>
+<p> </p>
+<p><strong>Step 1: Download the csv Template</strong></p>
+<ol>
+<li>
+<a href=""https://docs.google.com/spreadsheets/d/e/2PACX-1vQQNicF5LueZ2XO1VF_fL801QmHeEGd7gpqqRYCk-etmK1jqGjD6OFM4MAyN-LZ4JE92cl4JvSEmkCG/pub?output=csv"">Access the csv template provided here</a>.</li>
+</ol>
+<hr style=""height: 0px;"">
+<p><strong>Step 2: Navigate to the Admin Center</strong></p>
+<ol>
+<li>Log in to your Zendesk account.</li>
+<li>Navigate to the Admin Center.</li>
+<li>In the Admin Center, find ""Dynamic Content"" under the ""Workspaces"" section,</li>
+</ol>
+<p class=""wysiwyg-text-align-center""><img style=""height: auto;"" src=""https://aitvaric.torango.io/hc/article_attachments/24628854525075"" width=""689"" height=""441""></p>
+<hr style=""height: 0px;"">
+<p><strong>Step 3: Compare your Dynamic Content to the csv Title values</strong></p>
+<p>Each title in the csv should match a title in your dynamic content. For example, the title of the first row is ""dark"". There should be a dynamic content titled ""dark"" as well. If any values are missing from your admin center, add them and set their values, as well as any translations you wish to support.</p>",false,2023-12-29T20:41:24Z,2023-12-29T20:41:24Z,https://aitvaric.torango.io/hc/en-us/articles/24628854527123-Dynamic-Content,,en-us,false,,20825188493203,0,false,24620828748691,en-us,2023-12-29T20:41:24Z,https://d3v-aitvaric.zendesk.com/api/v2/help_center/en-us/articles/24628854527123.json,,0,0
+24638938807187,What are agent views?,"<p>Views are a powerful tool that helps you organize and manage your support tickets efficiently. Views act as filters that allow you to see specific sets of tickets based on certain criteria. Whether you're a support agent or manager, understanding how to use Views can significantly improve your workflow and productivity.</p>",true,2023-12-30T03:07:41Z,2023-12-30T03:07:42Z,https://aitvaric.torango.io/hc/en-us/articles/24638938807187-What-are-agent-views,,en-us,false,,20825188493203,0,false,24638704162451,en-us,2023-12-30T03:07:42Z,https://d3v-aitvaric.zendesk.com/api/v2/help_center/en-us/articles/24638938807187.json,,0,0
+24638930466067,Ticketing in Zendesk,"<p>Zendesk's ticketing system enables seamless collaboration among support teams by assigning tickets to specific agents or groups, ensuring accountability and streamlining the support workflow. Tickets can be categorized, prioritized, and tagged, allowing for efficient sorting and assignment based on urgency and nature. With features like automated ticket creation from various channels, customizable ticket forms, and a centralized interface, Zendesk's ticketing system empowers support teams to deliver timely and effective solutions, ultimately enhancing the overall customer experience.</p>",true,2023-12-30T03:09:21Z,2023-12-30T03:09:21Z,https://aitvaric.torango.io/hc/en-us/articles/24638930466067-Ticketing-in-Zendesk,,en-us,false,,20825188493203,0,false,24638701709203,en-us,2023-12-30T03:09:21Z,https://d3v-aitvaric.zendesk.com/api/v2/help_center/en-us/articles/24638930466067.json,,0,0
+24639047787667,Dashboards,"<p>Dashboards provide real-time insights into various aspects of your support operations, including ticket resolution times, agent performance, customer satisfaction scores, and more. Users can create personalized dashboards tailored to their specific needs, selecting from a range of pre-built widgets that showcase different data points. This enables support managers and teams to quickly assess trends, identify areas for improvement, and make data-driven decisions to enhance overall efficiency and customer satisfaction.</p>",true,2023-12-30T03:16:27Z,2023-12-30T03:16:27Z,https://aitvaric.torango.io/hc/en-us/articles/24639047787667-Dashboards,,en-us,false,,20825188493203,0,false,24638679094419,en-us,2023-12-30T03:16:27Z,https://d3v-aitvaric.zendesk.com/api/v2/help_center/en-us/articles/24639047787667.json,,0,0
+24639156830099,Enhancing Knowledge Management with Content Cues in Zendesk,"<p>Let's delve into the key aspects of Content Cues and how they revolutionize the creation and maintenance of support articles.</p>
+<h2 id=""h_01HJWBQEPCM17SFX9TKVX42X45"">Proactive Article Creation</h2>
+<p>Content Cues operate as proactive assistants for support agents, leveraging insights from support tickets to suggest potential articles that could address recurring or emerging customer queries. By analyzing the content of support tickets, these cues intelligently identify gaps in the knowledge base, providing valuable suggestions for new articles to be written. This predictive approach not only streamlines the support process but also ensures that the knowledge base remains comprehensive and up-to-date.</p>
+<h2 id=""h_01HJWBRQSY3ART4SC48X3Q9E4V"">Dynamic Suggestions Based on Ticket Trends</h2>
+<p>Content Cues dynamically adapts to changing trends by continually analyzing support ticket data. By recognizing patterns and commonalities in customer inquiries, it suggests relevant topics for new articles, enabling support teams to stay proactive in providing solutions even before a widespread issue arises.</p>
+<h2 id=""h_01HJWBRVA0T2C2ZKMF1SR90WRA"">Performance Metrics for Informed Decisions</h2>
+<p>By assessing the popularity and usefulness of existing articles through metrics like visitor counts, support teams can make informed decisions on whether to update, optimize, or retire certain articles. This data-driven approach ensures that the knowledge base remains a valuable resource for both customers and support agents.</p>
+<h2 id=""h_01HJWBRZ2XEQEWAZ19JYZEY1GC"">Strategic Knowledge Base Management</h2>
+<p>Content Cues empower support teams to strategically manage their knowledge base. By suggesting articles based on ticket content and evaluating the performance of existing content, teams can align their knowledge resources with the actual needs and preferences of their user base. This strategic alignment not only enhances customer satisfaction but also optimizes the efficiency of support operations.</p>",true,2023-12-30T03:20:36Z,2023-12-30T03:20:36Z,https://aitvaric.torango.io/hc/en-us/articles/24639156830099-Enhancing-Knowledge-Management-with-Content-Cues-in-Zendesk,,en-us,false,,20825188493203,0,false,24620777090451,en-us,2023-12-30T03:20:36Z,https://d3v-aitvaric.zendesk.com/api/v2/help_center/en-us/articles/24639156830099.json,,0,0
+24639183767571, Customizing Your Brand with the Aitvaric Theme,"<p>The Aitvaric theme makes it easy to brand your help center.</p>
+<h2 id=""h_01HJWC10RNM1BT4KZME187M5AP"">Installation and Activation</h2>
+<p>Initiate the brand customization process by installing and activating the Aitvaric theme. Within the website's admin dashboard, navigate to the ""Themes"" section and select Aitvaric. Activate the theme to initialize the customization capabilities.</p>
+<h2 id=""h_01HJWC13NKHYBAPSYMG7NCYBQ2"">Logo and Color Palette</h2>
+<p>Replace the default logo with your brand's emblem through the theme customization options. Seamlessly upload your logo and tailor the color palette to align with your brand's visual identity. Ensure a visually cohesive and branded experience for visitors.</p>
+<h2 id=""h_01HJWC167KM3BFXMDV8EVHC17B"">Header and Footer Customization</h2>
+<p>Tailor the header and footer sections to mirror your brand's style and messaging. Adjust layouts, add or remove elements, and incorporate brand-specific navigation links to enhance user experience while maintaining a cohesive brand presence.</p>",true,2023-12-30T03:24:44Z,2023-12-30T03:24:44Z,https://aitvaric.torango.io/hc/en-us/articles/24639183767571--Customizing-Your-Brand-with-the-Aitvaric-Theme,,en-us,false,,20825188493203,0,true,24620790517523,en-us,2023-12-30T03:26:58Z,https://d3v-aitvaric.zendesk.com/api/v2/help_center/en-us/articles/24639183767571.json,,0,0
+24639678250771,Dark Mode Images,"<p>In recent years, dark mode has become a popular feature in applications and websites, offering users a visually comfortable and energy-efficient alternative. However, the transition to dark mode can present challenges for the visual elements, especially images. Let's explore why accommodating dark mode might necessitate different images and how this adaptation can enhance the overall user experience.</p>
+<h2 id=""h_01HJWDVESTSERYQECE2N1XAR9Z"">Contrast Considerations</h2>
+<p>Dark mode often involves a dark background, and images designed for a light background may not provide the necessary contrast. To maintain visibility and clarity, images intended for dark mode may require adjustments in terms of brightness, contrast, or even color palettes to ensure they stand out effectively against the darker backdrop.</p>
+<h2 id=""h_01HJWDVC3M0G46117EJXZMH14B"">Reducing Eye Strain</h2>
+<p>One of the primary reasons users opt for dark mode is to reduce eye strain, especially in low-light conditions. Images with high contrast or overly bright elements can be harsh on the eyes in dark mode. Adapting images for dark mode involves creating versions with softer contrasts and more subdued tones to promote a comfortable viewing experience.</p>
+<h2 id=""h_01HJWDV9FMXZX0R3WZB54D1ZK9"">Color Harmony</h2>
+<p>Colors can appear differently in dark mode due to the change in background brightness. Images optimized for dark mode may need a recalibration of their color schemes to maintain visual harmony. This ensures that the images integrate seamlessly with the overall aesthetics of the dark mode interface and avoid appearing too vibrant or jarring.</p>
+<h2 id=""h_01HJWDV73X5JG9SDCH5KH4K8DG"">Maintaining Brand Consistency</h2>
+<p>For applications and websites that employ dark mode, maintaining brand consistency is crucial. Images are integral to brand identity, and having versions tailored for both light and dark modes helps ensure a cohesive brand experience across various user preferences. This consideration is particularly important for logos, icons, and other key visual elements.</p>
+<p> </p>",true,2023-12-30T03:56:48Z,2023-12-30T03:56:48Z,https://aitvaric.torango.io/hc/en-us/articles/24639678250771-Dark-Mode-Images,,en-us,false,,20825188493203,0,true,24620790517523,en-us,2023-12-30T03:56:48Z,https://d3v-aitvaric.zendesk.com/api/v2/help_center/en-us/articles/24639678250771.json,,0,0
+24639766544275,Knowledge Best Practices,"<p>A fundamental best practice in knowledge management is the creation of a centralized repository. This central hub, whether it's a database, intranet, or a dedicated knowledge management system, serves as a singular, reliable source for all organizational information.</p>
+<h2 id=""h_01HJWE65Q85XB2YQRKVXF04BXS"">Clear Taxonomy and Structure</h2>
+<p>Organize information systematically with a clear and intuitive taxonomy. Define categories, subcategories, and tags to facilitate easy navigation and quick retrieval of relevant content.</p>
+<h2 id=""h_01HJWE65Q8751T2AV86ZMH3BN4"">User-Friendly Interface</h2>
+<p>Design an interface that is intuitive and user-friendly. The goal is to enable employees to locate the information they need efficiently without unnecessary complexity or confusion.</p>
+<h2 id=""h_01HJWE65Q8D4W3SVJM85KQ2F5J"">Knowledge Sharing Culture</h2>
+<p>Cultivate a culture of knowledge sharing within the organization. Encourage team members to actively contribute insights, document processes, and share valuable lessons learned.</p>
+<h2 id=""h_01HJWE65Q8W7F3ZVETGVV99VR9"">Continuous Improvement</h2>
+<p>Regularly review and enhance knowledge management processes based on organizational needs and user feedback. Continuous improvement ensures that the knowledge base remains relevant, accurate, and aligned with evolving requirements.</p>",true,2023-12-30T04:03:07Z,2023-12-30T04:03:07Z,https://aitvaric.torango.io/hc/en-us/articles/24639766544275-Knowledge-Best-Practices,,en-us,false,,20825188493203,0,true,24620777090451,en-us,2023-12-30T04:03:07Z,https://d3v-aitvaric.zendesk.com/api/v2/help_center/en-us/articles/24639766544275.json,,0,0
+24639789534867,Advanced Strategies,"<h2 id=""h_01HJWED1RT40B08C3D6T8Z7VWM"">Robust Search Capabilities</h2>
+<p>Augment your knowledge management system with robust search capabilities. A powerful search functionality allows users to quickly locate specific information, making the knowledge base more user-friendly and efficient.</p>
+<h2 id=""h_01HJWED1RTRC90NT47Z0ZBG9RM"">Collaborative Content Creation</h2>
+<p>Encourage collaborative content creation within the knowledge base. Foster teamwork by allowing multiple team members to contribute, edit, and review content, ensuring a diverse and collective pool of knowledge.</p>
+<h2 id=""h_01HJWED1RTEE5DQ9YD2B31ZJ4D"">Regular Training and Refresher Courses</h2>
+<p>Implement regular training sessions and refresher courses on effective knowledge management practices. Keeping employees informed about the latest features and methodologies ensures ongoing utilization and adherence to best practices.</p>
+<h2 id=""h_01HJWED1RT4JTN7CX2GSZ4ZGRY"">Gamification for Engagement</h2>
+<p>Consider incorporating gamification elements to boost engagement with the knowledge base. Introduce challenges, rewards, or recognition for employees who actively contribute, fostering a positive and competitive environment for knowledge sharing.</p>
+<h2 id=""h_01HJWED1RTE4VPA0AMR0QGJTHY"">Integration with External Tools</h2>
+<p>Explore opportunities to integrate your knowledge management system with external tools and platforms used within the organization. Seamless integration streamlines workflows and enhances the overall utility of the knowledge base in the context of daily operations.</p>",true,2023-12-30T04:06:34Z,2023-12-30T04:06:34Z,https://aitvaric.torango.io/hc/en-us/articles/24639789534867-Advanced-Strategies,,en-us,false,,20825188493203,0,false,24620777090451,en-us,2023-12-30T04:06:34Z,https://d3v-aitvaric.zendesk.com/api/v2/help_center/en-us/articles/24639789534867.json,,0,0
+24639855473683,Inter-departmental Reporting Support,"<h2 id=""h_01HJWEJN3HTDNTB189BB4A236Q"">Cross-Department Collaboration</h2>
+<p>Facilitate collaboration between different departments through shared reporting insights. This ensures that data is leveraged not only within the help center team but also across the organization to inform strategic decisions and improve overall customer experience.</p>
+<h2 id=""h_01HJWEJN3H4ZXDBSK4RGNN7QZQ"">Regular Review Meetings</h2>
+<p>Schedule regular review meetings to discuss and interpret reporting data with relevant stakeholders. These meetings provide a platform for team members to share insights, address challenges, and collectively strategize for continuous improvement.</p>
+<h2 id=""h_01HJWEKZ71DW2RAP0SEG7AM6QH"">Data Security and Compliance</h2>
+<p>Prioritize data security and compliance with relevant regulations when handling customer and support data. Implement measures to safeguard sensitive information and ensure that reporting processes adhere to industry standards and legal requirements.</p>
+<h2 id=""h_01HJWEJN3J3GCWGB2T8Z0EE1C2"">Continuous Training for Reporting Tools</h2>
+<p>Provide continuous training for team members on the use of reporting tools. Familiarity with reporting software ensures that staff can extract meaningful insights efficiently, enhancing the overall effectiveness of your help center reporting processes.</p>",true,2023-12-30T04:10:08Z,2023-12-30T04:10:08Z,https://aitvaric.torango.io/hc/en-us/articles/24639855473683-Inter-departmental-Reporting-Support,,en-us,false,,20825188493203,0,false,24638679094419,en-us,2023-12-30T04:10:08Z,https://d3v-aitvaric.zendesk.com/api/v2/help_center/en-us/articles/24639855473683.json,,0,0
+24639925801491, Creating New Admins in Zendesk,"<h2 id=""h_01HJWEVHQK606PAFWYB7T8P1ZC"">Accessing the Admin Center</h2>
+<p>Log in to your Zendesk account using your administrative credentials. In the Zendesk dashboard, locate and click on ""Admin Center."" This is typically found in the main navigation menu or sidebar.</p>
+<h2 id=""h_01HJWEVHQKKC3CAS9MEWRFNP63"">Navigating to People</h2>
+<p>Within the Admin Center, find the ""People"" section. This may be listed in the main menu or under a specific category like ""Settings"" or ""Admin Settings."" Under ""People,"" select ""Team Members."" This section houses the list of current team members and allows you to manage their roles.</p>
+<h2 id=""h_01HJWEVHQMAVA5XZB0V8SX5QMZ"">Creating a New Team Member</h2>
+<p>Look for the ""Create Team Member"" or ""Add New"" button. Click on it to initiate the process of adding a new team member, which, in this case, will be a new admin. Complete the required information for the new admin. This typically includes details such as full name, email address, and a secure password. Ensure the password aligns with your organization's security policies.</p>",true,2023-12-30T04:14:27Z,2023-12-30T04:14:27Z,https://aitvaric.torango.io/hc/en-us/articles/24639925801491--Creating-New-Admins-in-Zendesk,,en-us,false,,20825188493203,0,false,24638649713043,en-us,2023-12-30T04:14:27Z,https://d3v-aitvaric.zendesk.com/api/v2/help_center/en-us/articles/24639925801491.json,,0,0
+24695537743251,Managing Permissions,<p>This article is here for illustrative purposes</p>,true,2024-01-01T19:59:57Z,2024-01-01T19:59:57Z,https://aitvaric.torango.io/hc/en-us/articles/24695537743251-Managing-Permissions,,en-us,false,,20825188493203,0,false,24638649713043,en-us,2024-01-01T19:59:57Z,https://d3v-aitvaric.zendesk.com/api/v2/help_center/en-us/articles/24695537743251.json,,0,0
+24695559158163,Deleting Admins,<p>This article is here for illustrative purposes</p>,true,2024-01-01T20:00:37Z,2024-01-01T20:00:37Z,https://aitvaric.torango.io/hc/en-us/articles/24695559158163-Deleting-Admins,,en-us,false,,20825188493203,0,false,24638649713043,en-us,2024-01-01T20:00:37Z,https://d3v-aitvaric.zendesk.com/api/v2/help_center/en-us/articles/24695559158163.json,,0,0
+24639844910227,Optimizing Help Center Reporting,"<h2 id=""h_01HJWEGX1SAYZ1ZZPRQGY564VC"">Customized Dashboard Creation</h2>
+<p>Begin by customizing your reporting dashboard to align with the specific metrics and key performance indicators (KPIs) relevant to your help center. Tailoring the dashboard ensures that it provides a snapshot of the data most critical to your organization.</p>
+<h2 id=""h_01HJWEGX1TBDRTTMCHEXBB02QZ"">Define and Monitor Key Metrics</h2>
+<p>Identify and prioritize key metrics that directly impact the performance of your help center. Common metrics include ticket resolution time, customer satisfaction scores, and first-response time. Regularly monitor these metrics to gain insights into the efficiency and effectiveness of your support operations.</p>
+<h2 id=""h_01HJWEGX1TVS4J3GV2K3MHCF1C"">Automated Reporting Processes</h2>
+<p>Implement automated reporting processes to streamline the generation and distribution of reports. Automation reduces manual effort, ensures timely delivery of insights, and allows your team to focus on analyzing data rather than compiling it.</p>
+<h2 id=""h_01HJWEGX1TPBXW40E51ABT7PJP"">Utilize Customer Feedback Data</h2>
+<p>Integrate customer feedback data into your reporting metrics. This includes analyzing comments, ratings, and customer surveys. Incorporating qualitative data provides a more comprehensive understanding of customer satisfaction and areas for improvement.</p>",true,2023-12-30T04:08:44Z,2023-12-30T04:08:44Z,https://aitvaric.torango.io/hc/en-us/articles/24639844910227-Optimizing-Help-Center-Reporting,,en-us,false,,20825188493203,0,true,24638679094419,en-us,2024-01-05T01:58:44Z,https://d3v-aitvaric.zendesk.com/api/v2/help_center/en-us/articles/24639844910227.json,,0,0
+24639784549907, Advancing Knowledge Management: Further Best Practices,"<h2 id=""h_01HJWE9JKVK3SERS73JFNFTTKW"">Version Control Mechanisms</h2>
+<p>Implement version control mechanisms to track changes in documents. This practice ensures that users access the most up-to-date information while providing a history of modifications for reference.</p>
+<h2 id=""h_01HJWE9JKVCTGNS0EHJJXKYEBM"">Access Controls and Permissions</h2>
+<p>Define access controls based on organizational roles. Tailoring permissions ensures that sensitive information is protected, promoting data security and maintaining confidentiality where necessary.</p>
+<h2 id=""h_01HJWE9JKVZXEBKW057BGJ75D6"">Integration with Workflows</h2>
+<p>Integrate knowledge management seamlessly into existing workflows. By doing so, accessing and contributing to the knowledge base becomes an integral part of daily operations, enhancing overall efficiency.</p>
+<h2 id=""h_01HJWE9JKV00PCZT3MYRVJ7S3N"">Analytics and Feedback Mechanisms</h2>
+<p>Implement analytics tools to track usage patterns and identify knowledge gaps. Additionally, provide mechanisms for users to offer feedback on the usefulness and accuracy of the content, fostering continuous improvement.</p>
+<h2 id=""h_01HJWE9JKVGF1M8FJFYR2BPYQE"">Mobile Accessibility Optimization</h2>
+<p>Optimize the knowledge base for mobile accessibility. This ensures that employees can access critical information on-the-go, promoting flexibility and efficiency in a modern, dynamic work environment.</p>",true,2023-12-30T04:04:28Z,2024-02-01T05:33:39Z,https://aitvaric.torango.io/hc/en-us/articles/24639784549907--Advancing-Knowledge-Management-Further-Best-Practices,,en-us,false,,20825188493203,0,true,24620777090451,en-us,2024-02-01T05:33:42Z,https://d3v-aitvaric.zendesk.com/api/v2/help_center/en-us/articles/24639784549907.json,,0,0

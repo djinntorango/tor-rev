@@ -113,12 +113,30 @@ const csvStringifier = createCsvStringifier({
   header: [
     { id: "id", title: "ID" },
     { id: "title", title: "Title" },
-    // ... (rest of the header configuration)
+    { id: "body", title: "Body" },
+    { id: "comments_disabled", title: "Comments Disabled" },
+    { id: "created_at", title: "Created At" },
+    { id: "edited_at", title: "Edited At" },
+    { id: "html_url", title: "HTML URL" },
+    { id: "label_names", title: "Label Names" },
+    { id: "locale", title: "Locale" },
+    { id: "outdated", title: "Outdated" },
+    { id: "outdated_locales", title: "Outdated Locales" },
+    { id: "permission_group_id", title: "Permission Group ID" },
+    { id: "position", title: "Position" },
+    { id: "promoted", title: "Promoted" },
+    { id: "section_id", title: "Section ID" },
+    { id: "source_locale", title: "Source Locale" },
+    { id: "updated_at", title: "Updated At" },
+    { id: "url", title: "URL" },
+    { id: "user_segment_id", title: "User Segment ID" },
+    { id: "vote_count", title: "Vote Count" },
+    { id: "vote_sum", title: "Vote Sum" },
   ],
 });
 
 // In-memory CSV string
-let csvData = "";
+let csvData = csvStringifier.getHeaderString();
 
 const csvWriter = createCsvWriter({
   path: "/app/src/help_center_articles.csv",
