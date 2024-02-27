@@ -39,7 +39,7 @@ app.get("/zendesk/auth", (req, res) => {
         response_type: "code",
         redirect_uri: process.env.REDIRECT_URI,
         client_id: process.env.ZENDESK_CLIENT_ID,
-        scope: "users:read",
+        scope: "users:read hc:read",
       }
     )}`
   );
@@ -187,15 +187,17 @@ async function getHelpCenterArticles() {
     while (nextPage) {
       
       console.log('Next Page:', nextPage);
-      console.log(access_token);
+      console.log('Access Token:', access_token);
       // Make the API request
-      const response = await axios.get(nextPage, {
-        auth: access_token,
-        params: {
-          sort_by: "updated_at",
-          sort_order: "asc",
-        },
-      });
+  const response = await axios.get(nextPage, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+    params: {
+      sort_by: "updated_at",
+      sort_order: "asc",
+    },
+  });
       const articles = response.data.articles;
       // Extract relevant information from the response
       console.log("Number of articles:", articles.length);
