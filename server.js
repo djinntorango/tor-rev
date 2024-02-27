@@ -59,7 +59,7 @@ app.get("/zendesk/oauth/callback", async (req, res) => {
         redirect_uri: process.env.REDIRECT_URI,
         scope: "users:read",
       },
-      { headers: { "Content-Type": "application/json" } }
+      { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
     );
 
     // In production, you'd store the access token somewhere in your app,
