@@ -1,0 +1,21 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Title Here</title>
+    <!-- Insert favicon link here -->
+    <link rel="stylesheet" type="text/css" href="public/styles.css" />
+</head>
+<body>
+    <section class="subdomain-inq">
+        <form class="sub-form" action="/zendesk/auth" method="get">
+            <label for="subdomain" class="sub">Zendesk Subdomain:</label>
+            <input type="text" id="subdomain" name="subdomain" required>
+            <button type="submit" class="btn--remix">Sign in to Zendesk</button>
+        </form>
+    </section>
+</body>
+</html>
