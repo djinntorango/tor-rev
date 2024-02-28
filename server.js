@@ -14,6 +14,9 @@ let storedSubdomain = null;
 let storedAccessToken = null;
 const path = require('path');
 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
 app.use('/public', (req, res, next) => {
   res.header('Content-Type', 'text/css');
   next();
@@ -23,18 +26,8 @@ app.use(express.urlencoded({ extended: true })); // Middleware to parse form dat
 
 
 app.get("/", (req, res) => {
-  res.send(`
-  <section class="subdomain-inq">
-    <form class="sub-form" action="/zendesk/auth" method="get">
-      <label for="subdomain" class="sub">Zendesk Subdomain:</label>
-      <input type="text" id="subdomain" name="subdomain" required>
-      <button type="submit" class="btn--remix">Sign in to Zendesk</button>
-    </form>
-  </section>
-    <link rel="stylesheet" type="text/css" href="public/styles.css" />  
-  `);
+  res.render("index");
 });
-
 app.get("/zendesk/auth", (req, res) => {
   const subdomain = req.query.subdomain;
 
@@ -80,15 +73,7 @@ app.get("/zendesk/oauth/callback", async (req, res) => {
       { headers: { Authorization: `Bearer ${access_token}` } }
     );
 
-    res.send(`
-    <p>Hi, ${profileResponse.data.user.name}!</p>
-    
-    <form action="/send-email" method="post">
-    <label for="email">Enter your email:</label>
-    <input type="email" id="email" name="email" required>
-    <button type="submit">Send Email</button>
-  </form>
-    `);
+res.render("oauth-callback", { profileResponse });
   } catch (error) {
     console.error("Error in OAuth callback:", error);
     res.status(500).send("Internal Server Error");
