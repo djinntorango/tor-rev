@@ -10,6 +10,12 @@ const createCsvStringifier = require("csv-writer").createObjectCsvStringifier;
 const app = express();
 const port = 3000;
 
+const favicon = require('serve-favicon');
+const faviconPath = path.join(__dirname, 'assets', 'https://cdn.glitch.global/887fed5c-3c1b-472d-8fdc-c2a3bad1fe27/oillamp(red).png?v=1709087894149');
+
+// Use the favicon middleware
+app.use(favicon("https://cdn.glitch.global/887fed5c-3c1b-472d-8fdc-c2a3bad1fe27/oillamp(powderblue).svg?v=1709088268120"));
+
 let storedSubdomain = null;
 let storedAccessToken = null;
 const path = require('path');
