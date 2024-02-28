@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true })); // Middleware to parse form dat
 app.get("/", (req, res) => {
   res.send(`
   <section class="subdomain-inq">
-    <form action="/zendesk/auth" method="get">
+    <form class="sub-form" action="/zendesk/auth" method="get">
       <label for="subdomain" class="sub">Zendesk Subdomain:</label>
       <input type="text" id="subdomain" name="subdomain" required>
       <button type="submit" class="btn--remix">Sign in to Zendesk</button>

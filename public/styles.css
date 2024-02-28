@@ -204,6 +204,12 @@ h2 {
   font-size:36px;
 }
 
+.sub-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .subdomain-inq {
     display: flex;
     flex-direction: column;
