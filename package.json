@@ -18,7 +18,8 @@
     "handlebars": "^4.7.8",
     "nodemailer": "^6.9.10",
     "path": "^0.12.7",
-    "querystring": "^0.2.1"
+    "querystring": "^0.2.1",
+    "static": "^2.0.0"
   },
   "engines": {
     "node": "14.x"

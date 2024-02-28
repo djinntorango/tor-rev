@@ -13,19 +13,25 @@ const port = 3000;
 let storedSubdomain = null;
 let storedAccessToken = null;
 const path = require('path');
-app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/public', (req, res, next) => {
+  res.header('Content-Type', 'text/css');
+  next();
+}, express.static(path.join(__dirname, 'public')));
 
 app.use(express.urlencoded({ extended: true })); // Middleware to parse form data
-app.use(express.static('public'));
+
 
 app.get("/", (req, res) => {
   res.send(`
+  <section class="subdomain-inq">
     <form action="/zendesk/auth" method="get">
       <label for="subdomain" class="sub">Zendesk Subdomain:</label>
       <input type="text" id="subdomain" name="subdomain" required>
       <button type="submit" class="btn--remix">Sign in to Zendesk</button>
     </form>
+  </section>
+    <link rel="stylesheet" type="text/css" href="public/styles.css" />  
   `);
 });
 

@@ -201,5 +201,14 @@ h2 {
 }
 
 .sub {
-  font-size:90px;
+  font-size:36px;
+}
+
+.subdomain-inq {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    vertical-align: middle;
+    height: 100dvh;
+    justify-content: center;
 }
