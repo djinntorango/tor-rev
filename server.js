@@ -47,6 +47,8 @@ app.get("/zendesk/auth", (req, res) => {
   );
 });
 
+
+
 app.get("/zendesk/oauth/callback", async (req, res) => {
   try {
     const subdomain = storedSubdomain;
