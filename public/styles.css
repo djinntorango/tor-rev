@@ -14,8 +14,8 @@ to this section's matching END comment to see page-specific styles.
   --wrapper-height: 87vh;
   --image-max-width: 300px;
   --image-margin: 3rem;
-  --font-family: "HK Grotesk";
-  --font-family-header: "HK Grotesk";
+  --font-family: "Futura";
+  --font-family-header: "Futura";
 }
 
 /* Basic page style resets */
@@ -41,7 +41,7 @@ to this section's matching END comment to see page-specific styles.
 
 /* Our remix on glitch button */
 .btn--remix {
-  font-family: HK Grotesk;
+  font-family: Futura;
   padding: 0.75rem 1rem;
   font-size: 1.1rem;
   line-height: 1rem;
@@ -78,7 +78,7 @@ to this section's matching END comment to see page-specific styles.
 
 .footer a:not(.btn--remix):link,
 a:not(.btn--remix):visited {
-  font-family: HK Grotesk;
+  font-family: Futura;
   font-style: normal;
   font-weight: normal;
   font-size: 1.1rem;
@@ -103,7 +103,7 @@ END Glitch hello-app default styles
 ******************************************************************************/
 
 body {
-  font-family: HK Grotesk;
+  font-family: Futura;
   background-color: var(--color-bg);
 }
 
@@ -128,7 +128,7 @@ p {
 /* Title h1 style */
 .title {
   color: #2800FF;
-  font-family: HK Grotesk;
+  font-family: Futura;
   font-style: normal;
   font-weight: bold;
   font-size: 100px;
@@ -222,7 +222,7 @@ h2 {
 }
 
 .sub-button {
-  font-family: HK Grotesk;
+  font-family: Futura;
   padding: 0.75rem 1rem;
   font-size: 1.1rem;
   line-height: 1rem;
