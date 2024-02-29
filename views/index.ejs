@@ -23,6 +23,10 @@
         <form class="sub-form" action="/zendesk/auth" method="get">
             <label for="subdomain" class="sub">Zendesk Subdomain:</label>
             <input type="text" id="subdomain" name="subdomain" required>
+                <div class="terms-checkbox">
+                <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                <label for="agreeTerms">Agree to <a href="https://torango.io/terms-and-conditions">Terms and Conditions</a></label>
+            </div>
             <button type="submit" class="sub-button">Sign in to Zendesk</button>
         </form>
     </section>
