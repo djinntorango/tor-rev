@@ -46,7 +46,13 @@ const storeAccessToken = async (db, accessToken) => {
   await db.run("INSERT INTO access_tokens (token) VALUES (?)", accessToken);
 };
 
+async function getAccessToken() {
+  const row = await db.get("SELECT * FROM access_token ORDER BY id DESC LIMIT 1");
+  return row ? row.token : null;
+}
+
 module.exports = {
   initializeDatabase,
   storeAccessToken,
+  getAccessToken,
 };

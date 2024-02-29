@@ -12,7 +12,7 @@ const port = 3000;
 
 const data = require("./src/data.json");
 const db = require("./src/" + data.database);
-const { initializeDatabase, storeAccessToken } = require('./src/sqlite.js');
+const { initializeDatabase, storeAccessToken, getAccessToken } = require('./src/sqlite.js');
 
 let storedSubdomain = null;
 let storedAccessToken = null;
@@ -172,36 +172,55 @@ const transporter = nodemailer.createTransport({
 });
 
 // Function to retrieve a list of help center articles
+
+
+// ...
+
 async function getHelpCenterArticles() {
   const subdomain = storedSubdomain;
-  const access_token = storedAccessToken;
-  const zendeskEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles.json`;
   
- let nextPage = zendeskEndpoint;
   try {
+    // Use the initializeDatabase function from sqlite.js
+    const db = await initializeDatabase();
+
+    // Retrieve access token from the database
+    const access_token = await getAccessToken(db);
+
+    // Ensure there is a valid access token
+    if (!access_token) {
+      console.error("Access token not found in the database.");
+      return;
+    }
+
+    // Build the Zendesk API endpoint
+    const zendeskEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles.json`;
+  
+    let nextPage = zendeskEndpoint;
+
     // Loop until there are no more pages
     csvData = csvStringifier.getHeaderString();
     while (nextPage) {
-      
       console.log('Next Page:', nextPage);
       console.log('Access Token:', access_token);
-      // Make the API request
-  const response = await axios.get(nextPage, {
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-    },
-    params: {
-      sort_by: "updated_at",
-      sort_order: "asc",
-    },
-  });
+
+      // Make the API request with the retrieved access token
+      const response = await axios.get(nextPage, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+        params: {
+          sort_by: "updated_at",
+          sort_order: "asc",
+        },
+      });
+
       const articles = response.data.articles;
+
       // Extract relevant information from the response
       console.log("Number of articles:", articles.length);
 
       // Write articles to CSV file
       csvData += csvStringifier.stringifyRecords(articles);
-
 
       // Get the next page URL
       nextPage = response.data.next_page;
