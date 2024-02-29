@@ -253,3 +253,8 @@ h2 {
     position: absolute;
     top: 20%;
 }
+@media (max-width:1024px) {
+  .note {
+    display: none;
+  }
+}

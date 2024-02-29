@@ -100,7 +100,7 @@ app.post("/send-email", (req, res) => {
 
   // Call the function to send an email
   sendEmail(userEmail)
-    .then(() => res.send("Email sent successfully."))
+    .then(() => res.render("success"))
     .catch((error) =>
       res.status(500).send(`Error sending email: ${error.message}`)
     );
