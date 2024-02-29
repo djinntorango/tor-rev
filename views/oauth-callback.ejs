@@ -10,6 +10,9 @@
     <link rel="stylesheet" type="text/css" href="https://torango-exporter.glitch.me/public/styles.css" />
 </head>
 <body>
+      <aside class="note">
+        <strong>Note:</strong> If you have a help center article with more than 32,767 characters of HTML code, it will be omitted from your report. This is because csv cells cannot contain more than 32,767 characters. Contact us at <a href="mailto:djinn@torango.io">djinn@torango.io</a> if you need help exporting these articles.
+    </aside>
     <section class="subdomain-inq">
     <% if (profileResponse && profileResponse.data.user) { %>
         <p>Hi, <%= profileResponse.data.user.name %>!</p>
