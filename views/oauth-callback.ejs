@@ -10,15 +10,17 @@
     <link rel="stylesheet" type="text/css" href="https://torango-exporter.glitch.me/public/styles.css" />
 </head>
 <body>
+    <section class="subdomain-inq">
     <% if (profileResponse && profileResponse.data.user) { %>
         <p>Hi, <%= profileResponse.data.user.name %>!</p>
-        <form action="/send-email" method="post">
-            <label for="email">Enter your email:</label>
+        <form class="sub-form" action="/send-email" method="post">
+            <label for="email">Enter the email address you wish to send your export to:</label>
             <input type="email" id="email" name="email" required>
-            <button type="submit">Send Email</button>
+            <button type="submit">Send Export</button>
         </form>
     <% } else { %>
         <p>Error in OAuth callback</p>
     <% } %>
+    </section>
 </body>
 </html>
