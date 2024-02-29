@@ -10,6 +10,9 @@ const createCsvStringifier = require("csv-writer").createObjectCsvStringifier;
 const app = express();
 const port = 3000;
 
+const data = require("./src/data.json");
+const db = require("./src/" + data.database);
+
 let storedSubdomain = null;
 let storedAccessToken = null;
 const path = require('path');
