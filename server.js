@@ -12,6 +12,7 @@ const port = 3000;
 
 const data = require("./src/data.json");
 const db = require("./src/" + data.database);
+const { initializeDatabase, storeAccessToken } = require('./src/sqlite.js');
 
 let storedSubdomain = null;
 let storedAccessToken = null;
@@ -69,9 +70,15 @@ app.get("/zendesk/oauth/callback", async (req, res) => {
       { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
     );
 
-    // In production, you'd store the access token somewhere in your app,
-    // such as a database.
+
     const access_token = tokenResponse.data.access_token;
+
+    // Use the initializeDatabase function from sqlite.js
+    const db = await initializeDatabase();
+
+    // Store access token in the database
+    await storeAccessToken(db, access_token);
+
     storedAccessToken = access_token;
     const profileResponse = await axios.get(
       `https://${subdomain}.zendesk.com/api/v2/users/me.json`,

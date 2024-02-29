@@ -13,26 +13,40 @@ const exists = fs.existsSync(dbFile);
 let db;
 
 // Open the SQLite database
-if (!exists) {
-  db = new sqlite3.Database(dbFile);
-  db.serialize(() => {
-    // Create the access_token table
-    db.run("CREATE TABLE access_token (id INTEGER PRIMARY KEY AUTOINCREMENT, token TEXT)");
-  });
-} else {
-  db = dbWrapper.open({
-    filename: dbFile,
-    driver: sqlite3.Database,
-  });
-}
+const initializeDatabase = async () => {
+  const dbFile = "./.data/choices.db";
+  const exists = fs.existsSync(dbFile);
+  let db;
 
-// Function to store access token
-async function storeAccessToken(token) {
-  await db.run("INSERT INTO access_token (token) VALUES (?)", token);
-}
+  if (!exists) {
+    db = await dbWrapper.open({
+      filename: dbFile,
+      driver: sqlite3.Database,
+    });
 
-// Function to fetch access token
-async function getAccessToken() {
-  const row = await db.get("SELECT * FROM access_token ORDER BY id DESC LIMIT 1");
-  return row ? row.token : null;
-}
+    // Create your access_token table if it doesn't exist
+    await db.exec(`
+      CREATE TABLE IF NOT EXISTS access_tokens (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        token TEXT NOT NULL
+      );
+    `);
+  } else {
+    db = await dbWrapper.open({
+      filename: dbFile,
+      driver: sqlite3.Database,
+    });
+  }
+
+  return db;
+};
+
+const storeAccessToken = async (db, accessToken) => {
+  // Insert the access token into the access_tokens table
+  await db.run("INSERT INTO access_tokens (token) VALUES (?)", accessToken);
+};
+
+module.exports = {
+  initializeDatabase,
+  storeAccessToken,
+};
