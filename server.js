@@ -167,7 +167,7 @@ const transporter = nodemailer.createTransport({
   service: "outlook",
   auth: {
     user: "djinn@torango.io",
-    pass: "dhwknmmjtpwqyfyw",
+    pass: process.env.EMAIL_PASS,
   },
 });
 
