@@ -45,6 +45,71 @@
                 <button id="next-button">Next</button>
             </div>
     </main>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+            let pageNum = 1;
+            const pageSize = 10; // Number of articles per page
 
+            const prevButton = document.getElementById("prev-button");
+            const nextButton = document.getElementById("next-button");
+            const pageNumSpan = document.getElementById("page-num");
+            const articlesBody = document.getElementById("articles-body");
+
+            // Function to fetch articles for the specified page
+            async function fetchArticles(page) {
+                try {
+                    const response = await axios.get(`/oauth-callback?page=${page}`);
+                    return response.data.articles;
+                } catch (error) {
+                    console.error("Error fetching articles:", error);
+                    return [];
+                }
+            }
+
+            // Function to render articles in the table
+            function renderArticles(articles) {
+                articlesBody.innerHTML = ""; // Clear existing articles
+                articles.forEach(article => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td><a href="${article.html_url}">${article.title}</a></td>
+                        <td>${new Date(article.created_at).toLocaleString()}</td>
+                        <td>${new Date(article.edited_at).toLocaleString()}</td>
+                        <td><button>Revise</button></td>
+                    `;
+                    articlesBody.appendChild(row);
+                });
+            }
+
+            // Function to update pagination UI
+            function updatePaginationUI() {
+                pageNumSpan.textContent = `Page ${pageNum}`;
+            }
+
+            // Function to handle previous button click
+            prevButton.addEventListener("click", async function () {
+                if (pageNum > 1) {
+                    pageNum--;
+                    const articles = await fetchArticles(pageNum);
+                    renderArticles(articles);
+                    updatePaginationUI();
+                }
+            });
+
+            // Function to handle next button click
+            nextButton.addEventListener("click", async function () {
+                pageNum++;
+                const articles = await fetchArticles(pageNum);
+                renderArticles(articles);
+                updatePaginationUI();
+            });
+
+            // Initial fetch and render
+            const articles = await fetchArticles(pageNum);
+            renderArticles(articles);
+            updatePaginationUI();
+        });
+    </script>
 </body>
 </html>

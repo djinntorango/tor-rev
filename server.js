@@ -90,7 +90,7 @@ res.render("oauth-callback", { profileResponse, articles });
 });
 
 // Function to retrieve a list of help center articles
-async function getHelpCenterArticles() {
+async function getHelpCenterArticles(limit = 10) {
   const subdomain = storedSubdomain;
 
   try {
@@ -107,14 +107,15 @@ async function getHelpCenterArticles() {
     }
 
     // Build the Zendesk API endpoint
-    const zendeskEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles.json`;
+    const zendeskEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles.json?page[size]=10`;
 
     let allArticles = []; // Array to store all articles
 
     let nextPage = zendeskEndpoint;
+    let fetchedArticlesCount = 0;
 
-    // Loop until there are no more pages
-    while (nextPage) {
+    // Loop until there are no more pages or the limit is reached
+    while (nextPage && fetchedArticlesCount < limit) {
       // Make the API request with the retrieved access token
       const response = await axios.get(nextPage, {
         headers: {
@@ -131,11 +132,15 @@ async function getHelpCenterArticles() {
       // Add fetched articles to the array
       allArticles = allArticles.concat(articles);
 
+      // Update the count of fetched articles
+      fetchedArticlesCount += articles.length;
+
       // Get the next page URL
       nextPage = response.data.next_page;
     }
 
-    return allArticles; // Return all fetched articles
+    // Return only the required number of articles
+    return allArticles.slice(0, limit);
   } catch (error) {
     console.error(
       "Error fetching and processing help center articles:",
@@ -145,14 +150,6 @@ async function getHelpCenterArticles() {
   }
 }
 
-app.get("/articles", async (req, res) => {
-  const articles = await getHelpCenterArticles();
-  if (articles) {
-    res.render("articles", { articles });
-  } else {
-    res.status(500).send("Error fetching articles");
-  }
-});
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}. Visit http://localhost:${port}`);
