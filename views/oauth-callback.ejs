@@ -58,7 +58,7 @@
 
  // Function to retrieve a list of help center articles
 async function getHelpCenterArticles(pageNum) {
-  const subdomain = process.env.SUBDOMAIN;
+
   try {
     // Use the initializeDatabase function from sqlite.js and retrieve token
     const db = await initializeDatabase();
