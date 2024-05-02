@@ -90,14 +90,11 @@ res.render("oauth-callback", { profileResponse, articles });
 });
 
 // Function to retrieve a list of help center articles
-async function getHelpCenterArticles(limit = 10) {
+async function getHelpCenterArticles() {
   const subdomain = storedSubdomain;
-
   try {
-    // Use the initializeDatabase function from sqlite.js
+    // Use the initializeDatabase function from sqlite.js and retrieve token
     const db = await initializeDatabase();
-
-    // Retrieve access token from the database
     const access_token = await getAccessToken(db);
 
     // Ensure there is a valid access token
@@ -108,16 +105,11 @@ async function getHelpCenterArticles(limit = 10) {
 
     // Build the Zendesk API endpoint
     const zendeskEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles.json?page[size]=10`;
-
     let allArticles = []; // Array to store all articles
-
-    let nextPage = zendeskEndpoint;
     let fetchedArticlesCount = 0;
 
-    // Loop until there are no more pages or the limit is reached
-    while (nextPage && fetchedArticlesCount < limit) {
       // Make the API request with the retrieved access token
-      const response = await axios.get(nextPage, {
+      const response = await axios.get(zendeskEndpoint, {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
@@ -129,18 +121,14 @@ async function getHelpCenterArticles(limit = 10) {
 
       const articles = response.data.articles;
 
-      // Add fetched articles to the array
+      // Add fetched articles to the array & update count
       allArticles = allArticles.concat(articles);
-
-      // Update the count of fetched articles
       fetchedArticlesCount += articles.length;
-
-      // Get the next page URL
-      nextPage = response.data.next_page;
-    }
+    
 
     // Return only the required number of articles
-    return allArticles.slice(0, limit);
+    return allArticles;
+    
   } catch (error) {
     console.error(
       "Error fetching and processing help center articles:",
