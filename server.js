@@ -32,6 +32,7 @@ app.use(express.urlencoded({ extended: true })); // Middleware to parse form dat
 let storedSubdomain = null;
 let storedAccessToken = null;
 
+
 app.get("/", (req, res) => {
   res.render("index");
 });
@@ -86,8 +87,11 @@ app.get("/zendesk/oauth/callback", async (req, res) => {
       { headers: { Authorization: `Bearer ${access_token}` } }
     );
 
-    // Call getHelpCenterArticles function to fetch articles
-    const articles = await getHelpCenterArticles();
+    // Check if pageNum parameter exists in query
+    const pageNum = req.query.pageNum ? parseInt(req.query.pageNum) : 1;
+
+    // Call your function to fetch articles based on the page number
+    const articles = await getHelpCenterArticles(subdomain, pageNum);
 
     let zendeskEndpoint = null;
     res.render("oauth-callback", {
@@ -102,7 +106,7 @@ app.get("/zendesk/oauth/callback", async (req, res) => {
 });
 
 // Function to retrieve a list of help center articles
-async function getHelpCenterArticles() {
+async function getHelpCenterArticles(pageNum) {
   const subdomain = storedSubdomain;
   try {
     // Use the initializeDatabase function from sqlite.js and retrieve token
@@ -116,7 +120,7 @@ async function getHelpCenterArticles() {
     }
 
     // Build the Zendesk API endpoint
-    const zendeskEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles.json?page[size]=10&page=1`;
+    const zendeskEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles.json?per_page=10&page=${pageNum}`;
     let allArticles = []; // Array to store all articles
     let fetchedArticlesCount = 0;
 
