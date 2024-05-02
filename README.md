@@ -1,3 +1,3 @@
-This is a free to use article export for Zendesk, built with node.js and sqlite.
+This is a lightweight app that uses gpt model 3.5 to revise select Zendesk articles based on user prompts.
 
-This app exports your Zendesk library to csv, delivered by email.
+This is not a true AI app, and makes no claims to machine learning.
