@@ -22,6 +22,7 @@ app.use('/public', (req, res, next) => {
 app.use(express.urlencoded({ extended: true })); // Middleware to parse form data
 
 let storedSubdomain = null;
+let storedAccessToken = null;
 
 app.get("/", (req, res) => {
   res.render("index");
@@ -71,7 +72,17 @@ app.get("/zendesk/oauth/callback", async (req, res) => {
     // Store access token in the database
     await storeAccessToken(db, access_token);
 
-    res.render("oauth-callback");
+    storedAccessToken = access_token;
+    const profileResponse = await axios.get(
+      `https://${subdomain}.zendesk.com/api/v2/users/me.json`,
+      { headers: { Authorization: `Bearer ${access_token}` } }
+    );
+
+    // Call getHelpCenterArticles function to fetch articles
+    const articles = await getHelpCenterArticles();
+    
+
+res.render("oauth-callback", { profileResponse });
   } catch (error) {
     console.error("Error in OAuth callback:", error);
     res.status(500).send("Internal Server Error");
@@ -92,11 +103,13 @@ async function getHelpCenterArticles() {
     // Ensure there is a valid access token
     if (!access_token) {
       console.error("Access token not found in the database.");
-      return;
+      return null; // Return null to indicate that no articles were fetched
     }
 
     // Build the Zendesk API endpoint
     const zendeskEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles.json`;
+
+    let allArticles = []; // Array to store all articles
 
     let nextPage = zendeskEndpoint;
 
@@ -115,25 +128,30 @@ async function getHelpCenterArticles() {
 
       const articles = response.data.articles;
 
-      // Extract relevant information from the response
-      console.log("Number of articles:", articles.length);
-
-      // Render articles in a paginated table
-      res.render("articles", { articles });
+      // Add fetched articles to the array
+      allArticles = allArticles.concat(articles);
 
       // Get the next page URL
       nextPage = response.data.next_page;
     }
+
+    return allArticles; // Return all fetched articles
   } catch (error) {
     console.error(
       "Error fetching and processing help center articles:",
       error.message
     );
+    return null; // Return null to indicate that an error occurred
   }
 }
 
 app.get("/articles", async (req, res) => {
-  await getHelpCenterArticles();
+  const articles = await getHelpCenterArticles();
+  if (articles) {
+    res.render("articles", { articles });
+  } else {
+    res.status(500).send("Error fetching articles");
+  }
 });
 
 app.listen(port, () => {
