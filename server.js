@@ -81,8 +81,8 @@ app.get("/zendesk/oauth/callback", async (req, res) => {
     // Call getHelpCenterArticles function to fetch articles
     const articles = await getHelpCenterArticles();
     
-
-res.render("oauth-callback", { profileResponse, articles });
+let zendeskEndpoint = null;
+res.render("oauth-callback", { profileResponse, articles, zendeskEndpoint });
   } catch (error) {
     console.error("Error in OAuth callback:", error);
     res.status(500).send("Internal Server Error");

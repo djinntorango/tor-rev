@@ -30,10 +30,10 @@
                 <tbody>
                     <% articles.forEach(article => { %>
                         <tr>
-                            <td><a href="<%= article.html_url %>"><%= article.title %></a></td>
-                            <td><%= new Date(article.created_at).toLocaleString() %></td>
-                            <td><%= new Date(article.edited_at).toLocaleString() %></td>
-                            <td><button>Revise</button></td>
+                            <td id="art"><a href="<%= article.html_url %>"><%= article.title %></a></td>
+                            <td id="art"><%= new Date(article.created_at).toLocaleString() %></td>
+                            <td id="art"><%= new Date(article.edited_at).toLocaleString() %></td>
+                            <td id="art"><button>Revise</button></td>
                         </tr>
                     <% }); %>
                 </tbody>
@@ -54,18 +54,57 @@
             const prevButton = document.getElementById("prev-button");
             const nextButton = document.getElementById("next-button");
             const pageNumSpan = document.getElementById("page-num");
-            const articlesBody = document.getElementById("articles-body");
+            const articlesBody = document.getElementById("art");
 
-            // Function to fetch articles for the specified page
-            async function fetchArticles(page) {
-                try {
-                    const response = await axios.get(`/oauth-callback?page=${page}`);
-                    return response.data.articles;
-                } catch (error) {
-                    console.error("Error fetching articles:", error);
-                    return [];
-                }
-            }
+ // Function to retrieve a list of help center articles
+async function getHelpCenterArticles(pageNum) {
+  const subdomain = process.env.SUBDOMAIN;
+  try {
+    // Use the initializeDatabase function from sqlite.js and retrieve token
+    const db = await initializeDatabase();
+    const access_token = await getAccessToken(db);
+
+    // Ensure there is a valid access token
+    if (!access_token) {
+      console.error("Access token not found in the database.");
+      return null; // Return null to indicate that no articles were fetched
+    }
+
+    // Build the Zendesk API endpoint
+    const zendeskEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles.json?page[size]=10&page=${pageNum}`;
+    let allArticles = []; // Array to store all articles
+    let fetchedArticlesCount = 0;
+
+      // Make the API request with the retrieved access token
+      const response = await axios.get(zendeskEndpoint, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+        params: {
+          sort_by: "updated_at",
+          sort_order: "asc",
+        },
+      });
+
+      const articles = response.data.articles;
+
+      // Add fetched articles to the array & update count
+      allArticles = allArticles.concat(articles);
+      fetchedArticlesCount += articles.length;
+    
+
+    // Return only the required number of articles
+    return allArticles;
+    
+  } catch (error) {
+    console.error(
+      "Error fetching and processing help center articles:",
+      error.message
+    );
+    return null; // Return null to indicate that an error occurred
+  }
+}
+
 
             // Function to render articles in the table
             function renderArticles(articles) {
@@ -91,7 +130,7 @@
             prevButton.addEventListener("click", async function () {
                 if (pageNum > 1) {
                     pageNum--;
-                    const articles = await fetchArticles(pageNum);
+                    const articles = await getHelpCenterArticles(pageNum);
                     renderArticles(articles);
                     updatePaginationUI();
                 }
@@ -100,13 +139,13 @@
             // Function to handle next button click
             nextButton.addEventListener("click", async function () {
                 pageNum++;
-                const articles = await fetchArticles(pageNum);
+                const articles = await getHelpCenterArticles(pageNum);
                 renderArticles(articles);
                 updatePaginationUI();
             });
 
             // Initial fetch and render
-            const articles = await fetchArticles(pageNum);
+            const articles = await getHelpCenterArticles(pageNum);
             renderArticles(articles);
             updatePaginationUI();
         });
