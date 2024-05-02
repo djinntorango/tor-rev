@@ -27,7 +27,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% articles.forEach(article => { %>
+                    <% const pageSize = 10; %>
+                    <% const start = (pageNum - 1) * pageSize; %>
+                    <% const end = Math.min(start + pageSize, articles.length); %>
+                    <% const displayedArticles = articles.slice(start, end); %>
+                    <% displayedArticles.forEach(article => { %>
                         <tr>
                             <td><a href="<%= article.html_url %>"><%= article.title %></a></td>
                             <td><%= new Date(article.created_at).toLocaleString() %></td>
@@ -37,10 +41,13 @@
                     <% }); %>
                 </tbody>
             </table>
+            <% if (pageNum > 1) { %>
+                <a href="/articles?page=<%= pageNum - 1 %>">Previous</a>
+            <% } %>
+            <% if (articles.length > end) { %>
+                <a href="/articles?page=<%= pageNum + 1 %>">Next</a>
+            <% } %>
         </section>
     </main>
-    <footer>
-        <p>&copy; 2024 Your App</p>
-    </footer>
 </body>
 </html>
