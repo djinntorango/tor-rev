@@ -47,6 +47,7 @@
     </main>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
     <script>
+      const { initializeDatabase, storeAccessToken, getAccessToken } = require('./src/sqlite.js');
         document.addEventListener("DOMContentLoaded", async function () {
             let pageNum = 1;
             const pageSize = 10; // Number of articles per page

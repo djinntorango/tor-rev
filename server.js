@@ -2,22 +2,30 @@ const axios = require("axios");
 const express = require("express");
 const querystring = require("querystring");
 require("dotenv").config();
-const { initializeDatabase, storeAccessToken, getAccessToken } = require('./src/sqlite.js');
+const {
+  initializeDatabase,
+  storeAccessToken,
+  getAccessToken,
+} = require("./src/sqlite.js");
 
 const app = express();
-const path = require('path');
+const path = require("path");
 const port = 3000;
 
 const data = require("./src/data.json");
 const db = require("./src/" + data.database);
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
-app.use('/public', (req, res, next) => {
-  res.header('Content-Type', 'text/css');
-  next();
-}, express.static(path.join(__dirname, 'public')));
+app.use(
+  "/public",
+  (req, res, next) => {
+    res.header("Content-Type", "text/css");
+    next();
+  },
+  express.static(path.join(__dirname, "public"))
+);
 
 app.use(express.urlencoded({ extended: true })); // Middleware to parse form data
 
@@ -80,9 +88,13 @@ app.get("/zendesk/oauth/callback", async (req, res) => {
 
     // Call getHelpCenterArticles function to fetch articles
     const articles = await getHelpCenterArticles();
-    
-let zendeskEndpoint = null;
-res.render("oauth-callback", { profileResponse, articles, zendeskEndpoint });
+
+    let zendeskEndpoint = null;
+    res.render("oauth-callback", {
+      profileResponse,
+      articles,
+      zendeskEndpoint,
+    });
   } catch (error) {
     console.error("Error in OAuth callback:", error);
     res.status(500).send("Internal Server Error");
@@ -108,27 +120,25 @@ async function getHelpCenterArticles() {
     let allArticles = []; // Array to store all articles
     let fetchedArticlesCount = 0;
 
-      // Make the API request with the retrieved access token
-      const response = await axios.get(zendeskEndpoint, {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-        params: {
-          sort_by: "updated_at",
-          sort_order: "asc",
-        },
-      });
+    // Make the API request with the retrieved access token
+    const response = await axios.get(zendeskEndpoint, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+      params: {
+        sort_by: "updated_at",
+        sort_order: "asc",
+      },
+    });
 
-      const articles = response.data.articles;
+    const articles = response.data.articles;
 
-      // Add fetched articles to the array & update count
-      allArticles = allArticles.concat(articles);
-      fetchedArticlesCount += articles.length;
-    
+    // Add fetched articles to the array & update count
+    allArticles = allArticles.concat(articles);
+    fetchedArticlesCount += articles.length;
 
     // Return only the required number of articles
     return allArticles;
-    
   } catch (error) {
     console.error(
       "Error fetching and processing help center articles:",
@@ -137,7 +147,6 @@ async function getHelpCenterArticles() {
     return null; // Return null to indicate that an error occurred
   }
 }
-
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}. Visit http://localhost:${port}`);
