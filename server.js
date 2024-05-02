@@ -152,6 +152,18 @@ async function getHelpCenterArticles(pageNum) {
   }
 }
 
+app.get("/zendesk/articles", async (req, res) => {
+    try {
+        const pageNum = parseInt(req.query.pageNum) || 1; // Get pageNum from query parameters, default to 1
+        const articles = await getHelpCenterArticles(pageNum);
+        res.json({ articles });
+    } catch (error) {
+        console.error("Error fetching articles:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}. Visit http://localhost:${port}`);
 });

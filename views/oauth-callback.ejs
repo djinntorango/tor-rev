@@ -45,5 +45,66 @@
                 <button id="next-button">Next</button>
             </div>
     </main>
+      <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+    let pageNum = 1;
+    const pageSize = 10; // Number of articles per page
+
+    const prevButton = document.getElementById("prev-button");
+    const nextButton = document.getElementById("next-button");
+    const pageNumSpan = document.getElementById("page-num");
+    const articlesBody = document.getElementById("art");
+
+    // Function to fetch articles based on page number
+    async function fetchArticles(pageNum) {
+        try {
+            const response = await fetch(`/zendesk/articles?pageNum=${pageNum}`);
+            const data = await response.json();
+            const articles = data.articles;
+            renderArticles(articles);
+            updatePaginationUI();
+        } catch (error) {
+            console.error("Error fetching articles:", error);
+        }
+    }
+
+    // Function to handle previous button click
+    prevButton.addEventListener("click", async function () {
+        if (pageNum > 1) {
+            pageNum--;
+            await fetchArticles(pageNum);
+        }
+    });
+
+    // Function to handle next button click
+    nextButton.addEventListener("click", async function () {
+        pageNum++;
+        await fetchArticles(pageNum);
+    });
+
+    // Function to render articles in the UI
+    function renderArticles(articles) {
+    const tbody = document.querySelectorAll("art"); // Target the tbody element
+    tbody.innerHTML = ""; // Clear existing articles
+        articles.forEach(article => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td><a href="${article.html_url}">${article.title}</a></td>
+                <td>${new Date(article.created_at).toLocaleString()}</td>
+                <td>${new Date(article.edited_at).toLocaleString()}</td>
+                <td><button>Revise</button></td>
+            `;
+            articlesBody.appendChild(row);
+        });
+    }
+
+    // Function to update pagination UI
+    function updatePaginationUI() {
+        pageNumSpan.textContent = `Page ${pageNum}`;
+    }
+
+
+});
+      </script>
 </body>
 </html>
