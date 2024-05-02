@@ -10,6 +10,78 @@
     <link rel="stylesheet" type="text/css" href="https://torango-exporter.glitch.me/public/styles.css" />
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LRS5LVL8ED"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async function () {
+    let pageNum = 1;
+    const pageSize = 10; // Number of articles per page
+
+    const articlesTable = document.getElementById("articles-table");
+    const articlesBody = document.getElementById("articles-body");
+    const prevButton = document.getElementById("prev-button");
+    const nextButton = document.getElementById("next-button");
+    const pageNumSpan = document.getElementById("page-num");
+
+    // Function to fetch articles for the specified page
+    async function fetchArticles(page) {
+        try {
+            const response = await axios.get(`/articles?page=${page}`);
+            return response.data.articles;
+        } catch (error) {
+            console.error("Error fetching articles:", error);
+            return [];
+        }
+    }
+
+    // Function to render articles in the table
+    function renderArticles(articles) {
+        articlesBody.innerHTML = ""; // Clear existing articles
+        const startIndex = (pageNum - 1) * pageSize;
+        const endIndex = Math.min(startIndex + pageSize, articles.length);
+        for (let i = startIndex; i < endIndex; i++) {
+            const article = articles[i];
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td><a href="${article.html_url}">${article.title}</a></td>
+                <td>${new Date(article.created_at).toLocaleString()}</td>
+                <td>${new Date(article.edited_at).toLocaleString()}</td>
+            `;
+            articlesBody.appendChild(row);
+        }
+    }
+
+    // Function to update pagination UI
+    function updatePaginationUI() {
+        pageNumSpan.textContent = `Page ${pageNum}`;
+        prevButton.disabled = pageNum === 1;
+        nextButton.disabled = articles.length <= pageNum * pageSize;
+    }
+
+    // Function to handle previous button click
+    prevButton.addEventListener("click", async function () {
+        if (pageNum > 1) {
+            pageNum--;
+            const articles = await fetchArticles(pageNum);
+            renderArticles(articles);
+            updatePaginationUI();
+        }
+    });
+
+    // Function to handle next button click
+    nextButton.addEventListener("click", async function () {
+        pageNum++;
+        const articles = await fetchArticles(pageNum);
+        renderArticles(articles);
+        updatePaginationUI();
+    });
+
+    // Initial fetch and render
+    const articles = await fetchArticles(pageNum);
+    renderArticles(articles);
+    updatePaginationUI();
+});
+
+</script>
 </head>
 <body>
     <header>
@@ -27,11 +99,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% const pageSize = 10; %>
-                    <% const start = (pageNum - 1) * pageSize; %>
-                    <% const end = Math.min(start + pageSize, articles.length); %>
-                    <% const displayedArticles = articles.slice(start, end); %>
-                    <% displayedArticles.forEach(article => { %>
+                    <% articles.forEach(article => { %>
                         <tr>
                             <td><a href="<%= article.html_url %>"><%= article.title %></a></td>
                             <td><%= new Date(article.created_at).toLocaleString() %></td>
@@ -41,13 +109,13 @@
                     <% }); %>
                 </tbody>
             </table>
-            <% if (pageNum > 1) { %>
-                <a href="/articles?page=<%= pageNum - 1 %>">Previous</a>
-            <% } %>
-            <% if (articles.length > end) { %>
-                <a href="/articles?page=<%= pageNum + 1 %>">Next</a>
-            <% } %>
         </section>
+                <div id="pagination-buttons">
+                <button id="prev-button">Previous</button>
+                <span id="page-num">Page 1</span>
+                <button id="next-button">Next</button>
+            </div>
     </main>
+
 </body>
 </html>

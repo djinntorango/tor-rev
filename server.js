@@ -23,7 +23,6 @@ app.use(express.urlencoded({ extended: true })); // Middleware to parse form dat
 
 let storedSubdomain = null;
 let storedAccessToken = null;
-let pageNum = 1;
 
 app.get("/", (req, res) => {
   res.render("index");
@@ -80,73 +79,80 @@ app.get("/zendesk/oauth/callback", async (req, res) => {
     );
 
     // Call getHelpCenterArticles function to fetch articles
-    const articles = await getHelpCenterArticles(pageNum);
+    const articles = await getHelpCenterArticles();
     
 
-res.render("oauth-callback", { profileResponse, articles, pageNum  });
+res.render("oauth-callback", { profileResponse, articles });
   } catch (error) {
     console.error("Error in OAuth callback:", error);
     res.status(500).send("Internal Server Error");
   }
 });
 
-// Function to retrieve a list of help center articles with pagination support
-async function getHelpCenterArticles(pageNum) {
-    const subdomain = storedSubdomain;
-    const pageSize = 10; // Number of articles per page
+// Function to retrieve a list of help center articles
+async function getHelpCenterArticles() {
+  const subdomain = storedSubdomain;
 
-    try {
-        // Use the initializeDatabase function from sqlite.js
-        const db = await initializeDatabase();
+  try {
+    // Use the initializeDatabase function from sqlite.js
+    const db = await initializeDatabase();
 
-        // Retrieve access token from the database
-        const access_token = await getAccessToken(db);
+    // Retrieve access token from the database
+    const access_token = await getAccessToken(db);
 
-        // Ensure there is a valid access token
-        if (!access_token) {
-            console.error("Access token not found in the database.");
-            return [];
-        }
-
-        // Calculate the starting index of articles based on the pageNum and pageSize
-        const startIndex = (pageNum - 1) * pageSize;
-
-        // Build the Zendesk API endpoint
-        const zendeskEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles.json`;
-
-        let nextPage = zendeskEndpoint;
-        let allArticles = [];
-
-        // Loop until there are no more pages or we have fetched enough articles for the current page
-        while (nextPage && allArticles.length < startIndex + pageSize) {
-            // Make the API request with the retrieved access token
-            const response = await axios.get(nextPage, {
-                headers: {
-                    Authorization: `Bearer ${access_token}`,
-                },
-                params: {
-                    sort_by: "updated_at",
-                    sort_order: "asc",
-                },
-            });
-
-            const articles = response.data.articles;
-
-            // Add the fetched articles to the array
-            allArticles = allArticles.concat(articles);
-
-            // Get the next page URL
-            nextPage = response.data.next_page;
-        }
-
-        // Return the subset of articles for the current page
-        return allArticles.slice(startIndex, startIndex + pageSize);
-    } catch (error) {
-        console.error("Error fetching and processing help center articles:", error.message);
-        throw error;
+    // Ensure there is a valid access token
+    if (!access_token) {
+      console.error("Access token not found in the database.");
+      return null; // Return null to indicate that no articles were fetched
     }
+
+    // Build the Zendesk API endpoint
+    const zendeskEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles.json`;
+
+    let allArticles = []; // Array to store all articles
+
+    let nextPage = zendeskEndpoint;
+
+    // Loop until there are no more pages
+    while (nextPage) {
+      // Make the API request with the retrieved access token
+      const response = await axios.get(nextPage, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+        params: {
+          sort_by: "updated_at",
+          sort_order: "asc",
+        },
+      });
+
+      const articles = response.data.articles;
+
+      // Add fetched articles to the array
+      allArticles = allArticles.concat(articles);
+
+      // Get the next page URL
+      nextPage = response.data.next_page;
+    }
+
+    return allArticles; // Return all fetched articles
+  } catch (error) {
+    console.error(
+      "Error fetching and processing help center articles:",
+      error.message
+    );
+    return null; // Return null to indicate that an error occurred
+  }
 }
 
+app.get("/articles", async (req, res) => {
+  const articles = await getHelpCenterArticles();
+  if (articles) {
+    res.render("articles", { articles });
+  } else {
+    res.status(500).send("Error fetching articles");
+  }
+});
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}. Visit http://localhost:${port}`);
