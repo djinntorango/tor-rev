@@ -104,7 +104,7 @@ async function getHelpCenterArticles() {
     }
 
     // Build the Zendesk API endpoint
-    const zendeskEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles.json?page[size]=10`;
+    const zendeskEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles.json?page[size]=10&page=1`;
     let allArticles = []; // Array to store all articles
     let fetchedArticlesCount = 0;
 
