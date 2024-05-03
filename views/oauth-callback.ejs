@@ -27,20 +27,20 @@
                         <th>Revise</th>
                     </tr>
                 </thead>
-                <tbody id="articles-body">
+                <tbody>
                     <% articles.forEach(article => { %>
                         <tr>
-                            <td><a href="<%= article.html_url %>"><%= article.title %></a></td>
-                            <td><%= new Date(article.created_at).toLocaleString() %></td>
-                            <td><%= new Date(article.edited_at).toLocaleString() %></td>
-                            <td><button>Revise</button></td>
+                            <td id="art"><a href="<%= article.html_url %>"><%= article.title %></a></td>
+                            <td id="art"><%= new Date(article.created_at).toLocaleString() %></td>
+                            <td id="art"><%= new Date(article.edited_at).toLocaleString() %></td>
+                            <td id="art"><button>Revise</button></td>
                         </tr>
                     <% }); %>
                 </tbody>
             </table>
         </section>
                 <div id="pagination-buttons">
-                <button id="prev-button" disabled>Previous</button>
+                <button id="prev-button">Previous</button>
                 <span id="page-num">Page 1</span>
                 <button id="next-button">Next</button>
             </div>
@@ -49,10 +49,11 @@
         document.addEventListener("DOMContentLoaded", async function () {
     let pageNum = 1;
     const pageSize = 10; // Number of articles per page
+
     const prevButton = document.getElementById("prev-button");
     const nextButton = document.getElementById("next-button");
     const pageNumSpan = document.getElementById("page-num");
-    const articlesBody = document.getElementById("articles-body");
+    const articlesBody = document.getElementById("art");
 
     // Function to fetch articles based on page number
     async function fetchArticles(pageNum) {
@@ -61,8 +62,7 @@
             const data = await response.json();
             const articles = data.articles;
             renderArticles(articles);
-            updatePaginationUI(data);
-          console.log(response);
+            updatePaginationUI();
         } catch (error) {
             console.error("Error fetching articles:", error);
         }
@@ -99,10 +99,9 @@ function renderArticles(articles) {
 }
 
     // Function to update pagination UI
-    function updatePaginationUI(data) {
+    function updatePaginationUI() {
         pageNumSpan.textContent = `Page ${pageNum}`;
-        prevButton.disabled = !data.links.prev; // Disable prev button if there's no previous page
-        nextButton.disabled = !data.links.next; // Disable next button if there's no next page
+      prevButton.disabled = pageNum === 1;
     }
 });
       </script>
