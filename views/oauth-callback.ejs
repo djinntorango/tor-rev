@@ -97,12 +97,15 @@ function renderArticles(articles) {
     });
 }
 
-    // Function to update pagination UI
-    function updatePaginationUI(data) {
-        pageNumSpan.textContent = `Page ${pageNum}`;
-      prevButton.disabled = pageNum === 1;
-      nextButton.disabled = !data.next; // Disable next button if there is no next page
+function updatePaginationUI(data) {
+    pageNumSpan.textContent = `Page ${pageNum}`;
+    prevButton.disabled = !data.previous_page; // Disable prev button if there's no previous page
+    nextButton.disabled = !data.next_page; // Disable next button if there's no next page
+    prevButton.enabled = data.previous_page; 
+    nextButton.enabled = data.next_page; 
+
     }
+
 });
       </script>
 </body>
