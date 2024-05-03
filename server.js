@@ -124,16 +124,18 @@ async function getHelpCenterArticles(pageNum) {
     let allArticles = []; // Array to store all articles
     let fetchedArticlesCount = 0;
 
-    // Make the API request with the retrieved access token
-    const response = await axios.get(zendeskEndpoint, {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
-      params: {
-        sort_by: "updated_at",
-        sort_order: "asc",
-      },
-    });
+const response = await axios.get(zendeskEndpoint, {
+  headers: {
+    Authorization: `Bearer ${access_token}`,
+  },
+  params: {
+    page: {
+      size: "10", // Specify the number of items per page
+    },
+    sort_by: "updated_at",
+    sort_order: "asc",
+  },
+});
 
     const articles = response.data.articles;
 

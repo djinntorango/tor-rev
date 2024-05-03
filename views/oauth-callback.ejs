@@ -101,8 +101,8 @@ function renderArticles(articles) {
     // Function to update pagination UI
     function updatePaginationUI(data) {
         pageNumSpan.textContent = `Page ${pageNum}`;
-      prevButton.disabled = !data.previous; // Disable prev button if there's no previous page
-      nextButton.disabled = !data.next; // Disable next button if there's no next page
+        prevButton.disabled = !data.links.prev; // Disable prev button if there's no previous page
+        nextButton.disabled = !data.links.next; // Disable next button if there's no next page
     }
 });
       </script>
