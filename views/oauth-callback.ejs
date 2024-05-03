@@ -83,24 +83,25 @@
     });
 
     // Function to render articles in the UI
-    function renderArticles(articles) {
-    const tbody = document.querySelectorAll("art"); // Target the tbody element
+function renderArticles(articles) {
+    const tbody = document.querySelector("tbody"); // Target the tbody element
     tbody.innerHTML = ""; // Clear existing articles
-        articles.forEach(article => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td><a href="${article.html_url}">${article.title}</a></td>
-                <td>${new Date(article.created_at).toLocaleString()}</td>
-                <td>${new Date(article.edited_at).toLocaleString()}</td>
-                <td><button>Revise</button></td>
-            `;
-            articlesBody.appendChild(row);
-        });
-    }
+    articles.forEach(article => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td><a href="${article.html_url}">${article.title}</a></td>
+            <td>${new Date(article.created_at).toLocaleString()}</td>
+            <td>${new Date(article.edited_at).toLocaleString()}</td>
+            <td><button>Revise</button></td>
+        `;
+        tbody.appendChild(row);
+    });
+}
 
     // Function to update pagination UI
     function updatePaginationUI() {
         pageNumSpan.textContent = `Page ${pageNum}`;
+      prevButton.disabled = pageNum === 1;
     }
 
 
