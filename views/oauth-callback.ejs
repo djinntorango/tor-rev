@@ -147,10 +147,10 @@
   });
         
   // Retrieve the article ID from the button data attribute then redirect
-  reviseButtons.forEach(button => {
+reviseButtons.forEach(button => {
   button.addEventListener("click", async function() {
     const articleId = button.getAttribute("data-article-id");
-    const reviseURL = `/revise-article?articleId=${articleId}`;
+    const reviseURL = `/zendesk/articles/${articleId}`; // Corrected endpoint
     window.location.href = reviseURL;
   });
 });

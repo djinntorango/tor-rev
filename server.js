@@ -225,9 +225,9 @@ app.get("/zendesk/articles/search", async (req, res) => {
 });
 
 // Endpoint to fetch a single article by ID
-app.get("/zendesk/articles/:articleId", async (req, res) => {
+app.get("/zendesk/articles/:article_id", async (req, res) => {
   try {
-    const articleId = req.params.articleId; // Get article ID from URL parameter
+    const articleId = req.params.article_id; // Get article ID from URL parameter
     const subdomain = storedSubdomain;
 
     // Build the Zendesk API endpoint to fetch a single article by ID
