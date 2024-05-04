@@ -99,9 +99,9 @@ function renderArticles(articles) {
 }
 
     // Function to update pagination UI
-    function updatePaginationUI() {
+    function updatePaginationUI(next) {
         pageNumSpan.textContent = `Page ${pageNum}`;
-      prevButton.disabled = pageNum === 1;
+        prevButton.disabled = pageNum === 1;
     }
 });
       </script>
