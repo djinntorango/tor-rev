@@ -56,20 +56,43 @@
 .main {
   margin: 5%;
 }
+    .art-card img {
+  max-width: 100%; /* Ensure images don't exceed the width of their container */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Ensure images are displayed as blocks */
+  margin: 0 auto; /* Center align images */
+  margin-bottom: 10px; /* Add some bottom margin for spacing */
+}
+    .sbs {
+      display: flex;
+      justify-content: space-evenly;
+    }
   </style>
 </head>
 <body>
-  <section class="main">
-    <h2>
-      Your Article
-    </h2>
-      <section class="art-card">
-        <h2>Title: <%= article.title %></h2>
-        <div>
-          <p><%- article.body %></p>
-        </div>
+  <div class="sbs">
+    <section class="main">
+      <h2>
+        Your Article
+      </h2>
+        <section class="art-card">
+          <h2><%= article.title %></h2>
+          <div>
+            <p><%- article.body %></p>
+          </div>
+        </section>
       </section>
-    </section>
-
+    <section class="main">
+      <h2>
+        Revision
+      </h2>
+        <section class="art-card">
+          <h2> <%= article.title %></h2>
+          <div>
+            <p><%- article.body %></p>
+          </div>
+        </section>
+      </section>
+    </div>
 </body>
 </html>
