@@ -94,7 +94,8 @@ app.get("/zendesk/oauth/callback", async (req, res) => {
     const articles = await getHelpCenterArticles(subdomain, pageNum);
 
     let zendeskEndpoint = null;
-    let prev 
+    let prev = null;
+    let next = null;
     res.render("oauth-callback", {
       profileResponse,
       articles,
