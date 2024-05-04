@@ -165,7 +165,7 @@ reviseButtons.forEach(button => {
         <td><a href="${article.html_url}">${article.title}</a></td>
         <td>${new Date(article.created_at).toLocaleString()}</td>
         <td>${new Date(article.edited_at).toLocaleString()}</td>
-        <td><button>Revise</button></td>
+        <td> <button class="revise-btn" data-article-id="${article.id}">Revise</button></td>
       `;
       tbody.appendChild(row);
     });
