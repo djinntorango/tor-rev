@@ -65,13 +65,47 @@
 }
     .sbs {
       display: flex;
-      justify-content: space-evenly;
+      justify-content: space-between;
     }
+    .prompt-box {
+  margin-top: 20px;
+}
+
+.prompt-input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+    input {
+      width: 100%;
+        height: 50px; /* Initial height */
+  padding: 8px;
+  border: none;
+  resize: vertical; /* Allow vertical resizing */
+    }
+#article-prompt-submit, #revision-prompt-submit {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+#article-prompt-submit:hover, #revision-prompt-submit:hover {
+  background-color: #0056b3;
+}
   </style>
 </head>
 <body>
+  <section class="main">
   <div class="sbs">
-    <section class="main">
+    <section>
       <h2>
         Your Article
       </h2>
@@ -82,7 +116,7 @@
           </div>
         </section>
       </section>
-    <section class="main">
+    <section>
       <h2>
         Revision
       </h2>
@@ -94,5 +128,11 @@
         </section>
       </section>
     </div>
+    <div class="prompt-box">
+      <label for="revision-prompt">Enter your prompt:</label><br>
+      <input type="text" id="revision-prompt" name="revision-prompt">
+      <button id="revision-prompt-submit">Submit</button>
+    </div>
+  </section>
 </body>
 </html>
