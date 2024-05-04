@@ -227,7 +227,7 @@ app.get("/zendesk/articles/search", async (req, res) => {
 // Endpoint to fetch a single article by ID
 app.get("/zendesk/articles/:articleId", async (req, res) => {
   try {
-    const articleId = req.params.article_id; // Get article ID from URL parameter
+    const articleId = req.params.articleId; // Get article ID from URL parameter
     const subdomain = storedSubdomain;
 
     // Build the Zendesk API endpoint to fetch a single article by ID
@@ -242,13 +242,14 @@ app.get("/zendesk/articles/:articleId", async (req, res) => {
 
     const article = response.data.article;
 
-    // Send the fetched article as a JSON response
-    res.json({ article });
+    // Render the article-revise.ejs template and pass the fetched article data to it
+    res.render("revise-article", { article });
   } catch (error) {
     console.error("Error fetching article:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 
 
 
