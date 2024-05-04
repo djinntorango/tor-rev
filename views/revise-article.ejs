@@ -17,9 +17,37 @@
 
   gtag('config', 'G-LRS5LVL8ED');
 </script>
+  <style>
+    /* styles.css */
+.art-card {
+  width: 60dvh;
+  height: 60dvh;
+  border: 1px solid black;
+  border-radius: 30px;
+  overflow: auto;
+}
+
+.art-card::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+.art-card::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track color */
+}
+
+.art-card::-webkit-scrollbar-thumb {
+  background: #888; /* Thumb color */
+  border-radius: 10px; /* Rounded corners */
+}
+
+.art-card::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Thumb color on hover */
+}
+
+  </style>
 </head>
 <body>
-        <section>
+        <section class="art-card">
             <h2>Title: <%= article.title %></h2>
             <div>
                 <p><%- article.body %></p>
