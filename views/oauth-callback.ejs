@@ -50,74 +50,81 @@
             </div>
     </main>
       <script>
-       document.addEventListener("DOMContentLoaded", async function () {
-    let pageNum = 1;
-    const pageSize = 10; // Number of articles per page
+      document.addEventListener("DOMContentLoaded", async function () {
+  let pageNum = 1;
+  let currentQuery = ''; // Store the current search query
+  const pageSize = 10; // Number of articles per page
 
-    const prevButton = document.getElementById("prev-button");
-    const nextButton = document.getElementById("next-button");
-    const pageNumSpan = document.getElementById("page-num");
-    const articlesBody = document.getElementsByClassName("art");
-    const searchInput = document.getElementById("search-input");
-    const searchButton = document.getElementById("search-button");
+  const prevButton = document.getElementById("prev-button");
+  const nextButton = document.getElementById("next-button");
+  const pageNumSpan = document.getElementById("page-num");
+  const articlesBody = document.getElementsByClassName("art");
+  const searchInput = document.getElementById("search-input");
+  const searchButton = document.getElementById("search-button");
 
-    // Function to fetch articles based on page number
-    async function fetchArticles(pageNum, query = '') {
-        try {
-            const response = await fetch(`/zendesk/articles?pageNum=${pageNum}&query=${query}`);
-            const data = await response.json();
-            const articles = data.articles;
-            const next = data.next;
-            renderArticles(articles);
-            updatePaginationUI(next);
-        } catch (error) {
-            console.error("Error fetching articles:", error);
-        }
+  // Function to fetch articles based on page number
+  async function fetchArticles(pageNum, query = '') {
+    try {
+      let endpoint = '/zendesk/articles';
+      if (query) {
+        endpoint = `/zendesk/articles/search`;
+      }
+      const response = await fetch(`${endpoint}?pageNum=${pageNum}&query=${encodeURIComponent(query)}`);
+      const data = await response.json();
+      const articles = data.articles;
+      const next = data.next;
+      renderArticles(articles);
+      updatePaginationUI(next);
+    } catch (error) {
+      console.error("Error fetching articles:", error);
     }
+  }
 
-    // Function to handle previous button click
-    prevButton.addEventListener("click", async function () {
-        if (pageNum > 1) {
-            pageNum--;
-            await fetchArticles(pageNum, searchInput.value);
-        }
-    });
-
-    // Function to handle next button click
-    nextButton.addEventListener("click", async function () {
-        pageNum++;
-        await fetchArticles(pageNum, searchInput.value);
-    });
-
-    // Function to handle search button click
-    searchButton.addEventListener("click", async function () {
-        pageNum = 1; // Reset pageNum when performing a new search
-        await fetchArticles(pageNum, searchInput.value);
-    });
-
-    // Function to render articles in the UI
-    function renderArticles(articles) {
-        const tbody = document.querySelector("tbody"); // Target the tbody element
-        tbody.innerHTML = ""; // Clear existing articles
-        articles.forEach(article => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td><a href="${article.html_url}">${article.title}</a></td>
-                <td>${new Date(article.created_at).toLocaleString()}</td>
-                <td>${new Date(article.edited_at).toLocaleString()}</td>
-                <td><button>Revise</button></td>
-            `;
-            tbody.appendChild(row);
-        });
+  // Function to handle previous button click
+  prevButton.addEventListener("click", async function () {
+    if (pageNum > 1) {
+      pageNum--;
+      await fetchArticles(pageNum, currentQuery);
     }
+  });
 
-    // Function to update pagination UI
-    function updatePaginationUI(next) {
-        pageNumSpan.textContent = `Page ${pageNum}`;
-        prevButton.disabled = pageNum === 1;
-        nextButton.disabled = next === null;
-    }
+  // Function to handle next button click
+  nextButton.addEventListener("click", async function () {
+    pageNum++;
+    await fetchArticles(pageNum, currentQuery);
+  });
+
+  // Function to handle search button click
+  searchButton.addEventListener("click", async function () {
+    pageNum = 1; // Reset pageNum when performing a new search
+    currentQuery = searchInput.value; // Update the current search query
+    await fetchArticles(pageNum, currentQuery);
+  });
+
+  // Function to render articles in the UI
+  function renderArticles(articles) {
+    const tbody = document.querySelector("tbody"); // Target the tbody element
+    tbody.innerHTML = ""; // Clear existing articles
+    articles.forEach(article => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td><a href="${article.html_url}">${article.title}</a></td>
+        <td>${new Date(article.created_at).toLocaleString()}</td>
+        <td>${new Date(article.edited_at).toLocaleString()}</td>
+        <td><button>Revise</button></td>
+      `;
+      tbody.appendChild(row);
+    });
+  }
+
+  // Function to update pagination UI
+  function updatePaginationUI(next) {
+    pageNumSpan.textContent = `Page ${pageNum}`;
+    prevButton.disabled = pageNum === 1;
+    nextButton.disabled = next === null;
+  }
 });
+
 
       </script>
 </body>

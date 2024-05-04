@@ -168,6 +168,62 @@ app.get("/zendesk/articles", async (req, res) => {
     }
 });
 
+async function searchHelpCenterArticles(query, pageNum) {
+  const subdomain = storedSubdomain;
+  try {
+    // Use the initializeDatabase function from sqlite.js and retrieve token
+    const db = await initializeDatabase();
+    const access_token = await getAccessToken(db);
+
+    // Ensure there is a valid access token
+    if (!access_token) {
+      console.error("Access token not found in the database.");
+      return null; // Return null to indicate that no articles were fetched
+    }
+
+    // Build the Zendesk API search endpoint
+    let zendeskSearchEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles/search.json?per_page=10&page=${pageNum}&query=${encodeURIComponent(query)}`;
+
+    // Make the API request with the retrieved access token
+    const response = await axios.get(zendeskSearchEndpoint, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+      params: {
+        sort_by: "relevance", // Sort by relevance by default
+        sort_order: "desc", // Sort in descending order by default
+      },
+    });
+
+    const articles = response.data.results; // Extract articles from search results
+    const count = response.data.count;
+    const next = response.data.next_page;
+    const prev = response.data.previous_page;
+
+    // Return only the required number of articles
+    return { articles, prev, next };
+  } catch (error) {
+    console.error(
+      "Error fetching and processing help center articles:",
+      error.message
+    );
+    return null; // Return null to indicate that an error occurred
+  }
+}
+
+// Endpoint to search for articles
+app.get("/zendesk/articles/search", async (req, res) => {
+  try {
+    const query = req.query.query || ''; // Get search query from query parameters
+    const pageNum = parseInt(req.query.pageNum) || 1; // Get pageNum from query parameters, default to 1
+    const { articles, prev, next } = await searchHelpCenterArticles(query, pageNum);
+    res.json({ articles, prev, next });
+  } catch (error) {
+    console.error("Error searching articles:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}. Visit http://localhost:${port}`);
