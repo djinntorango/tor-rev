@@ -146,16 +146,12 @@
     await fetchArticles(pageNum, currentQuery);
   });
         
+  // Retrieve the article ID from the button data attribute then redirect
   reviseButtons.forEach(button => {
   button.addEventListener("click", async function() {
-    // Retrieve the article ID from the button data attribute
     const articleId = button.getAttribute("data-article-id");
-    
-    // Open a new page or frame with the article content and prompt box
-    const newPageURL = `/revise-article?articleId=${articleId}`;
-    window.open(newPageURL, "_blank");
-    // You can use window.open() to open a new page or create a modal/frame
-    // Pass the article ID to the new page or frame so it knows which article to display
+    const reviseURL = `/revise-article?articleId=${articleId}`;
+    window.location.href = reviseURL;
   });
 });
         
