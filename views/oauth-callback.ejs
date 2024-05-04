@@ -168,8 +168,19 @@ reviseButtons.forEach(button => {
         <td> <button class="revise-btn" data-article-id="${article.id}">Revise</button></td>
       `;
       tbody.appendChild(row);
+      attachReviseButtonListeners();
     });
   }
+function attachReviseButtonListeners() {
+  const reviseButtons = document.querySelectorAll(".revise-btn");
+  reviseButtons.forEach(button => {
+    button.addEventListener("click", async function() {
+      const articleId = button.getAttribute("data-article-id");
+      const reviseURL =  `/zendesk/articles/${articleId}`;
+      window.location.href = reviseURL;
+    });
+  });
+}
 
   // Function to update pagination UI
   function updatePaginationUI(next) {
