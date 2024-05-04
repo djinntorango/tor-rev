@@ -23,30 +23,39 @@
   width: 60dvh;
   height: 60dvh;
   border: 1px solid black;
-  border-radius: 30px;
-  overflow: auto;
+  overflow: hidden;
   padding: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: overflow 0.2s;
+}
+
+.art-card:hover,
+.art-card:focus-within {
+  overflow: auto; /* Display scroll bars on hover or when focused */
 }
 
 .art-card::-webkit-scrollbar {
-  width: 10px; /* Width of the scrollbar */
+  width: 10px;
+  
 }
 
 .art-card::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Track color */
+  background: #f1f1f1; 
+  display: none;
 }
 
 .art-card::-webkit-scrollbar-thumb {
-  background: #888; /* Thumb color */
-  border-radius: 10px; /* Rounded corners */
+  background: #888; 
+  border-radius: 10px; 
 }
 
 .art-card::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Thumb color on hover */
+  background: #555; 
 }
-    .main {
-      margin: 5%;
-    }
+.main {
+  margin: 5%;
+}
   </style>
 </head>
 <body>
