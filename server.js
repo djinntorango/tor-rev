@@ -142,13 +142,13 @@ async function getHelpCenterArticles(pageNum) {
     const count = response.data.count;
     const next = response.data.next_page;
     const prev = response.data.previous_page;
-    
+    console.log(next);
     // Add fetched articles to the array & update count
     allArticles = allArticles.concat(articles);
     fetchedArticlesCount += articles.length;
 
     // Return only the required number of articles
-    return allArticles;
+    return { articles: allArticles, prev, next };
   } catch (error) {
     console.error(
       "Error fetching and processing help center articles:",
