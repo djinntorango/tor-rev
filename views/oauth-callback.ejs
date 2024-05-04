@@ -38,8 +38,8 @@
                     <% articles.forEach(article => { %>
                         <tr>
                           <td class="art"><a href="<%= article.html_url %>"><%= article.title %></a></td>
-                          <td class="art"><%= new Date(article.created_at).toLocaleString() %></td>
-                          <td class="art"><%= new Date(article.edited_at).toLocaleString() %></td>
+                          <td class="art"><%= new Date(article.created_at).toLocaleDateString() %></td>
+                          <td class="art"><%= new Date(article.edited_at).toLocaleDateString() %></td>
                           <td class="art"><button>Revise</button></td>
                         </tr>
                     <% }); %>
@@ -106,8 +106,9 @@
   });
 
   clearButton.addEventListener("click", async function () {
-    pageNum = 1; // Reset pageNum when performing a new search
-    currentQuery = ""; // Update the current search query
+    pageNum = 1; 
+    currentQuery = ""; 
+    searchInput.value = "";
     await fetchArticles(pageNum, currentQuery);
   });
         
