@@ -73,7 +73,7 @@
                           <td class="art"><a href="<%= article.html_url %>"><%= article.title %></a></td>
                           <td class="art"><%= new Date(article.created_at).toLocaleDateString() %></td>
                           <td class="art"><%= new Date(article.edited_at).toLocaleDateString() %></td>
-                          <td class="art revise"><button>Revise</button></td>
+                          <td class="art revise"> <button class="revise-btn" data-article-id="<%= article.id %>">Revise</button></td>
                         </tr>
                     <% }); %>
                 </tbody>
@@ -98,6 +98,7 @@
   const searchInput = document.getElementById("search-input");
   const searchButton = document.getElementById("search-button");
   const clearButton = document.getElementById("clear-search");
+  const reviseButtons = document.querySelectorAll(".revise-btn");
 
   // Function to fetch articles based on page number
   async function fetchArticles(pageNum, query = '') {
@@ -144,6 +145,19 @@
     searchInput.value = "";
     await fetchArticles(pageNum, currentQuery);
   });
+        
+  reviseButtons.forEach(button => {
+  button.addEventListener("click", async function() {
+    // Retrieve the article ID from the button data attribute
+    const articleId = button.getAttribute("data-article-id");
+    
+    // Open a new page or frame with the article content and prompt box
+    const newPageURL = `/revise-article?articleId=${articleId}`;
+    window.open(newPageURL, "_blank");
+    // You can use window.open() to open a new page or create a modal/frame
+    // Pass the article ID to the new page or frame so it knows which article to display
+  });
+});
         
   // Function to render articles in the UI
   function renderArticles(articles) {
