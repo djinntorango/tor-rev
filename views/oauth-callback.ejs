@@ -21,7 +21,9 @@
       padding: 8px;
       text-align: left;
     }
-
+    td.revise {
+      text-align: center;
+    }
     th {
       background-color: #f2f2f2;
     }
@@ -29,7 +31,16 @@
       margin: 5%;
     }
     .search {
-      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      width: 40%;
+      margin-bottom: 20px;
+    }
+    .pagination {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      margin-top: 20px;
     }
   </style>
   
@@ -62,17 +73,17 @@
                           <td class="art"><a href="<%= article.html_url %>"><%= article.title %></a></td>
                           <td class="art"><%= new Date(article.created_at).toLocaleDateString() %></td>
                           <td class="art"><%= new Date(article.edited_at).toLocaleDateString() %></td>
-                          <td class="art"><button>Revise</button></td>
+                          <td class="art revise"><button>Revise</button></td>
                         </tr>
                     <% }); %>
                 </tbody>
             </table>
-        </section>
-                <div id="pagination-buttons">
-    <button id="prev-button" <%= prev !== null ? '' : 'disabled' %>>Previous</button>
-    <span id="page-num">Page 1</span>
-    <button id="next-button" <%= next !== null ? '' : 'disabled' %>>Next</button>
+            <div class="pagination" id="pagination-buttons">
+              <button id="prev-button" <%= prev !== null ? '' : 'disabled' %>>Previous</button>
+              <span id="page-num">Page 1</span>
+              <button id="next-button" <%= next !== null ? '' : 'disabled' %>>Next</button>
             </div>
+        </section>
     </main>
       <script>
       document.addEventListener("DOMContentLoaded", async function () {
