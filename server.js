@@ -109,7 +109,7 @@ app.get("/zendesk/oauth/callback", async (req, res) => {
 });
 
 // Function to retrieve a list of help center articles
-async function getHelpCenterArticles(pageNum) {
+async function getHelpCenterArticles(pageNum, query = '') {
   const subdomain = storedSubdomain;
   try {
     // Use the initializeDatabase function from sqlite.js and retrieve token
@@ -123,9 +123,12 @@ async function getHelpCenterArticles(pageNum) {
     }
 
     // Build the Zendesk API endpoint
-    const zendeskEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles.json?per_page=10&page=${pageNum}`;
-    let allArticles = []; // Array to store all articles
-    let fetchedArticlesCount = 0;
+    let zendeskEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles.json?per_page=10&page=${pageNum}`;
+
+    // If a search query is provided, append it to the API endpoint
+    if (query) {
+      zendeskEndpoint += `&query=${encodeURIComponent(query)}`;
+    }
 
     // Make the API request with the retrieved access token
     const response = await axios.get(zendeskEndpoint, {
@@ -143,12 +146,8 @@ async function getHelpCenterArticles(pageNum) {
     const next = response.data.next_page;
     const prev = response.data.previous_page;
     console.log(next);
-    // Add fetched articles to the array & update count
-    allArticles = allArticles.concat(articles);
-    fetchedArticlesCount += articles.length;
-
     // Return only the required number of articles
-    return { articles: allArticles, prev, next };
+    return { articles, prev, next };
   } catch (error) {
     console.error(
       "Error fetching and processing help center articles:",
