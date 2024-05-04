@@ -40,9 +40,9 @@
             </table>
         </section>
                 <div id="pagination-buttons">
-                <button id="prev-button">Previous</button>
-                <span id="page-num">Page 1</span>
-                <button id="next-button">Next</button>
+    <button id="prev-button" <%= prev !== null ? '' : 'disabled' %>>Previous</button>
+    <span id="page-num">Page 1</span>
+    <button id="next-button" <%= next !== null ? '' : 'disabled' %>>Next</button>
             </div>
     </main>
       <script>

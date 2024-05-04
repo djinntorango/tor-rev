@@ -91,11 +91,10 @@ app.get("/zendesk/oauth/callback", async (req, res) => {
     const pageNum = req.query.pageNum ? parseInt(req.query.pageNum) : 1;
 
     // Call your function to fetch articles based on the page number
-    const articles = await getHelpCenterArticles(subdomain, pageNum);
+    const { articles, prev, next } = await getHelpCenterArticles(subdomain, pageNum);
 
     let zendeskEndpoint = null;
-    let prev = null;
-    let next = null;
+
     res.render("oauth-callback", {
       profileResponse,
       articles,
@@ -162,8 +161,8 @@ async function getHelpCenterArticles(pageNum) {
 app.get("/zendesk/articles", async (req, res) => {
     try {
         const pageNum = parseInt(req.query.pageNum) || 1; // Get pageNum from query parameters, default to 1
-        const articles = await getHelpCenterArticles(pageNum);
-        res.json({ articles });
+    const { articles, prev, next } = await getHelpCenterArticles(pageNum);
+    res.json({ articles, prev, next });
     } catch (error) {
         console.error("Error fetching articles:", error);
         res.status(500).json({ error: "Internal Server Error" });
