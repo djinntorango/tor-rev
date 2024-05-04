@@ -21,6 +21,9 @@
           <div class="search">
             <input type="text" id="search-input" placeholder="Search articles...">
             <button id="search-button">Search</button>
+            <button id="clear-search">
+              Clear
+            </button>
           </div>
             <table>
                 <thead>
@@ -61,6 +64,7 @@
   const articlesBody = document.getElementsByClassName("art");
   const searchInput = document.getElementById("search-input");
   const searchButton = document.getElementById("search-button");
+  const clearButton = document.getElementById("clear-search");
 
   // Function to fetch articles based on page number
   async function fetchArticles(pageNum, query = '') {
@@ -101,6 +105,12 @@
     await fetchArticles(pageNum, currentQuery);
   });
 
+  clearButton.addEventListener("click", async function () {
+    pageNum = 1; // Reset pageNum when performing a new search
+    currentQuery = ""; // Update the current search query
+    await fetchArticles(pageNum, currentQuery);
+  });
+        
   // Function to render articles in the UI
   function renderArticles(articles) {
     const tbody = document.querySelector("tbody"); // Target the tbody element
