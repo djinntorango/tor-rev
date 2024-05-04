@@ -25,6 +25,7 @@
   border: 1px solid black;
   border-radius: 30px;
   overflow: auto;
+  padding: 20px;
 }
 
 .art-card::-webkit-scrollbar {
@@ -43,15 +44,23 @@
 .art-card::-webkit-scrollbar-thumb:hover {
   background: #555; /* Thumb color on hover */
 }
-
+    .main {
+      margin: 5%;
+    }
   </style>
 </head>
 <body>
-        <section class="art-card">
-            <h2>Title: <%= article.title %></h2>
-            <div>
-                <p><%- article.body %></p>
-            </div>
-        </section>
+  <section class="main">
+    <h2>
+      Your Article
+    </h2>
+      <section class="art-card">
+        <h2>Title: <%= article.title %></h2>
+        <div>
+          <p><%- article.body %></p>
+        </div>
+      </section>
+    </section>
+
 </body>
 </html>
