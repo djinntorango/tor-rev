@@ -126,7 +126,7 @@
             <section class="art-card art-display">
                 <h2><%= article.title %></h2>
                 <div>
-                    <p><%- article.body %></p>
+                    <p id="orig"><%- article.body %></p>
                 </div>
             </section>
         </section>
@@ -159,9 +159,9 @@
   
       // Handle prompt submission
         document.getElementById('revision-prompt-submit').addEventListener('click', async () => {
-            const articleBody = document.querySelector('.art-display p').innerText; // Get article body
+            const articleBody = document.querySelector('.art-display div').innerText; // Get article body
             const userPrompt = document.getElementById('revision-prompt').value.trim(); // Get user prompt
-
+            console.log(articleBody);
             // Send data to server
             const response = await fetch('/submit-prompt', {
                 method: 'POST',

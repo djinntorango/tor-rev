@@ -254,6 +254,8 @@ const openaiApiKey = process.env.OPENAI_API_KEY;
 
 async function generateResponse(articleBody, userPrompt) {
     try {
+              console.log("User Prompt:", userPrompt);
+        console.log("Article Body:", articleBody);
         const response = await axios.post(
             'https://api.openai.com/v1/chat/completions',
             {
@@ -275,7 +277,7 @@ async function generateResponse(articleBody, userPrompt) {
         return response.data.choices[0].message.content;
       console.log(response.data.choices[0].message.content);
     } catch (error) {
-        console.error('Error generating response:', error);
+        //console.error('Error generating response:', error);
         throw new Error('Error generating response');
     }
 }
@@ -288,7 +290,7 @@ app.post('/submit-prompt', async (req, res) => {
         const aiResponse = await generateResponse(articleBody, userPrompt);
         res.json({ success: true, data: aiResponse });
     } catch (error) {
-        console.error('Error generating response:', error);
+        //console.error('Error generating response:', error);
         res.status(500).json({ success: false, error: 'Internal Server Error' });
     }
 });
