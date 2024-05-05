@@ -156,6 +156,25 @@
     var quill = new Quill('#editor', {
         theme: 'snow' // Specify theme (snow, bubble, etc.)
     });
+  
+      // Handle prompt submission
+        document.getElementById('revision-prompt-submit').addEventListener('click', async () => {
+            const articleBody = document.querySelector('.art-display p').innerText; // Get article body
+            const userPrompt = document.getElementById('revision-prompt').value.trim(); // Get user prompt
+
+            // Send data to server
+            const response = await fetch('/submit-prompt', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ articleBody, userPrompt })
+            });
+
+            // Handle response
+            const data = await response.json();
+            console.log(data); // Log or display the AI response
+        });
 </script>
 
 </body>

@@ -250,6 +250,42 @@ app.get("/zendesk/articles/:article_id", async (req, res) => {
   }
 });
 
+const openaiApiKey = process.env.OPENAI_API_KEY;
+
+async function generateResponse(articleBody, userPrompt) {
+    try {
+        const response = await axios.post(
+            'https://api.openai.com/v1/completions',
+            {
+                model: 'text-davinci-002',
+                prompt: `${articleBody}\nUser: ${userPrompt}\nAI:`,
+                max_tokens: 100,
+                temperature: 0.7,
+                stop: ['\n']
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${openaiApiKey}`
+                }
+            }
+        );
+
+        return response.data.choices[0].text.trim();
+    } catch (error) {
+        console.error('Error generating response:', error);
+        return 'Error generating response';
+    }
+}
+
+app.post('/submit-prompt', async (req, res) => {
+    const { articleBody, userPrompt } = req.body;
+
+    const aiResponse = await generateResponse(articleBody, userPrompt);
+
+    // Handle the AI response as needed
+    res.send(aiResponse);
+});
 
 
 
