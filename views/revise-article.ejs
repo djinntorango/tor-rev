@@ -17,7 +17,6 @@
     .art-card {
         width: 60dvh;
         height: 60dvh;
-        overflow: hidden;
         background-color: white;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         transition: overflow 0.2s;
@@ -25,28 +24,29 @@
       .art-display {
         border: 1px solid black;
         padding: 20px;
+        overflow: hidden;
       }
-    .art-card:hover,
-    .art-card:focus-within {
+    .art-display:hover,
+    .art-display:focus-within {
         overflow: auto; /* Display scroll bars on hover or when focused */
     }
 
-    .art-card::-webkit-scrollbar {
+    .art-display::-webkit-scrollbar {
         width: 10px;
 
     }
 
-    .art-card::-webkit-scrollbar-track {
+    .art-display::-webkit-scrollbar-track {
         background: #f1f1f1;
         display: none;
     }
 
-    .art-card::-webkit-scrollbar-thumb {
+    .art-display::-webkit-scrollbar-thumb {
         background: #888;
         border-radius: 10px;
     }
 
-    .art-card::-webkit-scrollbar-thumb:hover {
+    .art-display::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
 
@@ -100,9 +100,12 @@
     #editor:focus-visible {
         outline: none;
     }
+
     .ql-container, .ql-editor .ql-font-serif, .ql-editor .ql-font-monospace, .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=serif]::before, .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=monospace]::before, .ql-toolbar.ql-snow {
       font-family: inherit !important;
-      overflow: inherit;
+      }
+      .ql-editor {
+        height: inherit !important;
       }
     </style>
 </head>
