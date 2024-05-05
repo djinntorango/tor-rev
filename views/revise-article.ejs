@@ -31,22 +31,22 @@
         overflow: auto; /* Display scroll bars on hover or when focused */
     }
 
-    .art-display::-webkit-scrollbar {
+    .art-display::-webkit-scrollbar, .ql-editor::-webkit-scrollbar {
         width: 10px;
 
     }
 
-    .art-display::-webkit-scrollbar-track {
+    .art-display::-webkit-scrollbar-track, .ql-editor::-webkit-scrollbar-track {
         background: #f1f1f1;
         display: none;
     }
 
-    .art-display::-webkit-scrollbar-thumb {
+    .art-display::-webkit-scrollbar-thumb, .ql-editor::-webkit-scrollbar-thumb {
         background: #888;
         border-radius: 10px;
     }
 
-    .art-display::-webkit-scrollbar-thumb:hover {
+    .art-display::-webkit-scrollbar-thumb:hover, .ql-editor::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
 
@@ -104,8 +104,8 @@
     .ql-container, .ql-editor .ql-font-serif, .ql-editor .ql-font-monospace, .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=serif]::before, .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=monospace]::before, .ql-toolbar.ql-snow {
       font-family: inherit !important;
       }
-      .ql-editor {
-        height: inherit !important;
+      .ql-container.ql-snow {
+        height: 91%;
       }
     </style>
 </head>
