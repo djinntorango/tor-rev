@@ -8,141 +8,147 @@
     <title>Enter Email</title>
     <link id="favicon" rel="icon" href="https://cdn.glitch.global/887fed5c-3c1b-472d-8fdc-c2a3bad1fe27/oillamp(powderblue).svg?v=1709088268120" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="https://torango-exporter.glitch.me/public/styles.css" />
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LRS5LVL8ED"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-LRS5LVL8ED');
-</script>
-  <style>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <!-- Quill CSS -->
+
+    <style>
     /* styles.css */
-.art-card {
-  width: 60dvh;
-  height: 60dvh;
-  border: 1px solid black;
-  overflow: hidden;
-  padding: 20px;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  transition: overflow 0.2s;
-}
+    .art-card {
+        width: 60dvh;
+        height: 60dvh;
+        border: 1px solid black;
+        overflow: hidden;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: overflow 0.2s;
+    }
 
-.art-card:hover,
-.art-card:focus-within {
-  overflow: auto; /* Display scroll bars on hover or when focused */
-}
+    .art-card:hover,
+    .art-card:focus-within {
+        overflow: auto; /* Display scroll bars on hover or when focused */
+    }
 
-.art-card::-webkit-scrollbar {
-  width: 10px;
-  
-}
+    .art-card::-webkit-scrollbar {
+        width: 10px;
 
-.art-card::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-  display: none;
-}
+    }
 
-.art-card::-webkit-scrollbar-thumb {
-  background: #888; 
-  border-radius: 10px; 
-}
+    .art-card::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        display: none;
+    }
 
-.art-card::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-}
-.main {
-  margin: 5%;
-}
+    .art-card::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 10px;
+    }
+
+    .art-card::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    .main {
+        margin: 5%;
+    }
     .art-card img {
-  max-width: 100%; /* Ensure images don't exceed the width of their container */
-  height: auto; /* Maintain aspect ratio */
-  display: block; /* Ensure images are displayed as blocks */
-  margin: 0 auto; /* Center align images */
-  margin-bottom: 10px; /* Add some bottom margin for spacing */
-}
+        max-width: 100%; /* Ensure images don't exceed the width of their container */
+        height: auto; /* Maintain aspect ratio */
+        display: block; /* Ensure images are displayed as blocks */
+        margin: 0 auto; /* Center align images */
+        margin-bottom: 10px; /* Add some bottom margin for spacing */
+    }
     .sbs {
-      display: flex;
-      justify-content: space-between;
+        display: flex;
+        justify-content: space-between;
     }
     .prompt-box {
-  margin-top: 20px;
-}
-
-.prompt-input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
-}
-    input {
-      width: 100%;
-        height: 50px; /* Initial height */
-  padding: 8px;
-  border: none;
-  resize: vertical; /* Allow vertical resizing */
+        margin-top: 20px;
     }
-#article-prompt-submit, #revision-prompt-submit {
-  margin-top: 10px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 100%;
-}
 
-#article-prompt-submit:hover, #revision-prompt-submit:hover {
-  background-color: #0056b3;
-}
-  </style>
+    .prompt-input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    input {
+        width: 100%;
+        height: 50px; /* Initial height */
+        padding: 8px;
+        border: none;
+        resize: vertical; /* Allow vertical resizing */
+    }
+    #article-prompt-submit, #revision-prompt-submit {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    #article-prompt-submit:hover, #revision-prompt-submit:hover {
+        background-color: #0056b3;
+    }
+    #editor:focus-visible {
+        outline: none;
+    }
+    </style>
 </head>
 <body>
 <header>
-  <div class="toolbar">
-    <button id="temperatureBtn">Temperature: 0.7</button>
-    <button id="systemChatBtn">System Chats: Off</button>
-    <button id="resetBtn">Reset</button>
-    <button id="exportBtn">Export</button>
-    <button id="copyBtn">Copy Revision</button>
-  </div>
+    <div class="toolbar">
+        <button id="temperatureBtn">Temperature: 0.7</button>
+        <button id="systemChatBtn">System Chats: Off</button>
+        <button id="resetBtn">Reset</button>
+        <button id="exportBtn">Export</button>
+    </div>
 </header>
 
-  <section class="main">
-  <div class="sbs">
-    <section>
-      <h2>
-        Your Article
-      </h2>
-        <section class="art-card">
-          <h2><%= article.title %></h2>
-          <div>
-            <p><%- article.body %></p>
-          </div>
+<section class="main">
+    <div class="sbs">
+        <section>
+            <h2>Your Article</h2>
+            <section class="art-card">
+                <h2><%= article.title %></h2>
+                <div>
+                    <p><%- article.body %></p>
+                </div>
+            </section>
         </section>
-      </section>
-    <section>
-      <h2>
-        Revision
-      </h2>
-        <section class="art-card">
-          <h2> <%= article.title %></h2>
-          <div>
-            <p><%- article.body %></p>
-          </div>
+        <section>
+            <h2>Revision</h2>
+            <section class="art-card">
+                <div id="editor" contenteditable="true">
+                    <h2><%= article.title %></h2>
+                    <div>
+                        <p><%- article.body %></p>
+                    </div>
+                </div>
+            </section>
         </section>
-      </section>
     </div>
     <div class="prompt-box">
-      <label for="revision-prompt">Enter your prompt:</label><br>
-      <input type="text" id="revision-prompt" name="revision-prompt">
-      <button id="revision-prompt-submit">Submit</button>
+        <label for="revision-prompt">Enter your prompt:</label><br>
+        <input type="text" id="revision-prompt" name="revision-prompt">
+        <button id="revision-prompt-submit">Submit</button>
     </div>
-  </section>
+</section>
+
+<!-- Quill JavaScript -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+    // Initialize Quill
+    var quill = new Quill('#editor', {
+        theme: 'snow' // Specify theme (snow, bubble, etc.)
+    });
+</script>
+
 </body>
 </html>
