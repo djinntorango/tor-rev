@@ -257,7 +257,7 @@ async function generateResponse(articleBody, userPrompt) {
         const response = await axios.post(
             'https://api.openai.com/v1/completions',
             {
-                model: 'text-davinci-002',
+                model: 'gpt-3.5-turbo',
                 prompt: `${articleBody}\nUser: ${userPrompt}\nAI:`,
                 max_tokens: 100,
                 temperature: 0.7,
@@ -274,17 +274,20 @@ async function generateResponse(articleBody, userPrompt) {
         return response.data.choices[0].text.trim();
     } catch (error) {
         console.error('Error generating response:', error);
-        return 'Error generating response';
+        throw new Error('Error generating response');
     }
 }
 
 app.post('/submit-prompt', async (req, res) => {
     const { articleBody, userPrompt } = req.body;
 
-    const aiResponse = await generateResponse(articleBody, userPrompt);
-
-    // Handle the AI response as needed
-    res.send(aiResponse);
+    try {
+        const aiResponse = await generateResponse(articleBody, userPrompt);
+        res.json({ success: true, data: aiResponse });
+    } catch (error) {
+        console.error('Error generating response:', error);
+        res.status(500).json({ success: false, error: 'Internal Server Error' });
+    }
 });
 
 
