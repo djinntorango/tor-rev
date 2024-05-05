@@ -17,14 +17,15 @@
     .art-card {
         width: 60dvh;
         height: 60dvh;
-        border: 1px solid black;
         overflow: hidden;
-        padding: 20px;
         background-color: white;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         transition: overflow 0.2s;
     }
-
+      .art-display {
+        border: 1px solid black;
+        padding: 20px;
+      }
     .art-card:hover,
     .art-card:focus-within {
         overflow: auto; /* Display scroll bars on hover or when focused */
@@ -99,6 +100,10 @@
     #editor:focus-visible {
         outline: none;
     }
+    .ql-container, .ql-editor .ql-font-serif, .ql-editor .ql-font-monospace, .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=serif]::before, .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=monospace]::before, .ql-toolbar.ql-snow {
+      font-family: inherit !important;
+      overflow: inherit;
+      }
     </style>
 </head>
 <body>
@@ -115,7 +120,7 @@
     <div class="sbs">
         <section>
             <h2>Your Article</h2>
-            <section class="art-card">
+            <section class="art-card art-display">
                 <h2><%= article.title %></h2>
                 <div>
                     <p><%- article.body %></p>
