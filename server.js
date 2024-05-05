@@ -255,13 +255,14 @@ const openaiApiKey = process.env.OPENAI_API_KEY;
 async function generateResponse(articleBody, userPrompt) {
     try {
         const response = await axios.post(
-            'https://api.openai.com/v1/completions',
+            'https://api.openai.com/v1/chat/completions',
             {
                 model: 'gpt-3.5-turbo',
-                prompt: `${articleBody}\nUser: ${userPrompt}\nAI:`,
-                max_tokens: 100,
-                temperature: 0.7,
-                stop: ['\n']
+                messages: [
+                    { role: "user", content: articleBody },
+                    { role: "system", content: userPrompt }
+                ],
+                temperature: 0.7
             },
             {
                 headers: {
@@ -271,12 +272,14 @@ async function generateResponse(articleBody, userPrompt) {
             }
         );
 
-        return response.data.choices[0].text.trim();
+        return response.data.choices[0].message.content;
+      console.log(response.data.choices[0].message.content);
     } catch (error) {
         console.error('Error generating response:', error);
         throw new Error('Error generating response');
     }
 }
+
 
 app.post('/submit-prompt', async (req, res) => {
     const { articleBody, userPrompt } = req.body;
