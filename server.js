@@ -252,6 +252,9 @@ app.get("/zendesk/articles/:article_id", async (req, res) => {
 
 const openaiApiKey = process.env.OPENAI_API_KEY;
 
+const bodyParser = require('body-parser');
+
+app.use(express.json());
 async function generateResponse(articleBody, userPrompt) {
     try {
               console.log("User Prompt:", userPrompt);
