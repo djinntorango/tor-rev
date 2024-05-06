@@ -181,13 +181,7 @@
 
         // Update the Revision article body with the response from OpenAI
         const editorElement = document.querySelector('.art-card #editor div');
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = revisedArticleBodyHTML;
-
-        // Append child nodes of tempDiv to editorElement
-        while (tempDiv.firstChild) {
-            editorElement.appendChild(tempDiv.firstChild);
-        }
+        editorElement.innerHTML = revisedArticleBodyHTML;
 
         // Hide loading animation
         document.getElementById('loading-animation').style.display = 'none';
