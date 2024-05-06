@@ -132,6 +132,7 @@
         <section>
             <h2>Revision</h2>
             <section class="art-card">
+              <div id="loading-animation" style="display: none;">Loading...</div>
                 <div id="editor" contenteditable="true">
                     <div>
                         <p><%- article.body %></p>
@@ -155,30 +156,36 @@
         theme: 'snow' // Specify theme (snow, bubble, etc.)
     });
   
-// Handle prompt submission
-document.getElementById('revision-prompt-submit').addEventListener('click', async () => {
-    const articleBody = document.querySelector('.art-display div').innerHTML; // Get article body
-    const userPrompt = document.getElementById('revision-prompt').value.trim(); // Get user prompt
+ // Handle prompt submission
+    document.getElementById('revision-prompt-submit').addEventListener('click', async () => {
+        // Show loading animation
+        document.getElementById('loading-animation').style.display = 'block';
 
-    // Send data to server
-    const response = await fetch('/submit-prompt', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ articleBody, userPrompt })
+        const articleBody = document.querySelector('.art-display div').innerHTML; // Get article body
+        const userPrompt = document.getElementById('revision-prompt').value.trim(); // Get user prompt
+
+        // Send data to server
+        const response = await fetch('/submit-prompt', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ articleBody, userPrompt })
+        });
+
+        // Handle response
+        const data = await response.json();
+        console.log(data); // Log or display the AI response
+
+        const revisedArticleBodyHTML = data.data; // Assuming data.data contains the response HTML
+
+        // Update the Revision article body with the response from OpenAI
+        const editorElement = document.querySelector('.art-card #editor div');
+        editorElement.innerHTML = revisedArticleBodyHTML;
+
+        // Hide loading animation
+        document.getElementById('loading-animation').style.display = 'none';
     });
-
-    // Handle response
-    const data = await response.json();
-    console.log(data); // Log or display the AI response
-
-    const revisedArticleBodyHTML = data.data; // Assuming data.data contains the response HTML
-
-    // Update the Revision article body with the response from OpenAI
-    const editorElement = document.querySelector('.art-card #editor div');
-    editorElement.innerHTML = revisedArticleBodyHTML;
-});
 
 </script>
 
