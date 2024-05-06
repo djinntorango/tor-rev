@@ -150,6 +150,8 @@
 
 <!-- Quill JavaScript -->
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.3/purify.min.js"></script>
+
 <script>
     // Initialize Quill
     var quill = new Quill('#editor', {
@@ -157,36 +159,37 @@
     });
   
  // Handle prompt submission
-    document.getElementById('revision-prompt-submit').addEventListener('click', async () => {
-        // Show loading animation
-        document.getElementById('loading-animation').style.display = 'block';
-        document.getElementById('editor').style.display = 'none';
-        const articleBody = document.querySelector('.art-display div').innerHTML; // Get article body
-        const userPrompt = document.getElementById('revision-prompt').value.trim(); // Get user prompt
+document.getElementById('revision-prompt-submit').addEventListener('click', async () => {
+    // Show loading animation
+    document.getElementById('loading-animation').style.display = 'block';
+    document.getElementById('editor').style.display = 'none';
+    const articleBody = document.querySelector('.art-display div').innerHTML; // Get article body
+    const userPrompt = document.getElementById('revision-prompt').value.trim(); // Get user prompt
 
-        // Send data to server
-        const response = await fetch('/submit-prompt', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ articleBody, userPrompt })
-        });
-
-        // Handle response
-        const data = await response.json();
-        console.log(data); // Log or display the AI response
-
-        const revisedArticleBodyHTML = data.data; // Assuming data.data contains the response HTML
-
-        // Update the Revision article body with the response from OpenAI
-        const editorElement = document.querySelector('.art-card #editor div');
-        editorElement.innerHTML = revisedArticleBodyHTML;
-
-        // Hide loading animation
-        document.getElementById('loading-animation').style.display = 'none';
-      document.getElementById('editor').style.display = 'block';
+    // Send data to server
+    const response = await fetch('/submit-prompt', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ articleBody, userPrompt })
     });
+
+    // Handle response
+    const data = await response.json();
+    console.log(data); // Log or display the AI response
+
+    // Sanitize the HTML content
+    const revisedArticleBodyHTML = DOMPurify.sanitize(data.data); // Sanitize the response HTML
+
+    // Update the Revision article body with the sanitized response from OpenAI
+    const editorElement = document.querySelector('.art-card #editor div');
+    editorElement.innerHTML = revisedArticleBodyHTML;
+
+    // Hide loading animation
+    document.getElementById('loading-animation').style.display = 'none';
+    document.getElementById('editor').style.display = 'block';
+});
 
 </script>
 
