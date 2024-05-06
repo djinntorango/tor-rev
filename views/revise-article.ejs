@@ -132,12 +132,12 @@
         <section>
             <h2>Revision</h2>
             <section class="art-card">
-              <div id="loading-animation" style="display: none;">Loading...</div>
-                <div id="editor" contenteditable="true">
+                <div id="editor" contenteditable="true">                  
                     <div>
                         <p><%- article.body %></p>
                     </div>
                 </div>
+                            <div id="loading-animation" style="display: none;">Fetching response...</div>
             </section>
         </section>
     </div>
@@ -160,7 +160,7 @@
     document.getElementById('revision-prompt-submit').addEventListener('click', async () => {
         // Show loading animation
         document.getElementById('loading-animation').style.display = 'block';
-
+        document.getElementById('editor').style.display = 'none';
         const articleBody = document.querySelector('.art-display div').innerHTML; // Get article body
         const userPrompt = document.getElementById('revision-prompt').value.trim(); // Get user prompt
 
@@ -185,6 +185,7 @@
 
         // Hide loading animation
         document.getElementById('loading-animation').style.display = 'none';
+      document.getElementById('editor').style.display = 'block';
     });
 
 </script>
