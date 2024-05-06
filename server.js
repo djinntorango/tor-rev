@@ -250,8 +250,6 @@ app.get("/zendesk/articles/:article_id", async (req, res) => {
   }
 });
 
-
-//Prompt flow
 const openaiApiKey = process.env.OPENAI_API_KEY;
 
 async function generateResponse(articleBody, userPrompt) {
@@ -277,7 +275,7 @@ async function generateResponse(articleBody, userPrompt) {
         );
 
         return response.data.choices[0].message.content;
-        console.log(response.data.choices[0].message.content);
+      console.log(response.data.choices[0].message.content);
     } catch (error) {
         //console.error('Error generating response:', error);
         throw new Error('Error generating response');
@@ -285,7 +283,7 @@ async function generateResponse(articleBody, userPrompt) {
 }
 
 
-app.get('/submit-prompt', async (req, res) => {
+app.post('/submit-prompt', async (req, res) => {
     const { articleBody, userPrompt } = req.body;
 
     try {
@@ -297,3 +295,9 @@ app.get('/submit-prompt', async (req, res) => {
     }
 });
 
+
+
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}. Visit http://localhost:${port}`);
+});

@@ -162,10 +162,9 @@
             const articleBody = document.querySelector('.art-display div').innerText; // Get article body
             const userPrompt = document.getElementById('revision-prompt').value.trim(); // Get user prompt
             console.log(articleBody);
-            console.log(userPrompt);
             // Send data to server
             const response = await fetch('/submit-prompt', {
-                method: 'GET',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
