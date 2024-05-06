@@ -122,9 +122,8 @@
 <section class="main">
     <div class="sbs">
         <section>
-            <h2>Your Article</h2>
+            <h2><%= article.title %></h2>
             <section class="art-card art-display">
-                <h2><%= article.title %></h2>
                 <div>
                     <p id="orig"><%- article.body %></p>
                 </div>
@@ -134,7 +133,6 @@
             <h2>Revision</h2>
             <section class="art-card">
                 <div id="editor" contenteditable="true">
-                    <h2><%= article.title %></h2>
                     <div>
                         <p><%- article.body %></p>
                     </div>
@@ -157,36 +155,31 @@
         theme: 'snow' // Specify theme (snow, bubble, etc.)
     });
   
-      // Handle prompt submission
-        document.getElementById('revision-prompt-submit').addEventListener('click', async () => {
-            const articleBody = document.querySelector('.art-display div').innerHTML; // Get article body
-            const userPrompt = document.getElementById('revision-prompt').value.trim(); // Get user prompt
-            console.log(articleBody);
-            // Send data to server
-            const response = await fetch('/submit-prompt', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ articleBody, userPrompt })
-            });
+// Handle prompt submission
+document.getElementById('revision-prompt-submit').addEventListener('click', async () => {
+    const articleBody = document.querySelector('.art-display div').innerHTML; // Get article body
+    const userPrompt = document.getElementById('revision-prompt').value.trim(); // Get user prompt
 
-            // Handle response
-            const data = await response.json();
-            console.log(data); // Log or display the AI response
-          
-            const revisedArticleBody = data.data;
-            // Clear existing content
-            const editorElement = document.querySelector('.art-card #editor div');
-            while (editorElement.firstChild) {
-                editorElement.removeChild(editorElement.firstChild);
-            }
+    // Send data to server
+    const response = await fetch('/submit-prompt', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ articleBody, userPrompt })
+    });
 
-            // Add the revised article body
-            const p = document.createElement('p');
-            p.innerText = revisedArticleBody;
-            editorElement.appendChild(p);
-                });
+    // Handle response
+    const data = await response.json();
+    console.log(data); // Log or display the AI response
+
+    const revisedArticleBodyHTML = data.data; // Assuming data.data contains the response HTML
+
+    // Update the Revision article body with the response from OpenAI
+    const editorElement = document.querySelector('.art-card #editor div');
+    editorElement.innerHTML = revisedArticleBodyHTML;
+});
+
 </script>
 
 </body>
