@@ -159,7 +159,7 @@
   
       // Handle prompt submission
         document.getElementById('revision-prompt-submit').addEventListener('click', async () => {
-            const articleBody = document.querySelector('.art-display div').innerText; // Get article body
+            const articleBody = document.querySelector('.art-display div').innerHTML; // Get article body
             const userPrompt = document.getElementById('revision-prompt').value.trim(); // Get user prompt
             console.log(articleBody);
             // Send data to server
@@ -174,7 +174,19 @@
             // Handle response
             const data = await response.json();
             console.log(data); // Log or display the AI response
-        });
+          
+            const revisedArticleBody = data.data;
+            // Clear existing content
+            const editorElement = document.querySelector('.art-card #editor div');
+            while (editorElement.firstChild) {
+                editorElement.removeChild(editorElement.firstChild);
+            }
+
+            // Add the revised article body
+            const p = document.createElement('p');
+            p.innerText = revisedArticleBody;
+            editorElement.appendChild(p);
+                });
 </script>
 
 </body>
