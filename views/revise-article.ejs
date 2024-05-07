@@ -110,6 +110,12 @@
       #copy-html-button {
         font-size: 60%;
         background: #bdc9ff;
+        max-height: 30px;
+      }
+      #revision-title {
+        display: flex;
+        justify-content: space-between;  
+        align-items: center;
       }
     </style>
 </head>
@@ -134,7 +140,10 @@
             </section>
         </section>
         <section>
-            <h2>Revision <button id="copy-html-button">Copy</button></h2>
+          <div id="revision-title">
+              <h2>Revision</h2>
+              <button id="copy-html-button">Copy</button>
+            </div>
             <section class="art-card">
                 <div id="editor" contenteditable="true">                  
                     <div>
