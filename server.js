@@ -264,7 +264,7 @@ async function generateResponse(articleBody, userPrompt) {
                     { role: "user", content: articleBody },
                     { role: "system", content: userPrompt }
                 ],
-                temperature: 0.7
+                temperature: 0.3
             },
             {
                 headers: {
