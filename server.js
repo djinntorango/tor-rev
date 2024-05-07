@@ -254,15 +254,17 @@ const openaiApiKey = process.env.OPENAI_API_KEY;
 
 async function generateResponse(articleBody, userPrompt) {
     try {
-              console.log("User Prompt:", userPrompt);
+        console.log("User Prompt:", userPrompt);
         console.log("Article Body:", articleBody);
+        const systemPrompt = "Preserve original HTML structure; Make specified revisions to body text only; Output should be HTML format only. Make the requested changes: ";
+        const fullPrompt = systemPrompt + userPrompt;
         const response = await axios.post(
             'https://api.openai.com/v1/chat/completions',
             {
                 model: 'gpt-3.5-turbo',
                 messages: [
                     { role: "user", content: articleBody },
-                    { role: "system", content: userPrompt }
+                    { role: "system", content: fullPrompt }
                 ],
                 temperature: 0.3
             },
