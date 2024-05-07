@@ -156,7 +156,7 @@
         theme: 'snow' // Specify theme (snow, bubble, etc.)
     });
   
- // Handle prompt submission
+    // Handle prompt submission
     document.getElementById('revision-prompt-submit').addEventListener('click', async () => {
         // Show loading animation
         document.getElementById('loading-animation').style.display = 'block';
@@ -180,15 +180,15 @@
         const revisedArticleBodyHTML = data.data; // Assuming data.data contains the response HTML
 
         // Update the Revision article body with the response from OpenAI
-        const editorElement = document.querySelector('.art-card #editor div');
-        editorElement.innerHTML = revisedArticleBodyHTML;
+        const delta = quill.clipboard.convert(revisedArticleBodyHTML);
+        quill.setContents(delta);
 
         // Hide loading animation
         document.getElementById('loading-animation').style.display = 'none';
-      document.getElementById('editor').style.display = 'block';
+        document.getElementById('editor').style.display = 'block';
     });
-
 </script>
+
 
 </body>
 </html>
