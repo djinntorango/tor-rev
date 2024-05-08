@@ -351,8 +351,36 @@ exportButton.addEventListener("click", async function() {
     const articleId = document.getElementById("orig").getAttribute("data-article-id");
     const locale = document.getElementById("orig").getAttribute("data-lang");
     const expURL = `/zendesk/articles/${articleId}/translations/${locale}`;
-    window.location.href = expURL;
+    
+    try {
+        const response = await fetch(expURL, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+    translation: {
+        locale: "en-us",
+        source_type: "Article",
+        title: "How to take pictures in low light",
+        body: "updatedContent"
+    }
+})
+        });
+
+        if (response.ok) {
+            console.log("PUT request successful");
+            // Handle success
+        } else {
+            console.error("PUT request failed:", response.statusText);
+            // Handle failure
+        }
+    } catch (error) {
+        console.error("Error sending PUT request:", error);
+        // Handle error
+    }
 });
+
 </script>
 </body>
 </html>

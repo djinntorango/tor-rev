@@ -254,7 +254,7 @@ app.get("/zendesk/articles/:article_id", async (req, res) => {
 app.put("/zendesk/articles/:article_id/translations/:locale", async (req, res) => {
   try {
     const { article_id, locale } = req.params; // Get article ID and locale from URL parameters
-    const { updatedContent } = req.body; // Get updated content from request body
+    const updatedContent = req.body.body;  // Get updated content from request body
 console.log("Received request body:", req.body); 
     const subdomain = storedSubdomain;
 
