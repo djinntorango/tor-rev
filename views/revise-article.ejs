@@ -225,9 +225,12 @@
             <h2><%= article.title %></h2>
             <section class="art-card art-display">
                 <div>
-                    <p id="orig"><%- article.body %></p>
+                    <p id="orig" data-lang=><%- article.body %></p>
                 </div>
             </section>
+              <p>
+              <%= article.locale %></p>
+              </p>
         </section>
         <section>
           <div id="revision-title">

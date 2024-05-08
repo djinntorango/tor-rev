@@ -115,14 +115,14 @@
 reviseButtons.forEach(button => {
   button.addEventListener("click", async function() {
     const articleId = button.getAttribute("data-article-id");
-    const reviseURL = `/zendesk/articles/${articleId}`; // Corrected endpoint
+    const reviseURL = `/zendesk/articles/${articleId}`;
     window.location.href = reviseURL;
   });
 });
         
-  // Function to render articles in the UI
+  // Render articles in the UI
   function renderArticles(articles) {
-    const tbody = document.querySelector("tbody"); // Target the tbody element
+    const tbody = document.querySelector("tbody"); 
     tbody.innerHTML = ""; // Clear existing articles
     articles.forEach(article => {
       const row = document.createElement("tr");
