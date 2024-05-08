@@ -260,7 +260,7 @@ app.put("/zendesk/articles/:article_id/translations/:locale", async (req, res) =
 
     // Build the Zendesk API endpoint to update article translation
     const zendeskTranslationEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles/${article_id}/translations/${locale}.json`;
-
+console.log(zendeskTranslationEnpoint);
     // Make the PUT request to update article translation using axios
 const response = await axios.put(zendeskTranslationEndpoint, 
   {
@@ -272,7 +272,7 @@ const response = await axios.put(zendeskTranslationEndpoint,
       locale: "en-us",
       source_type: "Article",
       title: "How to take pictures in low light",
-      body: updatedContent
+      body: "updatedContent"
     }
   }
 );
@@ -284,6 +284,7 @@ const response = await axios.put(zendeskTranslationEndpoint,
     }
     res.render("success", { });
   } catch (error) {
+    
     console.error("Error updating article translation:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
