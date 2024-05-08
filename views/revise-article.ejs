@@ -125,9 +125,13 @@
 <body>
 <header>
     <div class="toolbar">
-        <button id="temperatureBtn">Temperature: 0.7</button>
-        <button id="systemChatBtn">System Chats: Off</button>
-        <button id="resetBtn">Reset</button>
+        <button class="dropbtn" id="translateBtn">Translate</button>
+        <div class="dropdown-content" id="languageDropdown">
+            <a href="#" data-lang="en">English</a>
+            <a href="#" data-lang="fr">French</a>
+            <a href="#" data-lang="de">German</a>
+            <!-- Add more language options as needed -->
+        </div>
         <button id="exportBtn">Export</button>
     </div>
 </header>
@@ -219,6 +223,43 @@
             alert('Failed to copy HTML content to clipboard. Please try again.');
         });
 });
+  
+  
+  // Get the dropdown button and dropdown content
+var dropdownBtn = document.getElementById("translateBtn");
+var dropdownContent = document.getElementById("languageDropdown");
+
+// Add click event listener to dropdown button
+dropdownBtn.addEventListener("click", function() {
+    // Toggle showing/hiding the dropdown content
+    dropdownContent.classList.toggle("show");
+});
+
+// Add click event listeners to language options
+var languageOptions = document.querySelectorAll("#languageDropdown a");
+languageOptions.forEach(function(option) {
+    option.addEventListener("click", function(event) {
+        // Prevent default link behavior
+        event.preventDefault();
+        
+        // Get the selected language from the data-lang attribute
+        var selectedLang = option.getAttribute("data-lang");
+        
+        // Call a function to handle translation based on selected language
+        translate(selectedLang);
+        
+        // Hide the dropdown content after selection
+        dropdownContent.classList.remove("show");
+    });
+});
+
+// Function to handle translation based on selected language
+function translate(language) {
+    // Implement translation logic here
+    console.log("Translating to " + language);
+    // You can call your translation API or perform any translation operation here
+}
+
 </script>
 </body>
 </html>
