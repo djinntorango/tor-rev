@@ -340,6 +340,7 @@ languageOptions.forEach(function(option) {
 function translate(language) {
 
     document.getElementById("revision-prompt").value = "Translate to " + language;
+  document.getElementById("revision-prompt").value = "Translate to " + language;
 
 }
 
@@ -350,16 +351,31 @@ const exportButton = document.getElementById("exportBtn");
 exportButton.addEventListener("click", async function() {
     const articleId = document.getElementById("orig").getAttribute("data-article-id");
     const locale = document.getElementById("orig").getAttribute("data-lang");
-    const body = document.getElementById("orig").
+    const updatedContent = document.querySelector('.art-card #editor div').innerHTML; // Extract updated content from editor
     const reviseURL = `/zendesk/articles/${articleId}/translations/${locale}`;
-    const response = await fetch(reviseURL, {
-    method: 'PUT',
-    headers: {
-        'Content-Type': 'application/json'
-    },
+
+    try {
+        const response = await fetch(reviseURL, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ updatedContent }) // Include updated content in request body
+        });
+
+        if (response.ok) {
+            console.log('Article translation updated successfully!');
+            // Optionally, you can handle success here, e.g., display a success message
+        } else {
+            console.error('Failed to update article translation:', response.statusText);
+            // Optionally, you can handle error here, e.g., display an error message
+        }
+    } catch (error) {
+        console.error('Error updating article translation:', error);
+        // Optionally, you can handle error here, e.g., display an error message
+    }
 });
-  //window.location.href = reviseURL;
-});
+
 </script>
 </body>
 </html>

@@ -266,7 +266,6 @@ app.put("/zendesk/articles/:article_id/translations/:locale", async (req, res) =
       translation: {
         locale: locale,
         source_type: "Article",
-        title: "How to take pictures in low light",
         body: updatedContent // Use the variable containing the updated content
       }
     }, {
