@@ -259,13 +259,12 @@ app.get("/zendesk/articles/:article_id/translations/:locale", async (req, res) =
     const subdomain = storedSubdomain;
 
     // Build the Zendesk API endpoint to update article translation
-    const zendeskTranslationEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles/${article_id}/translations/.json`;
+    const zendeskTranslationEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles/${article_id}/translations/${locale}.json`;
 
     // Make the PUT request to update article translation using axios
     const response = await axios.put(zendeskTranslationEndpoint, {
       translation: {
-        body: updatedContent,
-        locale: locale
+        body: updatedContent
       }
     }, {
       headers: {
