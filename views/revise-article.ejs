@@ -225,7 +225,7 @@
             <h2><%= article.title %></h2>
             <section class="art-card art-display">
                 <div>
-                    <p id="orig" data-lang=<%= article.locale %>><%- article.body %></p>
+                    <p id="orig" data-lang=<%= article.locale %> data-article-id=<%= article.id %></%>><%- article.body %></p>
                 </div>
             </section>
         </section>
@@ -343,6 +343,16 @@ function translate(language) {
 
 }
 
+  
+const exportButton = document.getElementById("exportBtn");
+exportButton.forEach(button => {
+  button.addEventListener("click", async function() {
+    const articleId = document.getElementById("orig").getAttribute("data-article-id");
+    const locale = document.getElementById("orig").getAttribute("data-lang");
+    const reviseURL = `/zendesk/articles/${articleId}/translations/${locale}`;
+    window.location.href = reviseURL;
+  });
+});
 </script>
 </body>
 </html>

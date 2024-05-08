@@ -250,7 +250,39 @@ app.get("/zendesk/articles/:article_id", async (req, res) => {
   }
 });
 
+//Endpoint to put article/translation
+app.put("/zendesk/articles/:article_id/translations/:locale", async (req, res) => {
+  try {
+    const { article_id, locale } = req.params; // Get article ID and locale from URL parameters
+    const { updatedContent } = req.body; // Get updated content from request body
 
+    const subdomain = storedSubdomain;
+
+    // Build the Zendesk API endpoint to update article translation
+    const zendeskTranslationEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles/${article_id}/translations/${locale}.json`;
+
+    // Make the PUT request to update article translation using axios
+    const response = await axios.put(zendeskTranslationEndpoint, {
+      translation: {
+        body: updatedContent
+      }
+    }, {
+      headers: {
+        Authorization: `Bearer ${storedAccessToken}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (response.status === 200) {
+      res.status(200).json({ message: `Article translation for locale ${locale} updated successfully!` });
+    } else {
+      res.status(response.status).json({ error: response.statusText });
+    }
+  } catch (error) {
+    console.error("Error updating article translation:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 //OPENAI calls
 const openaiApiKey = process.env.OPENAI_API_KEY;
