@@ -267,12 +267,12 @@ const response = await axios.put(zendeskTranslationEndpoint,
       Authorization: `Bearer ${storedAccessToken}`,
       'Content-Type': 'application/json'
     },
-    translation: {[
+    translation: [{
       locale: "en-us",
       source_type: "Article",
       title: "How to take pictures in low light",
       body: updatedContent
-    ]}
+    }]
   }
 );
 
