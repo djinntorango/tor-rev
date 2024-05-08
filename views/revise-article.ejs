@@ -351,7 +351,13 @@ exportButton.addEventListener("click", async function() {
     const articleId = document.getElementById("orig").getAttribute("data-article-id");
     const locale = document.getElementById("orig").getAttribute("data-lang");
     const reviseURL = `/zendesk/articles/${articleId}/translations/${locale}`;
-    window.location.href = reviseURL;
+    const response = await fetch('/zendesk/articles/${articleId}/translations/${locale}', {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+});
+  //window.location.href = reviseURL;
 });
 </script>
 </body>
