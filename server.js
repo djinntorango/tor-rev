@@ -251,7 +251,7 @@ app.get("/zendesk/articles/:article_id", async (req, res) => {
 });
 
 //Endpoint to put article/translation
-app.get("/zendesk/articles/:article_id/translations/:locale", async (req, res) => {
+app.put("/zendesk/articles/:article_id/translations/:locale", async (req, res) => {
   try {
     const { article_id, locale } = req.params; // Get article ID and locale from URL parameters
     const { updatedContent } = req.body; // Get updated content from request body
@@ -269,7 +269,9 @@ const response = await axios.put(zendeskTranslationEndpoint,
       'Content-Type': 'application/json'
     },
     translation: {
-      
+      locale: "en-us",
+      source_type: "Article",
+      title: "How to take pictures in low light",
       body: updatedContent
     }
   }
