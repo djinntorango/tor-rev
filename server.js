@@ -250,6 +250,9 @@ app.get("/zendesk/articles/:article_id", async (req, res) => {
   }
 });
 
+
+
+//OPENAI calls
 const openaiApiKey = process.env.OPENAI_API_KEY;
 
 async function generateResponse(articleBody, userPrompt) {
