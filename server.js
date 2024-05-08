@@ -275,6 +275,7 @@ const response = await axios.put(zendeskTranslationEndpoint,
     }
   }
 );
+
     if (response.status === 200) {
       res.status(200).json({ message: `Article translation for locale ${locale} updated successfully!` });
     } else {
