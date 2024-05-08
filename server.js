@@ -254,7 +254,7 @@ app.get("/zendesk/articles/:article_id", async (req, res) => {
 app.put("/zendesk/articles/:article_id/translations/:locale", async (req, res) => {
   try {
     const { article_id, locale } = req.params; // Get article ID and locale from URL parameters
-    const updatedContent = req.body.body;  // Get updated content from request body
+    const { updatedContent } = req.body; // Get updated content from request body
 console.log("Received request body:", req.body); 
     const subdomain = storedSubdomain;
 
@@ -267,15 +267,14 @@ const response = await axios.put(zendeskTranslationEndpoint,
       Authorization: `Bearer ${storedAccessToken}`,
       'Content-Type': 'application/json'
     },
-    translation: [{
+    translation: {
       locale: "en-us",
       source_type: "Article",
       title: "How to take pictures in low light",
-      body: updatedContent
-    }]
+      body: "updatedContent"
+    }
   }
 );
-
     if (response.status === 200) {
       res.status(200).json({ message: `Article translation for locale ${locale} updated successfully!` });
     } else {
