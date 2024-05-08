@@ -360,10 +360,9 @@ exportButton.addEventListener("click", async function() {
             },
             body: JSON.stringify({
     translation: {
-        locale: "en-us",
+        locale: locale,
         source_type: "Article",
-        title: "How to take pictures in low light",
-        body: "updatedContent"
+        body: articleId
     }
 })
         });
