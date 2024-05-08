@@ -340,8 +340,8 @@ languageOptions.forEach(function(option) {
 function translate(language) {
 
     document.getElementById("revision-prompt").value = "Translate to " + language;
-  document.getElementById("revision-prompt").value = "Translate to " + language;
-
+    const origElement = document.getElementById("orig");
+    origElement.setAttribute("data-lang", language);
 }
 
   
