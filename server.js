@@ -250,42 +250,43 @@ app.get("/zendesk/articles/:article_id", async (req, res) => {
   }
 });
 
-//Endpoint to put article/translation
 app.put("/zendesk/articles/:article_id/translations/:locale", async (req, res) => {
   try {
-    const { article_id, locale } = req.params; // Get article ID and locale from URL parameters
-    const { updatedContent } = req.body; // Get updated content from request body
-    console.log("Received request body:", req.body); 
+    const { article_id, locale } = req.params;
+    const { updatedContent } = req.body;
+    console.log("Received request body:", req.body);
+    console.log("Received request params:", req.params);
     const subdomain = storedSubdomain;
 
     // Build the Zendesk API endpoint to update article translation
-    const zendeskTranslationEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles/24638938807187/translations/${locale}.json`;
+    const zendeskTranslationEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles/${article_id}/translations/${locale}.json`;
+
     // Make the PUT request to update article translation using axios
-const response = await axios.put(zendeskTranslationEndpoint, 
-  {
-    headers: {
-      Authorization: `Bearer ${storedAccessToken}`,
-      'Content-Type': 'application/json'
-    },
-    translation: {
-      locale: "en-us",
-      source_type: "Article",
-      title: "How to take pictures in low light",
-      body: "updatedContent"
-    }
-  }
-);
+    const response = await axios.put(zendeskTranslationEndpoint, {
+      translation: {
+        locale: locale,
+        source_type: "Article",
+        title: "How to take pictures in low light",
+        body: updatedContent // Use the variable containing the updated content
+      }
+    }, {
+      headers: {
+        Authorization: `Bearer ${storedAccessToken}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
     if (response.status === 200) {
       res.status(200).json({ message: `Article translation for locale ${locale} updated successfully!` });
     } else {
       res.status(response.status).json({ error: response.statusText });
     }
   } catch (error) {
-    
     console.error("Error updating article translation:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 
 //OPENAI calls
 const openaiApiKey = process.env.OPENAI_API_KEY;

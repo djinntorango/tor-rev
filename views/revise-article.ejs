@@ -350,8 +350,9 @@ const exportButton = document.getElementById("exportBtn");
 exportButton.addEventListener("click", async function() {
     const articleId = document.getElementById("orig").getAttribute("data-article-id");
     const locale = document.getElementById("orig").getAttribute("data-lang");
+    const body = document.getElementById("orig").
     const reviseURL = `/zendesk/articles/${articleId}/translations/${locale}`;
-    const response = await fetch('/zendesk/articles/${articleId}/translations/${locale}', {
+    const response = await fetch(reviseURL, {
     method: 'PUT',
     headers: {
         'Content-Type': 'application/json'
