@@ -50,7 +50,7 @@ app.get("/zendesk/auth", (req, res) => {
         response_type: "code",
         redirect_uri: process.env.REDIRECT_URI,
         client_id: process.env.ZENDESK_CLIENT_ID,
-        scope: "users:read hc:read",
+        scope: "users:read hc:read hc:write",
       }
     )}`
   );
@@ -251,7 +251,7 @@ app.get("/zendesk/articles/:article_id", async (req, res) => {
 });
 
 //Endpoint to put article/translation
-app.get("/zendesk/articles/:article_id/translations/:locale", async (req, res) => {
+app.put("/zendesk/articles/:article_id/translations/:locale", async (req, res) => {
   try {
     const { article_id, locale } = req.params; // Get article ID and locale from URL parameters
     const { updatedContent } = req.body; // Get updated content from request body
@@ -259,9 +259,9 @@ console.log("Received request body:", req.body);
     const subdomain = storedSubdomain;
 
     // Build the Zendesk API endpoint to update article translation
-    const zendeskTranslationEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles/${article_id}/translations.json`;
+    const zendeskTranslationEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles/${article_id}/translations/${locale}.json`;
     // Make the PUT request to update article translation using axios
-const response = await axios.get(zendeskTranslationEndpoint, 
+const response = await axios.put(zendeskTranslationEndpoint, 
   {
     headers: {
       Authorization: `Bearer ${storedAccessToken}`,
@@ -275,7 +275,6 @@ const response = await axios.get(zendeskTranslationEndpoint,
     }
   }
 );
-
     if (response.status === 200) {
       res.status(200).json({ message: `Article translation for locale ${locale} updated successfully!` });
     } else {
