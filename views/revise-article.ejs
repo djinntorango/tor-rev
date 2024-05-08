@@ -120,6 +120,44 @@
       .toolbar {
         margin: 0 5%;
       }
+      
+      .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
     </style>
 </head>
 <body>
@@ -255,9 +293,9 @@ languageOptions.forEach(function(option) {
 
 // Function to handle translation based on selected language
 function translate(language) {
-    // Implement translation logic here
-    console.log("Translating to " + language);
-    // You can call your translation API or perform any translation operation here
+
+    document.getElementById("revision-prompt").value = "Translate to " + language;
+
 }
 
 </script>
