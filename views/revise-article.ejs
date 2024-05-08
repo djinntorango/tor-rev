@@ -24,31 +24,34 @@
       .art-display {
         border: 1px solid black;
         padding: 20px;
-        overflow: hidden;
+        overflow: auto;
       }
-    .art-display:hover,
-    .art-display:focus-within {
-        overflow: auto; /* Display scroll bars on hover or when focused */
-    }
 
-    .art-display::-webkit-scrollbar, .ql-editor::-webkit-scrollbar {
-        width: 10px;
+.art-display::-webkit-scrollbar,
+.ql-editor::-webkit-scrollbar,
+.dropdown-content::-webkit-scrollbar {
+    width: 10px;
+}
 
-    }
+.art-display::-webkit-scrollbar-track,
+.ql-editor::-webkit-scrollbar-track,
+.dropdown-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
 
-    .art-display::-webkit-scrollbar-track, .ql-editor::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        display: none;
-    }
+.art-display::-webkit-scrollbar-thumb,
+.ql-editor::-webkit-scrollbar-thumb,
+.dropdown-content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
 
-    .art-display::-webkit-scrollbar-thumb, .ql-editor::-webkit-scrollbar-thumb {
-        background: #888;
-        border-radius: 10px;
-    }
+.art-display::-webkit-scrollbar-thumb:hover,
+.ql-editor::-webkit-scrollbar-thumb:hover,
+.dropdown-content::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 
-    .art-display::-webkit-scrollbar-thumb:hover, .ql-editor::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
 
     .main {
         margin: 2% 5%;
@@ -142,6 +145,8 @@
     min-width: 160px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     z-index: 1;
+    max-height: 70dvh;
+    overflow: auto;
 }
 
 .dropdown-content a {
@@ -164,12 +169,52 @@
 <header>
     <div class="toolbar">
         <button class="dropbtn" id="translateBtn">Translate</button>
-        <div class="dropdown-content" id="languageDropdown">
-            <a href="#" data-lang="en">English</a>
-            <a href="#" data-lang="fr">French</a>
-            <a href="#" data-lang="de">German</a>
-            <!-- Add more language options as needed -->
-        </div>
+          <div class="dropdown-content" id="languageDropdown">
+              <a href="#" data-lang="ar">Arabic</a>
+              <a href="#" data-lang="bn">Bengali</a>
+              <a href="#" data-lang="bg">Bulgarian</a>
+              <a href="#" data-lang="ca">Catalan</a>
+              <a href="#" data-lang="zh">Chinese (Simplified)</a>
+              <a href="#" data-lang="cs">Czech</a>
+              <a href="#" data-lang="da">Danish</a>
+              <a href="#" data-lang="nl">Dutch</a>
+              <a href="#" data-lang="et">Estonian</a>
+              <a href="#" data-lang="fi">Finnish</a>
+              <a href="#" data-lang="fr">French</a>
+              <a href="#" data-lang="de">German</a>
+              <a href="#" data-lang="el">Greek</a>
+              <a href="#" data-lang="gu">Gujarati</a>
+              <a href="#" data-lang="he">Hebrew</a>
+              <a href="#" data-lang="hi">Hindi</a>
+              <a href="#" data-lang="hu">Hungarian</a>
+              <a href="#" data-lang="id">Indonesian</a>
+              <a href="#" data-lang="it">Italian</a>
+              <a href="#" data-lang="ja">Japanese</a>
+              <a href="#" data-lang="ko">Korean</a>
+              <a href="#" data-lang="lv">Latvian</a>
+              <a href="#" data-lang="lt">Lithuanian</a>
+              <a href="#" data-lang="ms">Malay</a>
+              <a href="#" data-lang="no">Norwegian</a>
+              <a href="#" data-lang="fa">Persian</a>
+              <a href="#" data-lang="pl">Polish</a>
+              <a href="#" data-lang="pt">Portuguese</a>
+              <a href="#" data-lang="pa">Punjabi</a>
+              <a href="#" data-lang="ro">Romanian</a>
+              <a href="#" data-lang="ru">Russian</a>
+              <a href="#" data-lang="sr">Serbian</a>
+              <a href="#" data-lang="sk">Slovak</a>
+              <a href="#" data-lang="sl">Slovenian</a>
+              <a href="#" data-lang="es">Spanish</a>
+              <a href="#" data-lang="sv">Swedish</a>
+              <a href="#" data-lang="tl">Tagalog</a>
+              <a href="#" data-lang="ta">Tamil</a>
+              <a href="#" data-lang="te">Telugu</a>
+              <a href="#" data-lang="th">Thai</a>
+              <a href="#" data-lang="tr">Turkish</a>
+              <a href="#" data-lang="uk">Ukrainian</a>
+              <a href="#" data-lang="ur">Urdu</a>
+              <a href="#" data-lang="vi">Vietnamese</a>
+          </div>
         <button id="exportBtn">Export</button>
     </div>
 </header>
