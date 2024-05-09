@@ -251,9 +251,9 @@ app.get("/zendesk/articles/:article_id", async (req, res) => {
 });
 
 //Update an article
-app.put("/zendesk/articles/:article_id/translations/:locale", async (req, res) => {
+app.put("/zendesk/articles/:article_id/translations/:locale/title/:title", async (req, res) => {
   try {
-    const { article_id, locale } = req.params;
+    const { article_id, locale, title } = req.params;
     const { updatedContent } = req.body;
     console.log("Received request body:", req.body);
     console.log("Received request params:", req.params);
@@ -267,6 +267,7 @@ app.put("/zendesk/articles/:article_id/translations/:locale", async (req, res) =
       translation: {
         locale: locale,
         source_type: "Article",
+        title: title,
         body: updatedContent // Use the variable containing the updated content
       }
     }, {
@@ -288,9 +289,9 @@ app.put("/zendesk/articles/:article_id/translations/:locale", async (req, res) =
 });
 
 //Create an article translation
-app.post("/zendesk/articles/:article_id/translations/:locale", async (req, res) => {
+app.post("/zendesk/articles/:article_id/translations/:locale/title/:title", async (req, res) => {
   try {
-    const { article_id, locale } = req.params;
+    const { article_id, locale, title } = req.params;
     const { updatedContent } = req.body;
     console.log("Received request body:", req.body);
     console.log("Received request params:", req.params);
@@ -304,6 +305,7 @@ app.post("/zendesk/articles/:article_id/translations/:locale", async (req, res) 
       translation: {
         locale: locale,
         source_type: "Article",
+        title: title,
         body: updatedContent 
       }
     }, {
