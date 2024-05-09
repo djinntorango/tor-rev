@@ -313,8 +313,8 @@ app.post("/zendesk/articles/:article_id/translations/:locale", async (req, res) 
       }
     });
 
-    if (response.status === 200) {
-      res.status(200).json({ message: `Article translation for locale ${locale} updated successfully!` });
+    if (response.status === 201) {
+      res.status(201).json({ message: `Article translation for locale ${locale} updated successfully!` });
     } else {
       res.status(response.status).json({ error: response.statusText });
     }
