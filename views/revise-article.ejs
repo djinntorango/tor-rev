@@ -258,7 +258,7 @@
     var quill = new Quill('#editor', {
         theme: 'snow' // Specify theme (snow, bubble, etc.)
     });
-  
+  let revisedArticleBodyHTML;
     // Handle prompt submission
     document.getElementById('revision-prompt-submit').addEventListener('click', async () => {
         // Show loading animation
@@ -351,7 +351,7 @@ const exportButton = document.getElementById("exportBtn");
 exportButton.addEventListener("click", async function() {
     const articleId = document.getElementById("orig").getAttribute("data-article-id");
     const locale = document.getElementById("orig").getAttribute("data-lang");
-    const updatedContent = document.querySelector('.art-card #editor div').innerHTML; // Extract updated content from editor
+    const updatedContent = document.querySelector('.art-card #editor div').innerHTML;
     const reviseURL = `/zendesk/articles/${articleId}/translations/${locale}`;
 
     try {
