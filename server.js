@@ -288,7 +288,7 @@ app.put("/zendesk/articles/:article_id/translations/:locale", async (req, res) =
 });
 
 //Create an article translation
-app.put("/zendesk/articles/:article_id/translations/", async (req, res) => {
+app.post("/zendesk/articles/:article_id/translations/:locale", async (req, res) => {
   try {
     const { article_id, locale } = req.params;
     const { updatedContent } = req.body;
@@ -297,14 +297,14 @@ app.put("/zendesk/articles/:article_id/translations/", async (req, res) => {
     const subdomain = storedSubdomain;
 
     // Build the Zendesk API endpoint to update article translation
-    const zendeskTranslationEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles/${article_id}/translations/${locale}.json`;
+    const zendeskTranslationEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles/${article_id}/translations.json`;
 
-    // Make the PUT request to update article translation using axios
-    const response = await axios.put(zendeskTranslationEndpoint, {
+    // Make the POST request to update article translation using axios
+    const response = await axios.post(zendeskTranslationEndpoint, {
       translation: {
         locale: locale,
         source_type: "Article",
-        body: updatedContent // Use the variable containing the updated content
+        body: updatedContent 
       }
     }, {
       headers: {

@@ -354,7 +354,7 @@ exportButton.addEventListener("click", async function() {
     const locale = document.getElementById("orig").getAttribute("data-lang");
     const updatedContent = document.querySelector('.art-card #editor div').innerHTML;
     const exportURL = `/zendesk/articles/${articleId}/translations/${locale}`;
-    const translateURL = `/zendesk/articles/${articleId}/translations`;
+    const translateURL = `/zendesk/articles/${articleId}/translations/${locale}`;
     const translated = document.getElementById("orig").getAttribute("translated");
 
     if (translated === "TRUE") {
