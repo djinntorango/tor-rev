@@ -222,10 +222,9 @@
 <section class="main">
     <div class="sbs">
         <section>
-            <h2>Original</h2>
+            <h2><%= article.title %></h2>
             <section class="art-card art-display">
-                <div  id="orig" data-lang="<%= article.locale %>" translated="FALSE" data-article-id="<%= article.id %>">
-                  <h2><%= article.title %></h2>
+                <div  id="orig" data-lang="<%= article.locale %>" translated="FALSE" data-article-id="<%= article.id %>">               
                     <p><%- article.body %></p>
                 </div>
             </section>
@@ -238,8 +237,7 @@
             <section class="art-card">
                 <div id="editor" contenteditable="true">                  
                     <div>
-                      <h2 id="new-title"><%= article.title %></h2>
-                        <p id="new-body"><%- article.body %></p>
+                        <p><%- article.body %></p>
                     </div>
                 </div>
                 <div id="loading-animation" style="display: none;">Fetching response...</div>
