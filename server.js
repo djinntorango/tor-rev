@@ -250,6 +250,7 @@ app.get("/zendesk/articles/:article_id", async (req, res) => {
   }
 });
 
+//Update an article
 app.put("/zendesk/articles/:article_id/translations/:locale", async (req, res) => {
   try {
     const { article_id, locale } = req.params;
@@ -285,6 +286,44 @@ app.put("/zendesk/articles/:article_id/translations/:locale", async (req, res) =
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+//Create an article translation
+app.put("/zendesk/articles/:article_id/translations/", async (req, res) => {
+  try {
+    const { article_id, locale } = req.params;
+    const { updatedContent } = req.body;
+    console.log("Received request body:", req.body);
+    console.log("Received request params:", req.params);
+    const subdomain = storedSubdomain;
+
+    // Build the Zendesk API endpoint to update article translation
+    const zendeskTranslationEndpoint = `https://${subdomain}.zendesk.com/api/v2/help_center/articles/${article_id}/translations/${locale}.json`;
+
+    // Make the PUT request to update article translation using axios
+    const response = await axios.put(zendeskTranslationEndpoint, {
+      translation: {
+        locale: locale,
+        source_type: "Article",
+        body: updatedContent // Use the variable containing the updated content
+      }
+    }, {
+      headers: {
+        Authorization: `Bearer ${storedAccessToken}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (response.status === 200) {
+      res.status(200).json({ message: `Article translation for locale ${locale} updated successfully!` });
+    } else {
+      res.status(response.status).json({ error: response.statusText });
+    }
+  } catch (error) {
+    console.error("Error updating article translation:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 
 
 //OPENAI calls

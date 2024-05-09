@@ -292,11 +292,11 @@
     });
   
   //Copy button
-  document.getElementById('copy-html-button').addEventListener('click', function(revisedArticleBodyHTML) {
-    const editorElement = document.querySelector('.art-card #editor div');
+  document.getElementById('copy-html-button').addEventListener('click', function() {
+    const editorElement = document.querySelector('.art-card #editor div').innerHTML;
     
     // Copy HTML content to clipboard
-    navigator.clipboard.writeText(revisedArticleBodyHTML)
+    navigator.clipboard.writeText(editorElement)
         .then(() => {
             alert('HTML content copied to clipboard!');
         })
@@ -349,52 +349,52 @@ function translate(language) {
 const exportButton = document.getElementById("exportBtn");
 
 // Add click event listener to the export button
-exportButton.addEventListener("click", async function(revisedArticleBodyHTML) {
+exportButton.addEventListener("click", async function() {
     const articleId = document.getElementById("orig").getAttribute("data-article-id");
     const locale = document.getElementById("orig").getAttribute("data-lang");
     const updatedContent = document.querySelector('.art-card #editor div').innerHTML;
-    const reviseURL = `/zendesk/articles/${articleId}/translations/${locale}`;
+    const exportURL = `/zendesk/articles/${articleId}/translations/${locale}`;
+    const translateURL = `/zendesk/articles/${articleId}/translations`;
     const translated = document.getElementById("orig").getAttribute("translated");
 
-  if (translated = "TRUE") {
+    if (translated === "TRUE") {
         try {
-        const response = await fetch(reviseURL, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ updatedContent })
-        });
+            const response = await fetch(translateURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ updatedContent })
+            });
 
-        if (response.ok) {
-            console.log('Article translation updated successfully!');
-        } else {
-            console.error('Failed to update article translation:', response.statusText);
+            if (response.ok) {
+                console.log('Article translation updated successfully!');
+            } else {
+                console.error('Failed to update article translation:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error updating article translation:', error);
         }
-    } catch (error) {
-        console.error('Error updating article translation:', error);
+    } else {
+        try {
+            const response = await fetch(exportURL, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ updatedContent })
+            });
+
+            if (response.ok) {
+                console.log('Article updated successfully!');
+            } else {
+                console.error('Failed to update article translation:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error updating article translation:', error);
+        }
     }
 });
-    try {
-        const response = await fetch(reviseURL, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ updatedContent })
-        });
-
-        if (response.ok) {
-            console.log('Article translation updated successfully!');
-        } else {
-            console.error('Failed to update article translation:', response.statusText);
-        }
-    } catch (error) {
-        console.error('Error updating article translation:', error);
-    }
-});
-  
-};
 
 </script>
 </body>
