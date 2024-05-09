@@ -225,7 +225,7 @@
             <h2><%= article.title %></h2>
             <section class="art-card art-display">
                 <div>
-                    <p id="orig" data-lang="<%= article.locale %>" data-article-id="<%= article.id %>"><%- article.body %></p>
+                    <p id="orig" data-lang="<%= article.locale %>" translated="FALSE" data-article-id="<%= article.id %>"><%- article.body %></p>
                 </div>
             </section>
         </section>
@@ -294,7 +294,6 @@
   //Copy button
   document.getElementById('copy-html-button').addEventListener('click', function(revisedArticleBodyHTML) {
     const editorElement = document.querySelector('.art-card #editor div');
-
     
     // Copy HTML content to clipboard
     navigator.clipboard.writeText(revisedArticleBodyHTML)
@@ -340,8 +339,10 @@ languageOptions.forEach(function(option) {
 function translate(language) {
 
     document.getElementById("revision-prompt").value = "Translate to " + language;
-    const origElement = document.getElementById("orig");
-    origElement.setAttribute("data-lang", language);
+    const dataLang = document.getElementById("orig");
+    dataLang.setAttribute("data-lang", language);
+    const trans = document.getElementById("orig");
+    trans.setAttribute("translated", "TRUE");
 }
 
   
@@ -353,7 +354,27 @@ exportButton.addEventListener("click", async function(revisedArticleBodyHTML) {
     const locale = document.getElementById("orig").getAttribute("data-lang");
     const updatedContent = document.querySelector('.art-card #editor div').innerHTML;
     const reviseURL = `/zendesk/articles/${articleId}/translations/${locale}`;
+    const translated = document.getElementById("orig").getAttribute("translated");
 
+  if (translated = "TRUE") {
+        try {
+        const response = await fetch(reviseURL, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ updatedContent })
+        });
+
+        if (response.ok) {
+            console.log('Article translation updated successfully!');
+        } else {
+            console.error('Failed to update article translation:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error updating article translation:', error);
+    }
+});
     try {
         const response = await fetch(reviseURL, {
             method: 'PUT',
@@ -372,6 +393,8 @@ exportButton.addEventListener("click", async function(revisedArticleBodyHTML) {
         console.error('Error updating article translation:', error);
     }
 });
+  
+};
 
 </script>
 </body>
