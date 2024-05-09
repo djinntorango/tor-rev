@@ -222,7 +222,7 @@
 <section class="main">
     <div class="sbs">
         <section>
-            <h2><%= article.title %></h2>
+            <h2 id="title"><%= article.title %></h2>
             <section class="art-card art-display">
                 <div  id="orig" data-lang="<%= article.locale %>" translated="FALSE" data-article-id="<%= article.id %>">               
                     <p><%- article.body %></p>
@@ -264,8 +264,8 @@
         // Show loading animation
         document.getElementById('loading-animation').style.display = 'block';
         document.getElementById('editor').style.display = 'none';
-        const articleBody = document.querySelector('.art-display div').innerHTML; // Get article body
-        const userPrompt = document.getElementById('revision-prompt').value.trim(); // Get user prompt
+        const articleBody = document.querySelector('.art-display div').innerHTML; 
+        const userPrompt = document.getElementById('revision-prompt').value.trim(); 
 
         // Send data to server
         const response = await fetch('/submit-prompt', {
@@ -337,7 +337,6 @@ languageOptions.forEach(function(option) {
 
 // Function to handle translation based on selected language
 function translate(language) {
-
     document.getElementById("revision-prompt").value = "Translate to " + language;
     const dataLang = document.getElementById("orig");
     dataLang.setAttribute("data-lang", language);
@@ -353,11 +352,8 @@ const exportButton = document.getElementById("exportBtn");
 exportButton.addEventListener("click", async function() {
     const articleId = document.getElementById("orig").getAttribute("data-article-id");
     const locale = document.getElementById("orig").getAttribute("data-lang");
-    const title = document.querySelector('.art-card #editor h2:first-child').innerHTML;
-    const fullBodyCast = document.querySelector('.art-card #editor div').innerHTML;
-    const updatedContent = fullBodyCast.removeChild(fullBodyCast.firstChild);
-  console.log(fullBodyCast);
-  console.log(updatedContent);
+    const title = document.getElementById("title").innerText;
+    const updatedContent = document.querySelector('.art-card #editor div').innerHTML;
     const exportURL = `/zendesk/articles/${articleId}/translations/${locale}/title/${title}`;
     const translateURL = `/zendesk/articles/${articleId}/translations/${locale}/title/${title}`;
     const translated = document.getElementById("orig").getAttribute("translated");
