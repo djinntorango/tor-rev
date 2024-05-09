@@ -258,7 +258,7 @@
     var quill = new Quill('#editor', {
         theme: 'snow' // Specify theme (snow, bubble, etc.)
     });
-  let revisedArticleBodyHTML;
+
     // Handle prompt submission
     document.getElementById('revision-prompt-submit').addEventListener('click', async () => {
         // Show loading animation
@@ -280,7 +280,7 @@
         const data = await response.json();
         console.log(data); // Log or display the AI response
 
-        const revisedArticleBodyHTML = data.data; // Assuming data.data contains the response HTML
+        const revisedArticleBodyHTML = data.data; 
 
         // Update the Revision article body with the response from OpenAI
         const editorElement = document.querySelector('.art-card #editor div');
@@ -292,9 +292,9 @@
     });
   
   //Copy button
-  document.getElementById('copy-html-button').addEventListener('click', function() {
+  document.getElementById('copy-html-button').addEventListener('click', function(revisedArticleBodyHTML) {
     const editorElement = document.querySelector('.art-card #editor div');
-    const revisedArticleBodyHTML = editorElement.innerHTML;
+
     
     // Copy HTML content to clipboard
     navigator.clipboard.writeText(revisedArticleBodyHTML)
@@ -348,7 +348,7 @@ function translate(language) {
 const exportButton = document.getElementById("exportBtn");
 
 // Add click event listener to the export button
-exportButton.addEventListener("click", async function() {
+exportButton.addEventListener("click", async function(revisedArticleBodyHTML) {
     const articleId = document.getElementById("orig").getAttribute("data-article-id");
     const locale = document.getElementById("orig").getAttribute("data-lang");
     const updatedContent = document.querySelector('.art-card #editor div').innerHTML;
@@ -360,19 +360,16 @@ exportButton.addEventListener("click", async function() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ updatedContent }) // Include updated content in request body
+            body: JSON.stringify({ updatedContent })
         });
 
         if (response.ok) {
             console.log('Article translation updated successfully!');
-            // Optionally, you can handle success here, e.g., display a success message
         } else {
             console.error('Failed to update article translation:', response.statusText);
-            // Optionally, you can handle error here, e.g., display an error message
         }
     } catch (error) {
         console.error('Error updating article translation:', error);
-        // Optionally, you can handle error here, e.g., display an error message
     }
 });
 
