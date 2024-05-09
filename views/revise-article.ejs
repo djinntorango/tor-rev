@@ -356,7 +356,7 @@ exportButton.addEventListener("click", async function() {
     const articleId = document.getElementById("orig").getAttribute("data-article-id");
     const locale = document.getElementById("orig").getAttribute("data-lang");
     const title = document.querySelector('.art-card #editor h2:first-child').innerText;
-    const updatedContent = document.querySelector('.art-card #editor div').innerHTML;
+    const updatedContent = document.querySelector('.art-card #editor div #new-body').innerHTML;
     const exportURL = `/zendesk/articles/${articleId}/translations/${locale}/title/${title}`;
     const translateURL = `/zendesk/articles/${articleId}/translations/${locale}/title/${title}`;
     const translated = document.getElementById("orig").getAttribute("translated");
