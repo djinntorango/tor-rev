@@ -17,6 +17,11 @@
         max-width: 1000px;
         margin: 0 auto;
       }
+    .art-section {
+        display: flex;
+        flex-direction: column;
+    }
+
     .art-card {
         width: 60dvh;
         height: 60dvh;
@@ -65,10 +70,12 @@
         margin: 0 auto; 
         margin-bottom: 10px; 
     }
-    .sbs {
-        display: flex;
-        justify-content: space-between;
-    }
+.sbs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px; /* Adjust the gap between sections */
+}
+
     .prompt-box {
         margin-top: 20px;
     }
@@ -231,7 +238,7 @@
 
 <section class="main">
     <div class="sbs">
-        <section>
+        <section class="art-section">
             <h2 id="title"><%= article.title %></h2>
             <section class="art-card art-display">
                 <div  id="orig" data-lang="<%= article.locale %>" translated="FALSE" data-article-id="<%= article.id %>">               
