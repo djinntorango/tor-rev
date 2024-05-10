@@ -22,7 +22,6 @@
         transition: overflow 0.2s;
     }
       .art-display {
-        border: 1px solid black;
         padding: 20px;
         overflow: auto;
       }
@@ -57,11 +56,11 @@
         margin: 2% 5%;
     }
     .art-card img {
-        max-width: 100%; /* Ensure images don't exceed the width of their container */
-        height: auto; /* Maintain aspect ratio */
-        display: block; /* Ensure images are displayed as blocks */
-        margin: 0 auto; /* Center align images */
-        margin-bottom: 10px; /* Add some bottom margin for spacing */
+        max-width: 100%; 
+        height: auto; 
+        display: block; 
+        margin: 0 auto; 
+        margin-bottom: 10px; 
     }
     .sbs {
         display: flex;
@@ -104,30 +103,24 @@
         outline: none;
     }
 
-    .ql-container, .ql-editor .ql-font-serif, .ql-editor .ql-font-monospace, .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=serif]::before, .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=monospace]::before, .ql-toolbar.ql-snow {
-      font-family: inherit !important;
-      }
-      .ql-container.ql-snow {
-        height: 91%;
-      }
-      #copy-html-button {
-        font-size: 60%;
-        background: #bdc9ff;
-        max-height: 30px;
-      }
-      #revision-title {
-        display: flex;
-        justify-content: space-between;  
-        align-items: center;
-      }
-      .toolbar {
-        margin: 0 5%;
-      }
-      
-      .dropdown {
-    position: relative;
-    display: inline-block;
-}
+  #copy-html-button {
+  font-size: 60%;
+  background: #bdc9ff;
+  max-height: 30px;
+  }
+  #revision-title {
+  display: flex;
+  justify-content: space-between;  
+  align-items: center;
+  }
+  .toolbar {
+  margin: 0 5%;
+  }
+
+  .dropdown {
+  position: relative;
+  display: inline-block;
+  }
 
 .dropbtn {
     background-color: #3498db;
@@ -163,6 +156,19 @@
 .show {
     display: block;
 }
+  .ql-container, .ql-editor .ql-font-serif, .ql-editor .ql-font-monospace, .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=serif]::before, .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=monospace]::before, .ql-toolbar.ql-snow {
+  font-family: inherit !important;
+  }
+  .ql-container.ql-snow {
+  height: 89%;
+  }
+  .ql-toolbar.ql-snow, .ql-container.ql-snow {
+    border: 0;
+  }
+      .ql-toolbar.ql-snow + .ql-container.ql-snow {
+        border-top: 1px solid #ccc;
+      }
+      
     </style>
 </head>
 <body>
