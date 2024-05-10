@@ -118,7 +118,9 @@
   max-height: 30px;
   }
   #title {
-
+  background: white;
+  text-align: center;
+    padding: 2%;
   }
   #revision-title {
   display: flex;
@@ -239,10 +241,10 @@
 </header>
 
 <section class="main">
-    <h2><%= article.title %></h2>
+    <h2 id="title" contenteditable="true"><%= article.title %></h2>
     <div class="sbs">
         <section class="art-section">
-            <h3 id="title">Original</h3>
+            <h3>Original</h3>
             <section class="art-card art-display">
                 <div  id="orig" data-lang="<%= article.locale %>" translated="FALSE" data-article-id="<%= article.id %>">               
                     <p><%- article.body %></p>
