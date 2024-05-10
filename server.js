@@ -378,33 +378,35 @@ app.post('/submit-prompt', async (req, res) => {
 
 app.post('/translate-title', async (req, res) => {
   const { title, language } = req.body;
+  const systemPrompt = `Translate the following title to ${language}: `;
 
   try {
-            const response = await axios.post(
-            'https://api.openai.com/v1/chat/completions',
-            {
-                model: 'gpt-3.5-turbo',
-                messages: [
-                    { role: "user", content: articleBody },
-                    { role: "system", content: fullPrompt }
-                ],
-                temperature: 0.3
-            },
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${openaiApiKey}`
-                }
-            }
-        );
+    const response = await axios.post(
+      'https://api.openai.com/v1/chat/completions',
+      {
+        model: 'gpt-3.5-turbo',
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: title }
+        ],
+        temperature: 0.3
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${openaiApiKey}`
+        }
+      }
+    );
 
-    res.json({ response });
+    const translatedTitle = response.data.choices[0].message.content.trim();
+    res.json({ translatedTitle });
+    console.log({ translatedTitle });
   } catch (error) {
     console.error('Error translating title:', error);
     res.status(500).json({ error: 'Failed to translate title' });
   }
 });
-
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}. Visit http://localhost:${port}`);
