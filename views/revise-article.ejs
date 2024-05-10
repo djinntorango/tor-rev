@@ -17,6 +17,15 @@
         max-width: 1000px;
         margin: 0 auto;
       }
+      #revision-header {
+        display: flex;
+        margin: 1% 5%;
+        align-items: center;
+        justify-content: space-between;
+      }
+      #title {
+        
+      }
   .art-section {
       display: flex;
       flex-direction: column;
@@ -117,16 +126,10 @@
   background: #bdc9ff;
   max-height: 30px;
   }
-  #title {
-
-  }
   #revision-title {
   display: flex;
   justify-content: space-between;  
   align-items: center;
-  }
-  .toolbar {
-  margin: 1% 5%;
   }
 
   .dropdown {
@@ -184,7 +187,7 @@
     </style>
 </head>
 <body id="revision-page">
-<header>
+<header id="revision-header">
     <div class="toolbar">
         <button class="dropbtn" id="translateBtn">Translate</button>
           <div class="dropdown-content" id="languageDropdown">
@@ -236,13 +239,13 @@
           </div>
         <button id="exportBtn">Export</button>
     </div>
+  <div id="title"><%= article.title %></div>
 </header>
 
 <section class="main">
-  <h1><%= article.title %></h1>
     <div class="sbs">
         <section class="art-section">
-            <h3 id="title">Original</h3>
+            <h3>Original</h3>
             <section class="art-card art-display">
                 <div  id="orig" data-lang="<%= article.locale %>" translated="FALSE" data-article-id="<%= article.id %>">               
                     <p><%- article.body %></p>
