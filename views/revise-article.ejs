@@ -364,6 +364,7 @@ function translate(language) {
     dataLang.setAttribute("data-lang", language);
     const trans = document.getElementById("orig");
     trans.setAttribute("translated", "TRUE");
+  translateTitle;
 }
 
   
@@ -418,6 +419,24 @@ exportButton.addEventListener("click", async function() {
         }
     }
 });
+  
+  async function translateTitle(title, language) {
+  try {
+    const response = await fetch('/translate-title', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ title, language })
+    });
+
+    const data = await response.json();
+    return data.translatedTitle;
+  } catch (error) {
+    console.error('Error translating title:', error);
+    return title; // Return the original title if translation fails
+  }
+}
 
 </script>
 </body>
