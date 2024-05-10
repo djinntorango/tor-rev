@@ -118,9 +118,7 @@
   max-height: 30px;
   }
   #title {
-  white-space: nowrap;
-  overflow: hidden; 
-  text-overflow: ellipsis;
+
   }
   #revision-title {
   display: flex;
@@ -241,9 +239,10 @@
 </header>
 
 <section class="main">
+  <h1><%= article.title %></h1>
     <div class="sbs">
         <section class="art-section">
-            <h2 id="title"><%= article.title %></h2>
+            <h3 id="title">Original</h3>
             <section class="art-card art-display">
                 <div  id="orig" data-lang="<%= article.locale %>" translated="FALSE" data-article-id="<%= article.id %>">               
                     <p><%- article.body %></p>
@@ -252,7 +251,7 @@
         </section>
         <section>
           <div id="revision-title">
-              <h2>Revision</h2>
+              <h3>Revision</h3>
               <button id="copy-html-button">Copy</button>
             </div>
             <section class="art-card">
