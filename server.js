@@ -93,20 +93,14 @@ app.get("/zendesk/oauth/callback", async (req, res) => {
     // Call your function to fetch articles based on the page number
     const { articles, prev, next } = await getHelpCenterArticles(subdomain, pageNum);
 
-    let zendeskEndpoint = null;
-
-    res.redirect(302, "https://torango.io/oauth-callback.html", {
-      profileResponse,
-      articles,
-      zendeskEndpoint,
-      prev, 
-      next
-    });
+    // Redirect to the frontend page after completing OAuth flow
+    res.redirect("https://torango.io/oauth-callback.html");
   } catch (error) {
     console.error("Error in OAuth callback:", error);
     res.status(500).send("Internal Server Error");
   }
 });
+
 
 // Function to retrieve a list of help center articles
 async function getHelpCenterArticles(pageNum, query = '') {
