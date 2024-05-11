@@ -95,7 +95,7 @@ app.get("/zendesk/oauth/callback", async (req, res) => {
 
     let zendeskEndpoint = null;
 
-    res.render("oauth-callback", {
+    res.redirect(302, "https://torango.io/oauth-callback.html", {
       profileResponse,
       articles,
       zendeskEndpoint,
