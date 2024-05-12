@@ -358,18 +358,15 @@ languageOptions.forEach(function(option) {
 });
 
 // Function to handle translation based on selected language
-async function translate(language) {
+function translate(language) {
     document.getElementById("revision-prompt").value = "Translate to " + language;
     const dataLang = document.getElementById("orig");
     dataLang.setAttribute("data-lang", language);
     const trans = document.getElementById("orig");
     trans.setAttribute("translated", "TRUE");
-
-    // Translate the title
-    const originalTitle = document.getElementById('title').innerText;
-    const translatedTitle = await translateTitle(originalTitle, language);
-    document.getElementById('title').innerText = translatedTitle;
+  translateTitle;
 }
+
   
 const exportButton = document.getElementById("exportBtn");
 
