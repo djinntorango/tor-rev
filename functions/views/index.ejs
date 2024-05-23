@@ -1,0 +1,34 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Subdomain</title>
+    <link id="favicon" rel="icon" href="https://cdn.glitch.global/887fed5c-3c1b-472d-8fdc-c2a3bad1fe27/oillamp(powderblue).svg?v=1709088268120" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="public/styles.css" />
+
+</head>
+<body>
+    <section class="subdomain-inq">
+        <form class="sub-form" action="/zendesk/auth" method="get">
+            <label for="subdomain" class="sub">Zendesk Subdomain:</label>
+            <input type="text" id="subdomain" name="subdomain" required>
+                <div class="terms-checkbox">
+                <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                <label for="agreeTerms">Agree to <a href="https://torango.io/terms-and-conditions">Terms and Conditions</a></label>
+            </div>
+          <strong>Note: This is intended for single-use only. We don't store any of your help center data in a database, meaning if you refresh the page after logging in, you will lose your session and need return to this page.</strong>
+            <button type="submit" class="sub-button">Sign in to Zendesk</button>
+        </form>
+    </section>
+  
+      <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100" viewBox="0 0 100 100" class="step-svg">
+        <circle cx="10%" cy="50%" r="17" fill="#6691FD" />
+        <text x="10%" y="50%" text-anchor="middle" alignment-baseline="middle" fill="white" font-size="12" z-index="281794" font-family="Futura">1</text>
+        <line x1="15%" y1="50%" x2="85%" y2="50%" stroke="#6691FD" stroke-width="7" />
+        <circle cx="90%" cy="50%" r="10" fill="#6691FD" />
+    </svg>
+</body>
+</html>

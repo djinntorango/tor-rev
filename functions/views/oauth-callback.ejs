@@ -1,0 +1,161 @@
+<!-- views/oauth-callback.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Email</title>
+    <link id="favicon" rel="icon" href="https://cdn.glitch.global/887fed5c-3c1b-472d-8fdc-c2a3bad1fe27/oillamp(powderblue).svg?v=1709088268120" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://torango-revise.glitch.me/public/styles.css" />
+  
+</head>
+<body>
+    <header class="main">
+        <h1>List of Articles</h1>
+    </header>
+    <main>
+        <section class="main">
+          <div class="search">
+            <input type="text" id="search-input" placeholder="Search articles...">
+            <button id="search-button">Search</button>
+            <button id="clear-search">
+              Clear
+            </button>
+          </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Created At</th>
+                        <th>Edited At</th>
+                        <th>Revise</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% articles.forEach(article => { %>
+                        <tr>
+                          <td class="art"><a href="<%= article.html_url %>"><%= article.title %></a></td>
+                          <td class="art"><%= new Date(article.created_at).toLocaleDateString() %></td>
+                          <td class="art"><%= new Date(article.edited_at).toLocaleDateString() %></td>
+                          <td class="art revise"> <button class="revise-btn" data-article-id="<%= article.id %>">Revise</button></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+            <div class="pagination" id="pagination-buttons">
+              <button id="prev-button" <%= prev !== null ? '' : 'disabled' %>>Previous</button>
+              <span id="page-num">Page 1</span>
+              <button id="next-button" <%= next !== null ? '' : 'disabled' %>>Next</button>
+            </div>
+        </section>
+    </main>
+      <script>
+      document.addEventListener("DOMContentLoaded", async function () {
+  let pageNum = 1;
+  let currentQuery = ''; // Store the current search query
+  const pageSize = 10; // Number of articles per page
+
+  const prevButton = document.getElementById("prev-button");
+  const nextButton = document.getElementById("next-button");
+  const pageNumSpan = document.getElementById("page-num");
+  const articlesBody = document.getElementsByClassName("art");
+  const searchInput = document.getElementById("search-input");
+  const searchButton = document.getElementById("search-button");
+  const clearButton = document.getElementById("clear-search");
+  const reviseButtons = document.querySelectorAll(".revise-btn");
+
+  // Function to fetch articles based on page number
+  async function fetchArticles(pageNum, query = '') {
+    try {
+      let endpoint = '/zendesk/articles';
+      if (query) {
+        endpoint = `/zendesk/articles/search`;
+      }
+      const response = await fetch(`${endpoint}?pageNum=${pageNum}&query=${encodeURIComponent(query)}`);
+      const data = await response.json();
+      const articles = data.articles;
+      const next = data.next;
+      renderArticles(articles);
+      updatePaginationUI(next);
+    } catch (error) {
+      console.error("Error fetching articles:", error);
+    }
+  }
+
+  // Function to handle previous button click
+  prevButton.addEventListener("click", async function () {
+    if (pageNum > 1) {
+      pageNum--;
+      await fetchArticles(pageNum, currentQuery);
+    }
+  });
+
+  // Function to handle next button click
+  nextButton.addEventListener("click", async function () {
+    pageNum++;
+    await fetchArticles(pageNum, currentQuery);
+  });
+
+  // Function to handle search button click
+  searchButton.addEventListener("click", async function () {
+    pageNum = 1; // Reset pageNum when performing a new search
+    currentQuery = searchInput.value; // Update the current search query
+    await fetchArticles(pageNum, currentQuery);
+  });
+
+  clearButton.addEventListener("click", async function () {
+    pageNum = 1; 
+    currentQuery = ""; 
+    searchInput.value = "";
+    await fetchArticles(pageNum, currentQuery);
+  });
+        
+  // Retrieve the article ID from the button data attribute then redirect
+reviseButtons.forEach(button => {
+  button.addEventListener("click", async function() {
+    const articleId = button.getAttribute("data-article-id");
+    const reviseURL = `/zendesk/articles/${articleId}`;
+    window.location.href = reviseURL;
+  });
+});
+        
+  // Render articles in the UI
+  function renderArticles(articles) {
+    const tbody = document.querySelector("tbody"); 
+    tbody.innerHTML = ""; // Clear existing articles
+    articles.forEach(article => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td><a href="${article.html_url}">${article.title}</a></td>
+        <td>${new Date(article.created_at).toLocaleString()}</td>
+        <td>${new Date(article.edited_at).toLocaleString()}</td>
+        <td> <button class="revise-btn" data-article-id="${article.id}">Revise</button></td>
+      `;
+      tbody.appendChild(row);
+      attachReviseButtonListeners();
+    });
+  }
+function attachReviseButtonListeners() {
+  const reviseButtons = document.querySelectorAll(".revise-btn");
+  reviseButtons.forEach(button => {
+    button.addEventListener("click", async function() {
+      const articleId = button.getAttribute("data-article-id");
+      const reviseURL =  `/zendesk/articles/${articleId}`;
+      window.location.href = reviseURL;
+    });
+  });
+}
+
+  // Function to update pagination UI
+  function updatePaginationUI(next) {
+    pageNumSpan.textContent = `Page ${pageNum}`;
+    prevButton.disabled = pageNum === 1;
+    nextButton.disabled = next === null;
+  }
+});
+
+
+      </script>
+</body>
+</html>
